@@ -14,7 +14,7 @@ steps:
 - task: CopyFiles@2
   displayName: Copy Python and VPK-MDL files
   inputs:
-    SourceFolder: '$(system.defaultWorkingDirectory)'
+    SourceFolder: '$(system.defaultWorkingDirectory)/Deployment_Automation/'
     Contents: |
       gvault_25gr2_deployment.py
       authentication.json
