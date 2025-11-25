@@ -1,0 +1,36 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- 25GR3
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+
+- task: CopyFiles@2
+  displayName: Copy Python and VPK-MDL files
+  inputs:
+    SourceFolder: '$(system.defaultWorkingDirectory)'
+    Contents: |
+      gvault_25gr2_deployment.py
+      authentication.json
+      deployment.json
+      payload.json
+      GVault_Deployment_Steps.csv
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/output'
+- task: PublishBuildArtifacts@1
+  displayName: Publish files to Stagiing
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/output'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
