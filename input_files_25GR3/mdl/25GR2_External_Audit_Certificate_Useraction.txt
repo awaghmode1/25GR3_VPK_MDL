@@ -1,0 +1,63 @@
+ALTER Objectlifecycle audit_lifecycle__c (
+   label('Audit Lifecycle'),
+   state_labels(),
+   labeled_states(),
+   starting_state('Objectlifecyclestate.define_team_state__c'),
+   description(),
+ADD Objectlifecyclestateuseraction closed_state__c.external_audit_certificate_useraction3__c(
+      label('External Audit Certificate'),
+      rule({<?xml version="1.0" encoding="UTF-8"?>
+<rule><expression operator="and"><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.object_type__v</value></expression><expression operator="value" type="string"><value>External Audit</value></expression></expression><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.auditee__qdm</value></expression><expression operator="value" type="string"><value>Clinical Investigator Site</value></expression></expression></expression><actions><action type="platform.all.formattedOutputs"><INPUT_USER_ACTION_LABEL>External Audit Certificate</INPUT_USER_ACTION_LABEL><attachFileToRecordCheckboxXmlControlKey>false</attachFileToRecordCheckboxXmlControlKey><includeRecordAttachmentsWithFileCheckboxXmlControlKey>false</includeRecordAttachmentsWithFileCheckboxXmlControlKey><templateKey>external_audit_certificate__c</templateKey></action></actions></rule>
+}),
+      order(5000)
+   ),
+ADD Objectlifecyclestateuseraction in_addendum_approval_state__c.external_audit_certificate_useraction7__c(
+      label('External Audit Certificate'),
+      rule({<?xml version="1.0" encoding="UTF-8"?>
+<rule><expression operator="and"><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.object_type__v</value></expression><expression operator="value" type="string"><value>External Audit</value></expression></expression><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.auditee__qdm</value></expression><expression operator="value" type="string"><value>Clinical Investigator Site</value></expression></expression></expression><actions><action type="platform.all.formattedOutputs"><INPUT_USER_ACTION_LABEL>External Audit Certificate</INPUT_USER_ACTION_LABEL><attachFileToRecordCheckboxXmlControlKey>false</attachFileToRecordCheckboxXmlControlKey><includeRecordAttachmentsWithFileCheckboxXmlControlKey>false</includeRecordAttachmentsWithFileCheckboxXmlControlKey><templateKey>external_audit_certificate__c</templateKey></action></actions></rule>
+}),
+      order(5000)
+   ),
+ADD Objectlifecyclestateuseraction in_addendum_state__c.external_audit_certificate_useraction6__c(
+      label('External Audit Certificate'),
+      rule({<?xml version="1.0" encoding="UTF-8"?>
+<rule><expression operator="and"><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.object_type__v</value></expression><expression operator="value" type="string"><value>External Audit</value></expression></expression><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.auditee__qdm</value></expression><expression operator="value" type="string"><value>Clinical Investigator Site</value></expression></expression></expression><actions><action type="platform.all.formattedOutputs"><INPUT_USER_ACTION_LABEL>External Audit Certificate</INPUT_USER_ACTION_LABEL><attachFileToRecordCheckboxXmlControlKey>false</attachFileToRecordCheckboxXmlControlKey><includeRecordAttachmentsWithFileCheckboxXmlControlKey>false</includeRecordAttachmentsWithFileCheckboxXmlControlKey><templateKey>external_audit_certificate__c</templateKey></action></actions></rule>
+}),
+      order(5000)
+   ),
+ADD Objectlifecyclestateuseraction in_audit_reporting_state__c.external_audit_certificate_useraction__c(
+      label('External Audit Certificate'),
+      rule({<?xml version="1.0" encoding="UTF-8"?>
+<rule><expression operator="and"><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.object_type__v</value></expression><expression operator="value" type="string"><value>External Audit</value></expression></expression><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.auditee__qdm</value></expression><expression operator="value" type="string"><value>Clinical Investigator Site</value></expression></expression></expression><actions><action type="platform.all.formattedOutputs"><INPUT_USER_ACTION_LABEL>External Audit Certificate</INPUT_USER_ACTION_LABEL><attachFileToRecordCheckboxXmlControlKey>false</attachFileToRecordCheckboxXmlControlKey><includeRecordAttachmentsWithFileCheckboxXmlControlKey>false</includeRecordAttachmentsWithFileCheckboxXmlControlKey><templateKey>external_audit_certificate__c</templateKey></action></actions></rule>
+}),
+      order(4000)
+   ),
+ADD Objectlifecyclestateuseraction in_re_open_approval_state__c.external_audit_certificate_useraction5__c(
+      label('External Audit Certificate'),
+      rule({<?xml version="1.0" encoding="UTF-8"?>
+<rule><expression operator="and"><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.object_type__v</value></expression><expression operator="value" type="string"><value>External Audit</value></expression></expression><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.auditee__qdm</value></expression><expression operator="value" type="string"><value>Clinical Investigator Site</value></expression></expression></expression><actions><action type="platform.all.formattedOutputs"><INPUT_USER_ACTION_LABEL>External Audit Certificate</INPUT_USER_ACTION_LABEL><attachFileToRecordCheckboxXmlControlKey>false</attachFileToRecordCheckboxXmlControlKey><includeRecordAttachmentsWithFileCheckboxXmlControlKey>false</includeRecordAttachmentsWithFileCheckboxXmlControlKey><templateKey>external_audit_certificate__c</templateKey></action></actions></rule>
+}),
+      order(5000)
+   ),
+ADD Objectlifecyclestateuseraction in_re_open_state__c.external_audit_certificate_useraction4__c(
+      label('External Audit Certificate'),
+      rule({<?xml version="1.0" encoding="UTF-8"?>
+<rule><expression operator="and"><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.object_type__v</value></expression><expression operator="value" type="string"><value>External Audit</value></expression></expression><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.auditee__qdm</value></expression><expression operator="value" type="string"><value>Clinical Investigator Site</value></expression></expression></expression><actions><action type="platform.all.formattedOutputs"><INPUT_USER_ACTION_LABEL>External Audit Certificate</INPUT_USER_ACTION_LABEL><attachFileToRecordCheckboxXmlControlKey>false</attachFileToRecordCheckboxXmlControlKey><includeRecordAttachmentsWithFileCheckboxXmlControlKey>false</includeRecordAttachmentsWithFileCheckboxXmlControlKey><templateKey>external_audit_certificate__c</templateKey></action></actions></rule>
+}),
+      order(5000)
+   ),
+ADD Objectlifecyclestateuseraction pending_finding_closure_state__c.external_audit_certificate_useraction2__c(
+      label('External Audit Certificate'),
+      rule({<?xml version="1.0" encoding="UTF-8"?>
+<rule><expression operator="and"><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.object_type__v</value></expression><expression operator="value" type="string"><value>External Audit</value></expression></expression><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.auditee__qdm</value></expression><expression operator="value" type="string"><value>Clinical Investigator Site</value></expression></expression></expression><actions><action type="platform.all.formattedOutputs"><INPUT_USER_ACTION_LABEL>External Audit Certificate</INPUT_USER_ACTION_LABEL><attachFileToRecordCheckboxXmlControlKey>false</attachFileToRecordCheckboxXmlControlKey><includeRecordAttachmentsWithFileCheckboxXmlControlKey>false</includeRecordAttachmentsWithFileCheckboxXmlControlKey><templateKey>external_audit_certificate__c</templateKey></action></actions></rule>
+}),
+      order(7000)
+   ),
+ADD Objectlifecyclestateuseraction pending_report_issuance_state__c.external_audit_certificate_useraction1__c(
+      label('External Audit Certificate'),
+      rule({<?xml version="1.0" encoding="UTF-8"?>
+<rule><expression operator="and"><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.object_type__v</value></expression><expression operator="value" type="string"><value>External Audit</value></expression></expression><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.auditee__qdm</value></expression><expression operator="value" type="string"><value>Clinical Investigator Site</value></expression></expression></expression><actions><action type="platform.all.formattedOutputs"><INPUT_USER_ACTION_LABEL>External Audit Certificate</INPUT_USER_ACTION_LABEL><attachFileToRecordCheckboxXmlControlKey>false</attachFileToRecordCheckboxXmlControlKey><includeRecordAttachmentsWithFileCheckboxXmlControlKey>false</includeRecordAttachmentsWithFileCheckboxXmlControlKey><templateKey>external_audit_certificate__c</templateKey></action></actions></rule>
+}),
+      order(6000)
+   )
+);

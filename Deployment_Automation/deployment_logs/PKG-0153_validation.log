@@ -1,0 +1,1291 @@
+Package Name:PKG-0153
+Package Id:0PI000000006002
+Summary:25GR1 QMS Validation Rule & Atomic Security Permission
+Source Vault:223156
+Author:mmonika@sb-gilead.com
+Package Status:Verified
+Total Steps:3
+Total Component Steps Blocked:0
+Start Time:09:09:2025 12:28:52 PM
+End Time:09:09:2025 12:28:53 PM
+Package Error:
+
+--Package Steps--
+STEP 00010 Finding-Finding Lifecycle-In Response
+ Step Id:0IS000000006024
+ Step Type:Component
+ Step Name:finding__v.finding_lifecycle__v.in_response_state__c.atomic_security__c
+ Type:Atomicsecurity
+ Deployment Status:Verified
+ Deployment Action:No Change (same as Vault)
+ Dependencies:
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:finding_category__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_lifecycle__v
+  Component Type:Objectlifecycle
+  Subcomponent Name:in_response_state__c
+  Subcomponent Type:Objectlifecyclestate
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:reason_for_no_capa_record__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:related_issue_escalation__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:addendum_closure_date__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:amendment_date__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:category__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:
+  Subcomponent Type:
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_created_by__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:extension_request_count__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:addendum_summary__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_lifecycle__v
+  Component Type:Objectlifecycle
+  Subcomponent Name:record_owner24__c
+  Subcomponent Type:Objectlifecyclerole
+  Status:In Target
+
+  Component Name:finding_record_team__c
+  Component Type:Object
+  Subcomponent Name:finding__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:due_date__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:impact__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:reopen_justification__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:study_site__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:reopen_count__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:response_summary__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:state_stage_id__sys
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:external_collaborator__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:owning_site__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_lifecycle__v
+  Component Type:Objectlifecycle
+  Subcomponent Name:lead_auditor3__c
+  Subcomponent Type:Objectlifecyclerole
+  Status:In Target
+
+  Component Name:extension_request__qdm
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_run_id__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:original_due_date__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:issue_escalation__v
+  Component Type:Object
+  Subcomponent Name:source_finding__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:department__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_source__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:capa_finding__v
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:description__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:owner__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:related_clinical_study_protocol__c
+  Component Type:Object
+  Subcomponent Name:finding__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:date_closed__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:cancellation_reason_justification__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:reopen_summary__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:record_check_result_state__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_department__v
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:reason_for_no_effectiveness_check_record__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:associated_regulation_requirement__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:study__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:stage__sys
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:finding_type__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:reopen_start_date__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:supplier__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:state__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:impact_to_patient_safety__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_other_references__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:reopen_closure_date__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:root_cause_analysis_details__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_organization__v
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:audit_finding__v
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:root_cause__qdm
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:audit__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_lifecycle__v
+  Component Type:Objectlifecycle
+  Subcomponent Name:qms_qa20__c
+  Subcomponent Type:Objectlifecyclerole
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:comments__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:effectiveness_check_plan__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:title__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v.delete_record_and_related_signatures__sys
+  Component Type:Objectaction
+  Subcomponent Name:
+  Subcomponent Type:
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_state__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:organizational_applicability__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_comments__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_document__v
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_ext_notif_recipient__v
+  Component Type:Object
+  Subcomponent Name:enr_enabled_record__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:finding_subcategory__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:capa_closure_required__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:additional_approval_required__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:audit_type__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v.attachments_upload__sys
+  Component Type:Objectaction
+  Subcomponent Name:
+  Subcomponent Type:
+  Status:In Target
+
+  Component Name:finding__v.attachments_edit__sys
+  Component Type:Objectaction
+  Subcomponent Name:
+  Subcomponent Type:
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:qms_module__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:record_check_result__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:capa_action__qdm
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:addendum_count__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:owning_functional_area__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_object_id__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:require_effectiveness_check__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:related_process__c
+  Component Type:Object
+  Subcomponent Name:finding__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:effectiveness_check__qdm
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:capa_required__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:capa_recommendations__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_date_created__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_lifecycle__v
+  Component Type:Objectlifecycle
+  Subcomponent Name:owner__v
+  Subcomponent Type:Objectlifecyclerole
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:study_country__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:related_continuous_improvement__c
+  Component Type:Object
+  Subcomponent Name:source_finding_record_id__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_study__v
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:supplier_capa_description__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:collaborate_externally__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:secondary_owning_functional_area__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:internal_finding_quality_team_member__v
+  Component Type:Object
+  Subcomponent Name:team_enabled_record__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:response_received_date__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_related_reference_ids__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:reopen_due_date__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:qms_scar__v
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_lifecycle__v
+  Component Type:Objectlifecycle
+  Subcomponent Name:
+  Subcomponent Type:
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_status__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:response_assessment__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:response_due_date__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:external_finding_quality_team_member__v
+  Component Type:Object
+  Subcomponent Name:team_enabled_record__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:lifecycle__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v.attachments_delete__sys
+  Component Type:Objectaction
+  Subcomponent Name:
+  Subcomponent Type:
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:capa_due_date__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:response_acceptance__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_lifecycle__v
+  Component Type:Objectlifecycle
+  Subcomponent Name:in_response_state__c.update_sharing_setting_owner_on_relate15__c
+  Subcomponent Type:Objectlifecyclestateuseraction
+  Status:In Target
+
+STEP 00020 Finding-Finding Lifecycle-Pending Response A
+ Step Id:0IS000000006025
+ Step Type:Component
+ Step Name:finding__v.finding_lifecycle__v.pending_response_acceptance_state__c.atomic_security__c
+ Type:Atomicsecurity
+ Deployment Status:Verified
+ Deployment Action:No Change (same as Vault)
+ Dependencies:
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:finding_category__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:reason_for_no_capa_record__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:related_issue_escalation__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:addendum_closure_date__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:amendment_date__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:category__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:
+  Subcomponent Type:
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_created_by__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:extension_request_count__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:addendum_summary__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_lifecycle__v
+  Component Type:Objectlifecycle
+  Subcomponent Name:record_owner24__c
+  Subcomponent Type:Objectlifecyclerole
+  Status:In Target
+
+  Component Name:finding_record_team__c
+  Component Type:Object
+  Subcomponent Name:finding__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:due_date__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_lifecycle__v
+  Component Type:Objectlifecycle
+  Subcomponent Name:pending_response_acceptance_state__c.update_sharing_setting_owner_on_relate18__c
+  Subcomponent Type:Objectlifecyclestateuseraction
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:impact__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:reopen_justification__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:study_site__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:reopen_count__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:response_summary__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:state_stage_id__sys
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:external_collaborator__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:owning_site__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:extension_request__qdm
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_run_id__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:original_due_date__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:issue_escalation__v
+  Component Type:Object
+  Subcomponent Name:source_finding__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:department__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_source__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:capa_finding__v
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:description__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:owner__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:related_clinical_study_protocol__c
+  Component Type:Object
+  Subcomponent Name:finding__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:date_closed__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:cancellation_reason_justification__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:reopen_summary__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:record_check_result_state__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_department__v
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:reason_for_no_effectiveness_check_record__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:associated_regulation_requirement__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:study__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:stage__sys
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:finding_type__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:reopen_start_date__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:supplier__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:state__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:impact_to_patient_safety__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_other_references__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:reopen_closure_date__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:root_cause_analysis_details__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_organization__v
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:audit_finding__v
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:root_cause__qdm
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_lifecycle__v
+  Component Type:Objectlifecycle
+  Subcomponent Name:pending_response_acceptance_state__c
+  Subcomponent Type:Objectlifecyclestate
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:audit__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_lifecycle__v
+  Component Type:Objectlifecycle
+  Subcomponent Name:qms_qa20__c
+  Subcomponent Type:Objectlifecyclerole
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:comments__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:effectiveness_check_plan__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:title__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v.delete_record_and_related_signatures__sys
+  Component Type:Objectaction
+  Subcomponent Name:
+  Subcomponent Type:
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_state__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:organizational_applicability__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_comments__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_document__v
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_ext_notif_recipient__v
+  Component Type:Object
+  Subcomponent Name:enr_enabled_record__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:finding_subcategory__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:capa_closure_required__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:additional_approval_required__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:audit_type__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v.attachments_upload__sys
+  Component Type:Objectaction
+  Subcomponent Name:
+  Subcomponent Type:
+  Status:In Target
+
+  Component Name:finding__v.attachments_edit__sys
+  Component Type:Objectaction
+  Subcomponent Name:
+  Subcomponent Type:
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:qms_module__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:record_check_result__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:capa_action__qdm
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:addendum_count__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:owning_functional_area__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_object_id__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:require_effectiveness_check__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:related_process__c
+  Component Type:Object
+  Subcomponent Name:finding__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:effectiveness_check__qdm
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:capa_required__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:capa_recommendations__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_date_created__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:study_country__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:related_continuous_improvement__c
+  Component Type:Object
+  Subcomponent Name:source_finding_record_id__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_study__v
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:supplier_capa_description__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:collaborate_externally__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:secondary_owning_functional_area__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:internal_finding_quality_team_member__v
+  Component Type:Object
+  Subcomponent Name:team_enabled_record__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:response_received_date__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_related_reference_ids__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:reopen_due_date__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:qms_scar__v
+  Component Type:Object
+  Subcomponent Name:finding__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_lifecycle__v
+  Component Type:Objectlifecycle
+  Subcomponent Name:
+  Subcomponent Type:
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:legacy_status__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:response_assessment__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:response_due_date__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:external_finding_quality_team_member__v
+  Component Type:Object
+  Subcomponent Name:team_enabled_record__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:lifecycle__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v.attachments_delete__sys
+  Component Type:Objectaction
+  Subcomponent Name:
+  Subcomponent Type:
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:capa_due_date__v
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding__v
+  Component Type:Object
+  Subcomponent Name:response_acceptance__c
+  Subcomponent Type:Field
+  Status:In Target
+
+  Component Name:finding_lifecycle__v
+  Component Type:Objectlifecycle
+  Subcomponent Name:lead_auditor3__c
+  Subcomponent Type:Objectlifecyclerole
+  Status:In Target
+
+  Component Name:finding_lifecycle__v
+  Component Type:Objectlifecycle
+  Subcomponent Name:record_qa19__c
+  Subcomponent Type:Objectlifecyclerole
+  Status:In Target
+
+  Component Name:finding_lifecycle__v
+  Component Type:Objectlifecycle
+  Subcomponent Name:owner__v
+  Subcomponent Type:Objectlifecyclerole
+  Status:In Target
+
+STEP 00030 Response Assessment field Required
+ Step Id:0IS000000006026
+ Step Type:Component
+ Step Name:finding__v.response_assessment_field_required__c
+ Type:Objectvalidation
+ Deployment Status:Verified
+ Deployment Action:No Change (same as Vault)
+

@@ -1,0 +1,223 @@
+***Import Package API Response***
+{
+    "responseStatus": "SUCCESS",
+    "url": "/api/v23.3/services/jobs/911416",
+    "job_id": 911416
+}
+***Retrieve Job Status API Response***
+{
+    "responseStatus": "SUCCESS",
+    "data": {
+        "id": 911416,
+        "status": "SUCCESS",
+        "links": [
+            {
+                "rel": "self",
+                "href": "/api/v23.3/services/jobs/911416",
+                "method": "GET",
+                "accept": "application/json"
+            },
+            {
+                "rel": "artifacts",
+                "href": "/api/v23.3/vobject/vault_package__v/0PI000000002008/actions/import/results",
+                "method": "GET",
+                "accept": "application/json"
+            }
+        ],
+        "created_by": 16255753,
+        "created_date": "2025-06-23T13:05:42.000Z",
+        "run_start_date": "2025-06-23T13:05:42.000Z",
+        "run_end_date": "2025-06-23T13:05:43.000Z"
+    }
+}
+***Validate Package API Response***
+{
+    "responseStatus": "SUCCESS",
+    "responseDetails": {
+        "summary": "QMS 25GR2- Layout Rules Creation in Risk Event",
+        "author": "schandran6_Admin@sb-gilead.com",
+        "package_name": "PKG-0166-1",
+        "package_id": "N/A",
+        "source_vault": "223156",
+        "package_status": "Verified",
+        "total_steps": 4,
+        "total_steps_blocked": 0,
+        "start_time": "23:06:2025 01:05:53 PM",
+        "end_time": "23:06:2025 01:05:53 PM",
+        "package_error": "",
+        "package_steps": [
+            {
+                "name__v": "00010",
+                "step_type__v": "Component",
+                "step_name__v": "generic_risk_detail_page_layout__c.hide_when_org_category_is_gcpglpgvp_o__c",
+                "type__v": "Layoutrule",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Add (missing in Vault)"
+            },
+            {
+                "name__v": "00020",
+                "step_type__v": "Component",
+                "step_name__v": "haccp_assessment_risk_detail_page_layout__c.hide_when_org_category_is_gcpglpgvp_o__c",
+                "type__v": "Layoutrule",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Add (missing in Vault)"
+            },
+            {
+                "name__v": "00030",
+                "step_type__v": "Component",
+                "step_name__v": "hazop_assessment_risk_detail_page_layout__c.hide_when_org_category_is_gcpglpgvp_o__c",
+                "type__v": "Layoutrule",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Add (missing in Vault)"
+            },
+            {
+                "name__v": "00040",
+                "step_type__v": "Component",
+                "step_name__v": "what_if_risk_detail_page_layout__c.hide_when_org_category_is_gcpglpgvp_o__c",
+                "type__v": "Layoutrule",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Add (missing in Vault)"
+            }
+        ]
+    }
+}
+***Deploy Package API Response***
+{
+    "responseStatus": "SUCCESS",
+    "url": "/api/v23.3/services/jobs/911314",
+    "job_id": 911314
+}
+***Retrieve Job Status API Response***
+{
+    "responseStatus": "SUCCESS",
+    "data": {
+        "id": 911314,
+        "status": "SUCCESS",
+        "links": [
+            {
+                "rel": "self",
+                "href": "/api/v23.3/services/jobs/911314",
+                "method": "GET",
+                "accept": "application/json"
+            },
+            {
+                "rel": "artifacts",
+                "href": "/api/v23.3/vobject/vault_package__v/0PI000000002008/actions/deploy/results",
+                "method": "GET",
+                "accept": "application/json"
+            }
+        ],
+        "created_by": 16255753,
+        "created_date": "2025-06-23T13:05:54.000Z",
+        "run_start_date": "2025-06-23T13:07:07.000Z",
+        "run_end_date": "2025-06-23T13:07:12.000Z"
+    }
+}
+***Retrieve Package Deploy Results API Response***
+{
+    "responseStatus": "SUCCESS",
+    "responseDetails": {
+        "total_steps": 4,
+        "deployed": 4,
+        "deployed_with_warnings": 0,
+        "deployed_with_failures": 0,
+        "deployed_with_error": 0,
+        "failed": 0,
+        "skipped": 0,
+        "package_status__v": "deployed__v",
+        "deployment_log": [
+            {
+                "filename": "PKG-0166-Validation.log",
+                "url": "https://sb-gilead-gvault-contingency.veevavault.com/api/v25.1/vobjects/vault_package__v/0PI000000002008/attachments/138/versions/1/file",
+                "created_date__v": "2025-06-23 13:05:42.630"
+            },
+            {
+                "filename": "PKG-0166-Deployment.log",
+                "url": "https://sb-gilead-gvault-contingency.veevavault.com/api/v25.1/vobjects/vault_package__v/0PI000000002008/attachments/141/versions/1/file",
+                "created_date__v": "2025-06-23 13:07:10.945"
+            }
+        ]
+    },
+    "package_steps": [
+        {
+            "id": "0IS000000002043",
+            "name__v": "00010",
+            "step_type__v": "Component",
+            "step_name__v": "generic_risk_detail_page_layout__c.hide_when_org_category_is_gcpglpgvp_o__c",
+            "type__v": "Layoutrule",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "Hide when Org Category is GCP/GLP/GVP Op",
+            "package_components": [
+                {
+                    "id": "0VP000000001025",
+                    "name__v": "Hide when Org Category is GCP/GLP/GVP Op",
+                    "component_name__v": "generic_risk_detail_page_layout__c.hide_when_org_category_is_gcpglpgvp_o__c",
+                    "component_type__v": "Layoutrule",
+                    "checksum__v": "d87613d412438b5d984a482de28d5739"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        },
+        {
+            "id": "0IS000000002044",
+            "name__v": "00020",
+            "step_type__v": "Component",
+            "step_name__v": "haccp_assessment_risk_detail_page_layout__c.hide_when_org_category_is_gcpglpgvp_o__c",
+            "type__v": "Layoutrule",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "Hide when Org Category is GCP/GLP/GVP Op",
+            "package_components": [
+                {
+                    "id": "0VP000000001026",
+                    "name__v": "Hide when Org Category is GCP/GLP/GVP Op",
+                    "component_name__v": "haccp_assessment_risk_detail_page_layout__c.hide_when_org_category_is_gcpglpgvp_o__c",
+                    "component_type__v": "Layoutrule",
+                    "checksum__v": "f872da4fa795b8171a0898263d6a2841"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        },
+        {
+            "id": "0IS000000002045",
+            "name__v": "00030",
+            "step_type__v": "Component",
+            "step_name__v": "hazop_assessment_risk_detail_page_layout__c.hide_when_org_category_is_gcpglpgvp_o__c",
+            "type__v": "Layoutrule",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "Hide when Org Category is GCP/GLP/GVP Op",
+            "package_components": [
+                {
+                    "id": "0VP000000001027",
+                    "name__v": "Hide when Org Category is GCP/GLP/GVP Op",
+                    "component_name__v": "hazop_assessment_risk_detail_page_layout__c.hide_when_org_category_is_gcpglpgvp_o__c",
+                    "component_type__v": "Layoutrule",
+                    "checksum__v": "f1b81c4b4c273f0e3664f0de1641617e"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        },
+        {
+            "id": "0IS000000002046",
+            "name__v": "00040",
+            "step_type__v": "Component",
+            "step_name__v": "what_if_risk_detail_page_layout__c.hide_when_org_category_is_gcpglpgvp_o__c",
+            "type__v": "Layoutrule",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "Hide when Org Category is GCP/GLP/GVP Op",
+            "package_components": [
+                {
+                    "id": "0VP000000001028",
+                    "name__v": "Hide when Org Category is GCP/GLP/GVP Op",
+                    "component_name__v": "what_if_risk_detail_page_layout__c.hide_when_org_category_is_gcpglpgvp_o__c",
+                    "component_type__v": "Layoutrule",
+                    "checksum__v": "16a9093ebc4ec5f900f1859895d68970"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        }
+    ]
+}

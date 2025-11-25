@@ -1,0 +1,13 @@
+ALTER Objectlifecycle finding_lifecycle__v (
+   label('Finding Lifecycle'),
+   state_labels(),
+   labeled_states(),
+   starting_state('Objectlifecyclestate.define_team_state__v'),
+   description(),
+ADD Objectlifecyclestateentrycriterion response_approved_state__c.entrycriteria396__c(
+      rule({<?xml version="1.0" encoding="UTF-8"?>
+<rule><expression operator="in" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.finding__v.object_type__v</value></expression><expression operator="value" type="string"><value>External Finding</value></expression><expression operator="value" type="string"><value>Internal Finding</value></expression></expression><actions><action type="LIFECYCLE_ENTRY_CRITERIA_FIELD"><expression operator="isNotBlank"><expression operator="field" type="boolean"><value>Object.finding__v.response_acceptance__c</value></expression></expression></action></actions></rule>
+}),
+      order(10000)
+   )
+);

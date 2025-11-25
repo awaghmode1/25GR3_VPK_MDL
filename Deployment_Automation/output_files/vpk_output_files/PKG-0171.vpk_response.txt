@@ -1,0 +1,622 @@
+***Import Package API Response***
+{
+    "responseStatus": "SUCCESS",
+    "url": "/api/v23.3/services/jobs/911423",
+    "job_id": 911423
+}
+***Retrieve Job Status API Response***
+{
+    "responseStatus": "SUCCESS",
+    "data": {
+        "id": 911423,
+        "status": "SUCCESS",
+        "links": [
+            {
+                "rel": "self",
+                "href": "/api/v23.3/services/jobs/911423",
+                "method": "GET",
+                "accept": "application/json"
+            },
+            {
+                "rel": "artifacts",
+                "href": "/api/v23.3/vobject/vault_package__v/0PI000000002013/actions/import/results",
+                "method": "GET",
+                "accept": "application/json"
+            }
+        ],
+        "created_by": 16255753,
+        "created_date": "2025-06-23T13:09:23.000Z",
+        "run_start_date": "2025-06-23T13:09:23.000Z",
+        "run_end_date": "2025-06-23T13:09:24.000Z"
+    }
+}
+***Validate Package API Response***
+{
+    "responseStatus": "SUCCESS",
+    "responseDetails": {
+        "summary": "25GR2_SNA_Non-ERP Batches_Join",
+        "author": "ljayarasu@sb-gilead.com",
+        "package_name": "PKG-0171-1",
+        "package_id": "N/A",
+        "source_vault": "223156",
+        "package_status": "Verified",
+        "total_steps": 7,
+        "total_steps_blocked": 0,
+        "start_time": "23:06:2025 01:09:34 PM",
+        "end_time": "23:06:2025 01:09:34 PM",
+        "package_error": "",
+        "package_steps": [
+            {
+                "name__v": "00010",
+                "step_type__v": "Component",
+                "step_name__v": "nonerp_batchquality_event__c",
+                "type__v": "Object",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Add (missing in Vault)",
+                "dependencies": [
+                    {
+                        "component_name": "default_status__v",
+                        "component_type": "Picklist",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "external_batch_lifecycle__c",
+                        "component_type": "Objectlifecycle",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Package - Create"
+                    },
+                    {
+                        "component_name": "external_batch__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "supplier_change_notification__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    }
+                ]
+            },
+            {
+                "name__v": "00020",
+                "step_type__v": "Component",
+                "step_name__v": "external_batch_lifecycle__c",
+                "type__v": "Objectlifecycle",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Add (missing in Vault)",
+                "dependencies": [
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "created_date__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    }
+                ]
+            },
+            {
+                "name__v": "00030",
+                "step_type__v": "Component",
+                "step_name__v": "nonerp_batchsna_detail_page_layout__c",
+                "type__v": "Pagelayout",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Add (missing in Vault)",
+                "dependencies": [
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "source_sna__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "comments__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "created_date__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "lifecycle__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "nonerp_batch__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "quantity__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    }
+                ]
+            },
+            {
+                "name__v": "00040",
+                "step_type__v": "Component",
+                "step_name__v": "external_batchsna_viewers__c",
+                "type__v": "Sharingrule",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Add (missing in Vault)",
+                "dependencies": [
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Package"
+                    }
+                ]
+            },
+            {
+                "name__v": "00050",
+                "step_type__v": "Component",
+                "step_name__v": "nonerp_batchquality_event__c.external_batch_lifecycle__c.in_amendment_state__c.atomic_security__c",
+                "type__v": "Atomicsecurity",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Add (missing in Vault)",
+                "dependencies": [
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "created_date__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "state_stage_id__sys",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "external_batch_lifecycle__c",
+                        "component_type": "Objectlifecycle",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "external_batch_lifecycle__c",
+                        "component_type": "Objectlifecycle",
+                        "subcomponent_name": "in_amendment_state__c",
+                        "subcomponent_type": "Objectlifecyclestate",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "stage__sys",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "lifecycle__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    }
+                ]
+            },
+            {
+                "name__v": "00060",
+                "step_type__v": "Component",
+                "step_name__v": "nonerp_batchquality_event__c.external_batch_lifecycle__c.locked_state__c.atomic_security__c",
+                "type__v": "Atomicsecurity",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Add (missing in Vault)",
+                "dependencies": [
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "quantity__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "created_date__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "source_sna__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "external_batch_lifecycle__c",
+                        "component_type": "Objectlifecycle",
+                        "subcomponent_name": "locked_state__c",
+                        "subcomponent_type": "Objectlifecyclestate",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "state_stage_id__sys",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "external_batch_lifecycle__c",
+                        "component_type": "Objectlifecycle",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "nonerp_batch__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "stage__sys",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "lifecycle__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "comments__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    }
+                ]
+            },
+            {
+                "name__v": "00070",
+                "step_type__v": "Component",
+                "step_name__v": "nonerp_batchquality_event__c.external_batch_lifecycle__c.unlocked_state__c.atomic_security__c",
+                "type__v": "Atomicsecurity",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Add (missing in Vault)",
+                "dependencies": [
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "created_date__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "state_stage_id__sys",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "external_batch_lifecycle__c",
+                        "component_type": "Objectlifecycle",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "external_batch_lifecycle__c",
+                        "component_type": "Objectlifecycle",
+                        "subcomponent_name": "unlocked_state__c",
+                        "subcomponent_type": "Objectlifecyclestate",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "stage__sys",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    },
+                    {
+                        "component_name": "nonerp_batchquality_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "lifecycle__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Package"
+                    }
+                ]
+            }
+        ]
+    }
+}
+***Deploy Package API Response***
+{
+    "responseStatus": "SUCCESS",
+    "url": "/api/v23.3/services/jobs/911425",
+    "job_id": 911425
+}
+***Retrieve Job Status API Response***
+{
+    "responseStatus": "SUCCESS",
+    "data": {
+        "id": 911425,
+        "status": "SUCCESS",
+        "links": [
+            {
+                "rel": "self",
+                "href": "/api/v23.3/services/jobs/911425",
+                "method": "GET",
+                "accept": "application/json"
+            },
+            {
+                "rel": "artifacts",
+                "href": "/api/v23.3/vobject/vault_package__v/0PI000000002013/actions/deploy/results",
+                "method": "GET",
+                "accept": "application/json"
+            }
+        ],
+        "created_by": 16255753,
+        "created_date": "2025-06-23T13:09:37.000Z",
+        "run_start_date": "2025-06-23T13:09:37.000Z",
+        "run_end_date": "2025-06-23T13:11:18.000Z"
+    }
+}
+***Retrieve Package Deploy Results API Response***
+{
+    "responseStatus": "SUCCESS",
+    "responseDetails": {
+        "total_steps": 7,
+        "deployed": 7,
+        "deployed_with_warnings": 0,
+        "deployed_with_failures": 0,
+        "deployed_with_error": 0,
+        "failed": 0,
+        "skipped": 0,
+        "package_status__v": "deployed__v",
+        "deployment_log": [
+            {
+                "filename": "PKG-0171-Validation.log",
+                "url": "https://sb-gilead-gvault-contingency.veevavault.com/api/v25.1/vobjects/vault_package__v/0PI000000002013/attachments/150/versions/1/file",
+                "created_date__v": "2025-06-23 13:09:23.701"
+            },
+            {
+                "filename": "PKG-0171-Deployment.log",
+                "url": "https://sb-gilead-gvault-contingency.veevavault.com/api/v25.1/vobjects/vault_package__v/0PI000000002013/attachments/152/versions/1/file",
+                "created_date__v": "2025-06-23 13:11:17.564"
+            }
+        ]
+    },
+    "package_steps": [
+        {
+            "id": "0IS000000002073",
+            "name__v": "00010",
+            "step_type__v": "Component",
+            "step_name__v": "nonerp_batchquality_event__c",
+            "type__v": "Object",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "Non-ERP Batch-SNA",
+            "package_components": [
+                {
+                    "id": "0VP000000001055",
+                    "name__v": "Non-ERP Batch-SNA",
+                    "component_name__v": "nonerp_batchquality_event__c",
+                    "component_type__v": "Object",
+                    "checksum__v": "97c2d6b3857d4a75eeb52df5aaa52ac3"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        },
+        {
+            "id": "0IS000000002074",
+            "name__v": "00020",
+            "step_type__v": "Component",
+            "step_name__v": "external_batch_lifecycle__c",
+            "type__v": "Objectlifecycle",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "External Batch-SNA Lifecycle",
+            "package_components": [
+                {
+                    "id": "0VP000000001056",
+                    "name__v": "External Batch-SNA Lifecycle",
+                    "component_name__v": "external_batch_lifecycle__c",
+                    "component_type__v": "Objectlifecycle",
+                    "checksum__v": "16c330363d0fd1fcacf70fa096b727cf"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        },
+        {
+            "id": "0IS000000002075",
+            "name__v": "00030",
+            "step_type__v": "Component",
+            "step_name__v": "nonerp_batchsna_detail_page_layout__c",
+            "type__v": "Pagelayout",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "Non-ERP Batch-SNA Detail Page Layout",
+            "package_components": [
+                {
+                    "id": "0VP000000001057",
+                    "name__v": "Non-ERP Batch-SNA Detail Page Layout",
+                    "component_name__v": "nonerp_batchsna_detail_page_layout__c",
+                    "component_type__v": "Pagelayout",
+                    "checksum__v": "fc6037ae74a4e3d3d541bf38c6386887"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        },
+        {
+            "id": "0IS000000002076",
+            "name__v": "00040",
+            "step_type__v": "Component",
+            "step_name__v": "external_batchsna_viewers__c",
+            "type__v": "Sharingrule",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "External Batch-SNA Viewers",
+            "package_components": [
+                {
+                    "id": "0VP000000001058",
+                    "name__v": "External Batch-SNA Viewers",
+                    "component_name__v": "external_batchsna_viewers__c",
+                    "component_type__v": "Sharingrule",
+                    "checksum__v": "e95a1a43450109774107cb3d8331982f"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        },
+        {
+            "id": "0IS000000002077",
+            "name__v": "00050",
+            "step_type__v": "Component",
+            "step_name__v": "nonerp_batchquality_event__c.external_batch_lifecycle__c.in_amendment_state__c.atomic_security__c",
+            "type__v": "Atomicsecurity",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "Non-ERP Batch-SNA-External Batch-SNA-In Amendment",
+            "package_components": [
+                {
+                    "id": "0VP000000001059",
+                    "name__v": "Non-ERP Batch-SNA-External Batch-SNA-In Amendment",
+                    "component_name__v": "nonerp_batchquality_event__c.external_batch_lifecycle__c.in_amendment_state__c.atomic_security__c",
+                    "component_type__v": "Atomicsecurity",
+                    "checksum__v": "6d536e73925af0383b799ef5af5ccf7b"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        },
+        {
+            "id": "0IS000000002078",
+            "name__v": "00060",
+            "step_type__v": "Component",
+            "step_name__v": "nonerp_batchquality_event__c.external_batch_lifecycle__c.locked_state__c.atomic_security__c",
+            "type__v": "Atomicsecurity",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "Non-ERP Batch-SNA-External Batch-SNA-Locked",
+            "package_components": [
+                {
+                    "id": "0VP000000001060",
+                    "name__v": "Non-ERP Batch-SNA-External Batch-SNA-Locked",
+                    "component_name__v": "nonerp_batchquality_event__c.external_batch_lifecycle__c.locked_state__c.atomic_security__c",
+                    "component_type__v": "Atomicsecurity",
+                    "checksum__v": "be12561e63b103e5266874c35371f1d9"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        },
+        {
+            "id": "0IS000000002079",
+            "name__v": "00070",
+            "step_type__v": "Component",
+            "step_name__v": "nonerp_batchquality_event__c.external_batch_lifecycle__c.unlocked_state__c.atomic_security__c",
+            "type__v": "Atomicsecurity",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "Non-ERP Batch-SNA-External Batch-SNA-Unlocked",
+            "package_components": [
+                {
+                    "id": "0VP000000001061",
+                    "name__v": "Non-ERP Batch-SNA-External Batch-SNA-Unlocked",
+                    "component_name__v": "nonerp_batchquality_event__c.external_batch_lifecycle__c.unlocked_state__c.atomic_security__c",
+                    "component_type__v": "Atomicsecurity",
+                    "checksum__v": "dc194abd46ad43ca44dff4af39a50a5c"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        }
+    ]
+}

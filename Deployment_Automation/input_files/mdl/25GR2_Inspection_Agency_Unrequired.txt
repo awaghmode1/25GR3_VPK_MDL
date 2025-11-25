@@ -1,0 +1,8 @@
+ALTER Objecttype audit__qdm.inspection__c (
+   label('Inspection'),
+   label_plural('Inspections'),
+   description(),
+Modify Typefield inspection_agency__c(
+    required(false)
+   )
+);

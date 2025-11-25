@@ -1,0 +1,10 @@
+ALTER Object audit__qdm (
+    MODIFY Field partner__c (
+controlling_picklist('type__c'),
+picklist_dependencies('{"partner_audit__c":["bristolmeyers_squibb_bms__c","gsk__c","janssen__c","merck__c","peru_digemid__c",
+"arcus__c","arcustaiho__c","astellas_pharma_global_development__c","astellas_pharmafujisawa__c","fosun_kite__c","galapagos_nveisai__c",
+"genentech__c","gritstone__c","heptera_llc__c","immunogen__c","menarini__c","msd_kk__c","novo_nordisk__c","ono__c",
+"pari_pharma__c","pari_respiratory_equipment_inc__c","pregistry__c","quantum_leap__c","roche__c","rockefeller_university__c","sumitomo__c",
+"vir_bio__c","kpmg_llp__c","soul_medical_ltda_sai__c","optuminsight_life_sciences_inc__c"],"regulatory_inspection__c":["armenia_moh__c"]}')
+    )
+);

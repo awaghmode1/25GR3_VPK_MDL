@@ -1,0 +1,3094 @@
+***Import Package API Response***
+{
+    "responseStatus": "SUCCESS",
+    "url": "/api/v23.3/services/jobs/911311",
+    "job_id": 911311
+}
+***Retrieve Job Status API Response***
+{
+    "responseStatus": "SUCCESS",
+    "data": {
+        "id": 911311,
+        "status": "SUCCESS",
+        "links": [
+            {
+                "rel": "self",
+                "href": "/api/v23.3/services/jobs/911311",
+                "method": "GET",
+                "accept": "application/json"
+            },
+            {
+                "rel": "artifacts",
+                "href": "/api/v23.3/vobject/vault_package__v/0PI000000001006/actions/import/results",
+                "method": "GET",
+                "accept": "application/json"
+            }
+        ],
+        "created_by": 16255753,
+        "created_date": "2025-06-23T13:02:38.000Z",
+        "run_start_date": "2025-06-23T13:02:40.000Z",
+        "run_end_date": "2025-06-23T13:02:43.000Z"
+    }
+}
+***Validate Package API Response***
+{
+    "responseStatus": "SUCCESS",
+    "responseDetails": {
+        "summary": "QMS25GR2- Risk Event- PageLayout",
+        "author": "schandran6_Admin@sb-gilead.com",
+        "package_name": "PKG-0165-1",
+        "package_id": "N/A",
+        "source_vault": "223156",
+        "package_status": "Verified",
+        "total_steps": 4,
+        "total_steps_blocked": 0,
+        "start_time": "23:06:2025 01:02:49 PM",
+        "end_time": "23:06:2025 01:02:49 PM",
+        "package_error": "",
+        "package_steps": [
+            {
+                "name__v": "00010",
+                "step_type__v": "Component",
+                "step_name__v": "generic_risk_detail_page_layout__c",
+                "type__v": "Pagelayout",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Update",
+                "dependencies": [
+                    {
+                        "component_name": "risk_registerrisks__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_register__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "identification_date__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "lifecycle__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_function__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "therapeutic_area1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "product_family__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_rpn_qual__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_detectability__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_material_number__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_detectability__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "rationale_for_closure__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "mitigation_action__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "finding__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_register__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "type__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "audit__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "qms_organization__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "address1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "qms_organization__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "parent_organization__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "matrix_type__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "pi_name__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "description1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_subcategory__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_occurrence__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v.generic__v",
+                        "component_type": "Objecttype",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "date_closed__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_register__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_classification__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "riskorganization__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_matrix__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product_family__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "program_type__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "parent_assessment__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_occurrence__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_severity__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "document_risk_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "protocol_title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_rpn_qual__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_response__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "function__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "owning_site__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "audit__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "justification_for_acceptance__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_product_family__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_risk_score__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "site_number__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "record_owner__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "source__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "quality_event__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "site__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "finding__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "owner__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "original_fmea_risk_event__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_severity__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "key_risk__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "source_template_risk__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "organizational_category__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "date_closed__qdm",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "process_step__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_category__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "qms_organization__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "type__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event_risks__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "formality__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "document_risk_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "related_document__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "legacy_date_created__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "reason_for_cancellation__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_finding__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_audit__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "commercial_or_clinical__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_risk_analysis_summary__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product_family__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "clinical_commercial__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "parent_risk_assessment_title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "residual_risk_scoring_rationale__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product_family__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "description__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_clinical_study_procotol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "ethics_committee_data__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_context__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "description__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "finding__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "description1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "mitigation_action_lifecycle_state__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "quality_event_lifecycle_state__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "generic_risk_event__c",
+                        "component_type": "Objectlifecyclestagegroup",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "ract_id__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "reporting_requirements__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "impacted_regulation__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "audit_standard__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_impact_scope__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "inspection_agency__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "study_stage__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "sequence_of_events__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "process__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "subprocess_item__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "subprocess__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "process_category__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    }
+                ]
+            },
+            {
+                "name__v": "00020",
+                "step_type__v": "Component",
+                "step_name__v": "haccp_assessment_risk_detail_page_layout__c",
+                "type__v": "Pagelayout",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Update",
+                "dependencies": [
+                    {
+                        "component_name": "risk_registerrisks__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_register__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "identification_date__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "lifecycle__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_function__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "therapeutic_area1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "product_family__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_rpn_qual__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_detectability__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_material_number__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_detectability__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "rationale_for_closure__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "mitigation_action__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "finding__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_register__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "type__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "detection_controls__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "audit__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "qms_organization__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "address1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "qms_organization__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "parent_organization__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "matrix_type__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "pi_name__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "description1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "hazardeous_situation__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_subcategory__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_occurrence__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "date_closed__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_register__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_classification__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "riskorganization__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_matrix__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product_family__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "program_type__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "parent_assessment__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_occurrence__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_severity__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "document_risk_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "harm__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "protocol_title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_rpn_qual__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "critical_parameter__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_response__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "function__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "owning_site__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "audit__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "justification_for_acceptance__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_product_family__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_risk_score__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "site_number__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "record_owner__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "source__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "quality_event__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "site__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "finding__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "owner__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "original_fmea_risk_event__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_severity__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "key_risk__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "source_template_risk__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "organizational_category__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "date_closed__qdm",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "process_step__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_category__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "qms_organization__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "type__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event_risks__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "formality__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "document_risk_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "related_document__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "legacy_date_created__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "reason_for_cancellation__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_finding__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_audit__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_risk_analysis_summary__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product_family__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "clinical_commercial__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "parent_risk_assessment_title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v.haccp__v",
+                        "component_type": "Objecttype",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "hazards__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "residual_risk_scoring_rationale__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product_family__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "description__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_clinical_study_procotol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "ethics_committee_data__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "prevention_controls__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "critical_control_point__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_context__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "description__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_risk_score__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "finding__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "description1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "mitigation_action_lifecycle_state__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "quality_event_lifecycle_state__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "haccp_risk_event__c",
+                        "component_type": "Objectlifecyclestagegroup",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "impacted_regulation__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "sequence_of_events__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "process__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "subprocess_item__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "subprocess__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "process_category__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "ract_id__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "reporting_requirements__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_impact_scope__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "audit_standard__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "inspection_agency__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "study_stage__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    }
+                ]
+            },
+            {
+                "name__v": "00030",
+                "step_type__v": "Component",
+                "step_name__v": "hazop_assessment_risk_detail_page_layout__c",
+                "type__v": "Pagelayout",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Update",
+                "dependencies": [
+                    {
+                        "component_name": "risk_registerrisks__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_register__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "identification_date__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "lifecycle__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_function__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "therapeutic_area1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v.hazop__v",
+                        "component_type": "Objecttype",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "product_family__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_rpn_qual__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_detectability__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_material_number__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_detectability__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "rationale_for_closure__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "mitigation_action__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "finding__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "failure_effect__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_register__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "type__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "detection_controls__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "audit__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "qms_organization__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "address1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "qms_organization__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "parent_organization__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "matrix_type__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "failure_cause__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "pi_name__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "description1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_subcategory__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_occurrence__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "date_closed__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_register__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_classification__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "riskorganization__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "hazop_guideword__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_matrix__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product_family__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "program_type__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "parent_assessment__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_occurrence__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_severity__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "document_risk_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "protocol_title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_rpn_qual__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_response__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "current_controls__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "function__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "owning_site__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "audit__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "justification_for_acceptance__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_product_family__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_risk_score__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "site_number__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "record_owner__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "source__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "quality_event__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "site__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "finding__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "owner__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "original_fmea_risk_event__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_severity__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "key_risk__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "source_template_risk__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "organizational_category__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "date_closed__qdm",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "process_step__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_category__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "qms_organization__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "type__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event_risks__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "formality__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "document_risk_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "related_document__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "legacy_date_created__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "reason_for_cancellation__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_finding__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_audit__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "commercial_or_clinical__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_risk_analysis_summary__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product_family__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "clinical_commercial__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "parent_risk_assessment_title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "hazop_node__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "residual_risk_scoring_rationale__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product_family__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "description__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_clinical_study_procotol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "ethics_committee_data__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "prevention_controls__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "part__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_context__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "description__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "recommended_actions__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_risk_score__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "finding__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "description1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "mitigation_action_lifecycle_state__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "quality_event_lifecycle_state__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "hazop_risk_event__c",
+                        "component_type": "Objectlifecyclestagegroup",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "impacted_regulation__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "sequence_of_events__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "ract_id__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "reporting_requirements__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_impact_scope__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "audit_standard__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "inspection_agency__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "study_stage__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "process__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "subprocess_item__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "subprocess__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "process_category__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    }
+                ]
+            },
+            {
+                "name__v": "00040",
+                "step_type__v": "Component",
+                "step_name__v": "what_if_risk_detail_page_layout__c",
+                "type__v": "Pagelayout",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Update",
+                "dependencies": [
+                    {
+                        "component_name": "risk_registerrisks__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_register__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "identification_date__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "lifecycle__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_function__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "therapeutic_area1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "product_family__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_rpn_qual__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_detectability__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_material_number__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_detectability__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "rationale_for_closure__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "mitigation_action__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "finding__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_register__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "type__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "detection_controls__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "audit__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "qms_organization__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "address1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "qms_organization__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "parent_organization__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "matrix_type__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "pi_name__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "description1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_subcategory__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_occurrence__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "date_closed__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_register__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_classification__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "riskorganization__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_matrix__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product_family__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "program_type__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "parent_assessment__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_occurrence__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_severity__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "document_risk_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "protocol_title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_rpn_qual__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_response__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "function__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "owning_site__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "what_if__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "audit__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "justification_for_acceptance__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_product_family__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_risk_score__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "site_number__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "record_owner__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "source__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "quality_event__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "site__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "finding__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "owner__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "original_fmea_risk_event__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "final_severity__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "key_risk__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "source_template_risk__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "organizational_category__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "date_closed__qdm",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "process_step__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_category__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "qms_organization__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "type__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event_risks__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "formality__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "document_risk_event__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "related_document__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "legacy_date_created__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "reason_for_cancellation__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_finding__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_audit__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_risk_analysis_summary__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v.what_if__v",
+                        "component_type": "Objecttype",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "answer__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product_family__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "clinical_commercial__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "parent_risk_assessment_title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "residual_risk_scoring_rationale__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product_family__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "description__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_clinical_study_procotol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "ethics_committee_data__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "prevention_controls__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "risk_event_context__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "product__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "description__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "initial_risk_score__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "finding__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "state__v",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "quality_event__qdm",
+                        "component_type": "Object",
+                        "subcomponent_name": "description1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "mitigation_action_lifecycle_state__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "assessment_risk_mitigation__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "quality_event_lifecycle_state__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "what_if_risk_event__c",
+                        "component_type": "Objectlifecyclestagegroup",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "impacted_regulation__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "sequence_of_events__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "process__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "subprocess_item__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "subprocess__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_process__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "process_category__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "ract_id__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "reporting_requirements__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_impact_scope__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "audit_standard__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "inspection_agency__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "fmea_risk_event__v",
+                        "component_type": "Object",
+                        "subcomponent_name": "study_stage__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    }
+                ]
+            }
+        ]
+    }
+}
+***Deploy Package API Response***
+{
+    "responseStatus": "SUCCESS",
+    "url": "/api/v23.3/services/jobs/911312",
+    "job_id": 911312
+}
+***Retrieve Job Status API Response***
+{
+    "responseStatus": "SUCCESS",
+    "data": {
+        "id": 911312,
+        "status": "SUCCESS",
+        "links": [
+            {
+                "rel": "self",
+                "href": "/api/v23.3/services/jobs/911312",
+                "method": "GET",
+                "accept": "application/json"
+            },
+            {
+                "rel": "artifacts",
+                "href": "/api/v23.3/vobject/vault_package__v/0PI000000001006/actions/deploy/results",
+                "method": "GET",
+                "accept": "application/json"
+            }
+        ],
+        "created_by": 16255753,
+        "created_date": "2025-06-23T13:02:53.000Z",
+        "run_start_date": "2025-06-23T13:05:08.000Z",
+        "run_end_date": "2025-06-23T13:05:14.000Z"
+    }
+}
+***Retrieve Package Deploy Results API Response***
+{
+    "responseStatus": "SUCCESS",
+    "responseDetails": {
+        "total_steps": 4,
+        "deployed": 4,
+        "deployed_with_warnings": 0,
+        "deployed_with_failures": 0,
+        "deployed_with_error": 0,
+        "failed": 0,
+        "skipped": 0,
+        "package_status__v": "deployed__v",
+        "deployment_log": [
+            {
+                "filename": "PKG-0165-Validation.log",
+                "url": "https://sb-gilead-gvault-contingency.veevavault.com/api/v25.1/vobjects/vault_package__v/0PI000000001006/attachments/18/versions/1/file",
+                "created_date__v": "2025-06-23 13:02:41.517"
+            },
+            {
+                "filename": "PKG-0165-Deployment.log",
+                "url": "https://sb-gilead-gvault-contingency.veevavault.com/api/v25.1/vobjects/vault_package__v/0PI000000001006/attachments/19/versions/1/file",
+                "created_date__v": "2025-06-23 13:05:13.327"
+            }
+        ]
+    },
+    "package_steps": [
+        {
+            "id": "0IS000000001029",
+            "name__v": "00010",
+            "step_type__v": "Component",
+            "step_name__v": "generic_risk_detail_page_layout__c",
+            "type__v": "Pagelayout",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "Generic Detail Page Layout",
+            "package_components": [
+                {
+                    "id": "0VP000000002017",
+                    "name__v": "Generic Detail Page Layout",
+                    "component_name__v": "generic_risk_detail_page_layout__c",
+                    "component_type__v": "Pagelayout",
+                    "checksum__v": "3d45f6140a0174eba5ac200e050ca26b"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        },
+        {
+            "id": "0IS000000001030",
+            "name__v": "00020",
+            "step_type__v": "Component",
+            "step_name__v": "haccp_assessment_risk_detail_page_layout__c",
+            "type__v": "Pagelayout",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "HACCP Detail Page Layout",
+            "package_components": [
+                {
+                    "id": "0VP000000002018",
+                    "name__v": "HACCP Detail Page Layout",
+                    "component_name__v": "haccp_assessment_risk_detail_page_layout__c",
+                    "component_type__v": "Pagelayout",
+                    "checksum__v": "9f018a10a4d01b3c6c4ef0efa23ad9bb"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        },
+        {
+            "id": "0IS000000001031",
+            "name__v": "00030",
+            "step_type__v": "Component",
+            "step_name__v": "hazop_assessment_risk_detail_page_layout__c",
+            "type__v": "Pagelayout",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "HAZOP Detail Page Layout",
+            "package_components": [
+                {
+                    "id": "0VP000000002019",
+                    "name__v": "HAZOP Detail Page Layout",
+                    "component_name__v": "hazop_assessment_risk_detail_page_layout__c",
+                    "component_type__v": "Pagelayout",
+                    "checksum__v": "c54fa05ec9203ed6155613d986d14b6c"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        },
+        {
+            "id": "0IS000000001032",
+            "name__v": "00040",
+            "step_type__v": "Component",
+            "step_name__v": "what_if_risk_detail_page_layout__c",
+            "type__v": "Pagelayout",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "What - If Detail Page Layout",
+            "package_components": [
+                {
+                    "id": "0VP000000002020",
+                    "name__v": "What - If Detail Page Layout",
+                    "component_name__v": "what_if_risk_detail_page_layout__c",
+                    "component_type__v": "Pagelayout",
+                    "checksum__v": "a5e6d44fd974c3bc48e0c61d09afc7ed"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+ALTER Objecttype audit__qdm.inspection__c (
+   label('Inspection'),
+   label_plural('Inspections'),
+   description(),
+ADD Typefield partner__c(
+      source('custom'),
+      required(false)
+   )
+);

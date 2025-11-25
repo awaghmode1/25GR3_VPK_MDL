@@ -1,0 +1,6 @@
+ALTER Object supplier_change_notification__v (
+	MODIFY Field sna_subtype__c(
+	controlling_picklist('sna_type__c'),
+      picklist_dependencies('{"supplier_vendor_action__c":["recall__c","market_withdrawl__c","stockout__c","stock_recovery__c","supply_disruption__c","force_majeure__c","discontinuation__c"],"quality_issue__c":["na__c","clinical_site_excursions__c"],"change__c":["na__c"]}')
+	)
+);

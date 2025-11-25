@@ -1,0 +1,27 @@
+ALTER Object supplier_change_notification__v (
+   label('Supplier Notification Assessment'),
+   label_plural('Supplier Notification Assessments'),
+   active(true),
+   description(),
+   help_content(),
+   in_menu(true),
+   allow_attachments(true),
+   enable_esignatures(true),
+   audit(true),
+   order(591),
+   dynamic_security(true),
+   available_lifecycles('Objectlifecycle.supplier_change_notification_lifecycle__v'),
+   allow_types(false),
+   user_role_setup_object('Object.user_role_setup_qms__c'),
+   secure_sharing_settings(false),
+   secure_attachments(true),
+   secure_audit_trail(false),
+   prevent_record_overwrite(true),
+   triggers_disallowed(false),
+   configuration_data(false),
+   enable_merges(false),
+   summary_fields(),
+MODIFY Field batch_material_associated__c(
+      label('Batch / Material Associated? (ERP)')
+)
+);

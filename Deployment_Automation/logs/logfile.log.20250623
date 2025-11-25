@@ -1,0 +1,24 @@
+2025-06-23 18:29:10,115 - INFO - ******Started  Deployment Automation Script******
+2025-06-23 18:29:10,126 - INFO - Logging into  Vault...
+2025-06-23 18:29:10,131 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-06-23 18:29:10,136 - INFO - User : sabariraj@sb-gilead.com
+2025-06-23 18:29:10,894 - INFO - sessionID : 9F91DF08D000B956F55D1536B68E4E5ABD6440F6C09DEA132044D0DC8A5364CD26CF59C624E52F0A864F0E1C8C496527D44ACBACB7927A413CD46174E49EAE0C
+2025-06-23 18:29:10,900 - INFO - Logged into  Vault!!!
+2025-06-23 18:29:18,528 - INFO - Entry Criteria_25GR2_Finding_Lifecycle_Response_Approved state - MDL Executed Successfully
+2025-06-23 18:29:45,033 - INFO - 25GR2_Finding_Lifecycle_Role Permission - MDL Executed Successfully
+2025-06-23 18:30:43,851 - INFO - PKG-0153 -  Deployed Successfully into Vault 
+2025-06-23 18:31:06,868 - INFO - 25GR2_Addind_Fields_to_HAZOP_Object_Type_of_RiskEvent - MDL Executed Successfully
+2025-06-23 18:31:30,200 - INFO - 25GR2_Adding_Fields_to_Generic_Object_Type_of_RiskEvent - MDL Executed Successfully
+2025-06-23 18:31:53,247 - INFO - 25GR2_Adding_Fields_to_HACCP_Object_Type_of_RiskEvent - MDL Executed Successfully
+2025-06-23 18:32:15,889 - INFO - 25GR2_Adding_Fields_to_What_If_Object_Type_of_RiskEvent - MDL Executed Successfully
+2025-06-23 18:35:19,803 - INFO - PKG-0165 -  Deployed Successfully into Vault 
+2025-06-23 18:37:18,737 - INFO - PKG-0166 -  Deployed Successfully into Vault 
+2025-06-23 18:37:39,877 - INFO - Step 3_SNA_Batch_Material_Associated_field_label_update - MDL Executed Successfully
+2025-06-23 18:38:37,721 - INFO - PKG-0169 -  Deployed Successfully into Vault 
+2025-06-23 18:39:00,397 - INFO - Step_8_SNA_sna_subtype_picklist_dependency - MDL Executed Successfully
+2025-06-23 18:41:21,327 - INFO - PKG-0171 -  Deployed Successfully into Vault 
+2025-06-23 18:42:09,234 - INFO - PKG-0172 -  Deployed Successfully into Vault 
+2025-06-23 18:43:34,600 - INFO - PKG-0179 -  Deployed Successfully into Vault 
+2025-06-23 18:44:44,271 - INFO - PKG-0180 -  Deployed Successfully into Vault 
+2025-06-23 18:45:48,472 - INFO - PKG-0181 -  Deployed Successfully into Vault 
+2025-06-23 18:46:08,589 - INFO - Deployment Automation Script Completed

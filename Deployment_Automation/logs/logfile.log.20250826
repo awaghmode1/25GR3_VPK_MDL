@@ -1,0 +1,27 @@
+2025-08-26 08:23:15,976 - INFO - ******Started  Deployment Automation Script******
+2025-08-26 08:23:16,086 - INFO - Logging into  Vault...
+2025-08-26 08:23:16,089 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-08-26 08:23:16,092 - INFO - User : pradnyavantg@sb-gilead.com
+2025-08-26 08:23:18,706 - INFO - sessionID : 017DA167AAF70A708A9590DCD8972B3295E765288E4112AFF2187A2D1DC1D084B4CB02B243D00D9E677AA8ACDC4D38938A34C02D14F13AB993BA4801CC151ED5
+2025-08-26 08:23:18,712 - INFO - Logged into  Vault!!!
+2025-08-26 08:25:27,903 - INFO - PKG-0153 -  Deployed Successfully into Vault 
+2025-08-26 08:25:28,313 - INFO - Downloaded PKG-0153-Validation.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_validation.log
+2025-08-26 08:25:28,580 - INFO - Downloaded PKG-0153-Deployment.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_deployment.log
+2025-08-26 08:25:48,679 - INFO - Deployment Automation Script Completed
+2025-08-26 14:48:35,754 - INFO - ******Started  Deployment Automation Script******
+2025-08-26 14:48:35,771 - INFO - Logging into  Vault...
+2025-08-26 14:48:35,775 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-08-26 14:48:35,778 - INFO - User : pradnyavantg@sb-gilead.com
+2025-08-26 14:48:36,831 - INFO - sessionID : 3A481C9B0EC76BF8C2BABE40EECD7E625AA2386B57B9A1EA20A3EFEAEE56CE88BF8382A26643BA3B9BE0A5714EE25951ADEF020F761D6861F867909D67736044
+2025-08-26 14:48:36,838 - INFO - Logged into  Vault!!!
+2025-08-26 14:48:36,842 - ERROR - CSV file is open/locked: GVault_Deployment_Steps.csv
+2025-08-26 14:48:59,336 - INFO - ******Started  Deployment Automation Script******
+2025-08-26 14:48:59,360 - INFO - Logging into  Vault...
+2025-08-26 14:48:59,364 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-08-26 14:48:59,368 - INFO - User : pradnyavantg@sb-gilead.com
+2025-08-26 14:48:59,875 - INFO - sessionID : 3A481C9B0EC76BF8C2BABE40EECD7E625AA2386B57B9A1EA20A3EFEAEE56CE88BF8382A26643BA3B9BE0A5714EE25951ADEF020F761D6861F867909D67736044
+2025-08-26 14:48:59,881 - INFO - Logged into  Vault!!!
+2025-08-26 14:49:26,800 - INFO - PKG-0153 -  Deployed Successfully into Vault 
+2025-08-26 14:49:27,145 - INFO - Downloaded PKG-0153-Validation.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_validation.log
+2025-08-26 14:49:27,418 - INFO - Downloaded PKG-0153-Deployment.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_deployment.log
+2025-08-26 14:49:47,543 - INFO - Deployment Automation Script Completed

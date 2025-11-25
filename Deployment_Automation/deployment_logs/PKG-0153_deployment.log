@@ -1,0 +1,41 @@
+--Deployment Package--
+Package:PKG-0153
+Package Type:Migration
+Start Time:09:09:2025 12:29:06 PM
+Package Status:Queued
+VaultId:223156
+JobId:944111
+Deployed By:pradnyavantg@sb-gilead.com
+
+--Deployment Steps--
+09:09:2025 12:29:06 PM
+STEP 00010 Finding-Finding Lifecycle-In Response
+ REVIEW deployment_status__v:"Verified"
+ EXECUTE "RECREATE Atomicsecurity finding__v.finding_lifecycle__v.in_response_state__c.atomic_security__c"
+ SUCCESS "[SUCCESS] RECREATE Atomicsecurity finding__v.finding_lifecycle__v.in_response_state__c.atomic_security__c"
+ SUMMARY "OK", warnings:0, failures:0, exceptions:0, components_affected:1, data_successes:0, data_failures:0, execution_time:1460
+
+09:09:2025 12:29:07 PM
+STEP 00020 Finding-Finding Lifecycle-Pending Response A
+ REVIEW deployment_status__v:"Verified"
+ EXECUTE "RECREATE Atomicsecurity finding__v.finding_lifecycle__v.pending_response_acceptance_state__c.atomic_security__c"
+ SUCCESS "[SUCCESS] RECREATE Atomicsecurity finding__v.finding_lifecycle__v.pending_response_acceptance_state__c.atomic_security__c"
+ SUMMARY "OK", warnings:0, failures:0, exceptions:0, components_affected:1, data_successes:0, data_failures:0, execution_time:770
+
+09:09:2025 12:29:08 PM
+STEP 00030 Response Assessment field Required
+ REVIEW deployment_status__v:"Verified"
+ EXECUTE "RECREATE Objectvalidation finding__v.response_assessment_field_required__c"
+ SUCCESS "[SUCCESS] RECREATE Objectvalidation finding__v.response_assessment_field_required__c"
+ SUMMARY "OK", warnings:0, failures:0, exceptions:0, components_affected:1, data_successes:0, data_failures:0, execution_time:900
+
+--Deployment Summary--
+End Time:09:09:2025 12:29:09 PM
+Total Steps:3
+Deployed:3
+Deployed with warnings:0
+Deployed with failures:0
+Deployed with error:0
+Failed:0
+Skipped:0
+Package Status:Deployed

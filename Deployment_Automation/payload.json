@@ -1,0 +1,31 @@
+{
+   
+    "api":
+        {
+            "version":"/services/loader/",
+            "job_task":"/tasks/1/results",
+            "job_status":"/services/jobs/",
+            "query_version_replace":"/api/v23.3"
+        },
+    "output_dir":
+    {
+        "mdl_output_dir":"./output_files/mdl_output_files",
+        "vpk_output_dir":"./output_files/vpk_output_files",
+        "loader_output_dir":"./output_files/loader_output_files"
+    },
+    "input_dir":
+    {
+        "mdl_input_dir":"./mdl",
+        "vpk_input_dir":"./package"
+    },
+    "paylod_parameters":
+    {
+        "update":["object_type","object","action","idparam","file","recordmigrationmode"],
+        "create":["object_type","object","action","file","recordmigrationmode"]
+    },
+    "ftp":
+    {
+        "ftp_folder":"25GR2_Deployment"
+    }
+
+}

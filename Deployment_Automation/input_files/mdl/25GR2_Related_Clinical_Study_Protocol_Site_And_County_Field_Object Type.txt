@@ -1,0 +1,9 @@
+ALTER Objecttype related_clinical_study_protocol__c.audit__c (
+   label('Audit'),
+   label_plural('Audits'),
+   description(),
+ADD Typefield country_source_system__c(
+      source('custom'),
+      required(false)
+   )
+);

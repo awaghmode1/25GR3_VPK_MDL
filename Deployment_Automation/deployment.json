@@ -1,0 +1,12 @@
+{
+"deployment_type":{
+    "vpk":true,
+    "mdl":true,
+    "loader":false
+},
+"deployment_settings":{
+    "import":true,
+    "validate":true,
+    "deploy":true
+}
+}

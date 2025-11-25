@@ -1,0 +1,116 @@
+2025-08-25 22:09:25,201 - INFO - ******Started  Deployment Automation Script******
+2025-08-25 22:09:25,291 - INFO - Logging into  Vault...
+2025-08-25 22:09:25,294 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-08-25 22:09:25,298 - INFO - User : pradnyavantg@sb-gilead.com
+2025-08-25 22:09:25,814 - INFO - sessionID : A29CA04503DDFAAC9B3765B3B27DBD85AC8FFA6410231A90AA0E074BB8A69DA13BB196F3AEA463C390380754B75D2C1D621DC28ED244DE64C436BA7775FBF27C
+2025-08-25 22:09:25,820 - INFO - Logged into  Vault!!!
+2025-08-25 22:09:25,851 - INFO - Deployment Automation Script Completed
+2025-08-25 22:11:34,679 - INFO - ******Started  Deployment Automation Script******
+2025-08-25 22:11:34,688 - INFO - Logging into  Vault...
+2025-08-25 22:11:34,692 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-08-25 22:11:34,695 - INFO - User : pradnyavantg@sb-gilead.com
+2025-08-25 22:11:35,216 - INFO - sessionID : A29CA04503DDFAAC9B3765B3B27DBD85AC8FFA6410231A90AA0E074BB8A69DA13BB196F3AEA463C390380754B75D2C1D621DC28ED244DE64C436BA7775FBF27C
+2025-08-25 22:11:35,221 - INFO - Logged into  Vault!!!
+2025-08-25 22:13:09,074 - INFO - ******Started  Deployment Automation Script******
+2025-08-25 22:13:09,084 - INFO - Logging into  Vault...
+2025-08-25 22:13:09,088 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-08-25 22:13:09,091 - INFO - User : pradnyavantg@sb-gilead.com
+2025-08-25 22:13:09,634 - INFO - sessionID : A29CA04503DDFAAC9B3765B3B27DBD85AC8FFA6410231A90AA0E074BB8A69DA13BB196F3AEA463C390380754B75D2C1D621DC28ED244DE64C436BA7775FBF27C
+2025-08-25 22:13:09,641 - INFO - Logged into  Vault!!!
+2025-08-25 22:13:36,372 - INFO - PKG-0153 -  Deployed Successfully into Vault 
+2025-08-25 22:13:56,480 - INFO - Deployment Automation Script Completed
+2025-08-25 22:30:09,188 - INFO - ******Started  Deployment Automation Script******
+2025-08-25 22:30:09,211 - INFO - Logging into  Vault...
+2025-08-25 22:30:09,215 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-08-25 22:30:09,218 - INFO - User : pradnyavantg@sb-gilead.com
+2025-08-25 22:30:09,639 - INFO - sessionID : A29CA04503DDFAAC9B3765B3B27DBD85AC8FFA6410231A90AA0E074BB8A69DA13BB196F3AEA463C390380754B75D2C1D621DC28ED244DE64C436BA7775FBF27C
+2025-08-25 22:30:09,649 - INFO - Logged into  Vault!!!
+2025-08-25 22:30:36,153 - INFO - PKG-0153 -  Deployed Successfully into Vault 
+2025-08-25 22:30:36,440 - INFO - Downloaded PKG-0153-4-Deployment.log to C:\Users\pgangawne\Downloads\PKG-0153_deployment.log
+2025-08-25 22:30:36,708 - INFO - Downloaded PKG-0153-4-Validation.log to C:\Users\pgangawne\Downloads\PKG-0153_validation.log
+2025-08-25 22:30:56,822 - INFO - Deployment Automation Script Completed
+2025-08-25 22:33:56,126 - INFO - ******Started  Deployment Automation Script******
+2025-08-25 22:33:56,159 - INFO - Logging into  Vault...
+2025-08-25 22:33:56,163 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-08-25 22:33:56,166 - INFO - User : pradnyavantg@sb-gilead.com
+2025-08-25 22:33:56,554 - INFO - sessionID : A29CA04503DDFAAC9B3765B3B27DBD85AC8FFA6410231A90AA0E074BB8A69DA13BB196F3AEA463C390380754B75D2C1D621DC28ED244DE64C436BA7775FBF27C
+2025-08-25 22:33:56,564 - INFO - Logged into  Vault!!!
+2025-08-25 22:34:23,170 - INFO - PKG-0153 -  Deployed Successfully into Vault 
+2025-08-25 22:34:23,390 - INFO - Downloaded PKG-0153-5-Deployment.log to C:\Users\pgangawne\Downloads\PKG-0153_deployment.log
+2025-08-25 22:34:23,698 - INFO - Downloaded PKG-0153-5-Validation.log to C:\Users\pgangawne\Downloads\PKG-0153_validation.log
+2025-08-25 22:34:43,804 - INFO - Deployment Automation Script Completed
+2025-08-25 22:36:56,325 - INFO - ******Started  Deployment Automation Script******
+2025-08-25 22:36:56,384 - INFO - Logging into  Vault...
+2025-08-25 22:36:56,388 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-08-25 22:36:56,390 - INFO - User : pradnyavantg@sb-gilead.com
+2025-08-25 22:36:56,927 - INFO - sessionID : A29CA04503DDFAAC9B3765B3B27DBD85AC8FFA6410231A90AA0E074BB8A69DA13BB196F3AEA463C390380754B75D2C1D621DC28ED244DE64C436BA7775FBF27C
+2025-08-25 22:36:56,937 - INFO - Logged into  Vault!!!
+2025-08-25 22:37:23,365 - INFO - PKG-0153 - Deployed Successfully into Vault
+2025-08-25 22:37:23,693 - INFO - Downloaded PKG-0153-6-Validation.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_validation.log
+2025-08-25 22:37:23,975 - INFO - Downloaded PKG-0153-6-Deployment.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_deployment.log
+2025-08-25 22:37:44,093 - INFO - Deployment Automation Script Completed
+2025-08-25 22:39:03,715 - INFO - ******Started  Deployment Automation Script******
+2025-08-25 22:39:03,757 - INFO - Logging into  Vault...
+2025-08-25 22:39:03,761 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-08-25 22:39:03,765 - INFO - User : pradnyavantg@sb-gilead.com
+2025-08-25 22:39:04,352 - INFO - sessionID : A29CA04503DDFAAC9B3765B3B27DBD85AC8FFA6410231A90AA0E074BB8A69DA13BB196F3AEA463C390380754B75D2C1D621DC28ED244DE64C436BA7775FBF27C
+2025-08-25 22:39:04,362 - INFO - Logged into  Vault!!!
+2025-08-25 22:39:30,860 - INFO - PKG-0153 - Deployed Successfully into Vault
+2025-08-25 22:39:31,229 - INFO - Downloaded PKG-0153-7-Deployment.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_deployment.log
+2025-08-25 22:39:31,511 - INFO - Downloaded PKG-0153-7-Validation.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_validation.log
+2025-08-25 22:39:51,642 - INFO - Deployment Automation Script Completed
+2025-08-25 22:40:57,226 - INFO - ******Started  Deployment Automation Script******
+2025-08-25 22:40:57,282 - INFO - Logging into  Vault...
+2025-08-25 22:40:57,285 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-08-25 22:40:57,288 - INFO - User : pradnyavantg@sb-gilead.com
+2025-08-25 22:40:57,783 - INFO - sessionID : A29CA04503DDFAAC9B3765B3B27DBD85AC8FFA6410231A90AA0E074BB8A69DA13BB196F3AEA463C390380754B75D2C1D621DC28ED244DE64C436BA7775FBF27C
+2025-08-25 22:40:57,792 - INFO - Logged into  Vault!!!
+2025-08-25 22:41:24,121 - INFO - PKG-0154 - Deployment Completed with Errors
+2025-08-25 22:41:24,476 - INFO - Downloaded PKG-0154-3-Validation.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0154_validation.log
+2025-08-25 22:41:24,761 - INFO - Downloaded PKG-0154-3-Deployment.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0154_deployment.log
+2025-08-25 22:41:44,864 - INFO - Deployment Automation Script Completed
+2025-08-25 22:51:35,078 - INFO - ******Started  Deployment Automation Script******
+2025-08-25 22:51:35,088 - INFO - Logging into  Vault...
+2025-08-25 22:51:35,092 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-08-25 22:51:35,095 - INFO - User : pradnyavantg@sb-gilead.com
+2025-08-25 22:51:35,512 - INFO - sessionID : A29CA04503DDFAAC9B3765B3B27DBD85AC8FFA6410231A90AA0E074BB8A69DA13BB196F3AEA463C390380754B75D2C1D621DC28ED244DE64C436BA7775FBF27C
+2025-08-25 22:51:35,518 - INFO - Logged into  Vault!!!
+2025-08-25 22:51:35,550 - INFO - Deployment Automation Script Completed
+2025-08-25 22:52:27,215 - INFO - ******Started  Deployment Automation Script******
+2025-08-25 22:52:27,226 - INFO - Logging into  Vault...
+2025-08-25 22:52:27,229 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-08-25 22:52:27,232 - INFO - User : pradnyavantg@sb-gilead.com
+2025-08-25 22:52:27,598 - INFO - sessionID : A29CA04503DDFAAC9B3765B3B27DBD85AC8FFA6410231A90AA0E074BB8A69DA13BB196F3AEA463C390380754B75D2C1D621DC28ED244DE64C436BA7775FBF27C
+2025-08-25 22:52:27,604 - INFO - Logged into  Vault!!!
+2025-08-25 23:11:32,872 - INFO - ******Started  Deployment Automation Script******
+2025-08-25 23:11:32,884 - INFO - Logging into  Vault...
+2025-08-25 23:11:32,887 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-08-25 23:11:32,890 - INFO - User : pradnyavantg@sb-gilead.com
+2025-08-25 23:11:33,797 - INFO - sessionID : 79E41D47948D76F06C44872EE6117D946E16E9E3C04CD9E5452D688B4FA13822541A67FDCB10D68B860E14E437A6FCAA7E5BC1416570CF0343F14678AA5515B3
+2025-08-25 23:11:33,804 - INFO - Logged into  Vault!!!
+2025-08-25 23:11:33,808 - ERROR - CSV file is open/locked: GVault_Deployment_Steps.csv
+2025-08-25 23:12:00,859 - INFO - ******Started  Deployment Automation Script******
+2025-08-25 23:12:00,877 - INFO - Logging into  Vault...
+2025-08-25 23:12:00,881 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-08-25 23:12:00,884 - INFO - User : pradnyavantg@sb-gilead.com
+2025-08-25 23:12:01,276 - INFO - sessionID : 79E41D47948D76F06C44872EE6117D946E16E9E3C04CD9E5452D688B4FA13822541A67FDCB10D68B860E14E437A6FCAA7E5BC1416570CF0343F14678AA5515B3
+2025-08-25 23:12:01,285 - INFO - Logged into  Vault!!!
+2025-08-25 23:13:28,712 - INFO - ******Started  Deployment Automation Script******
+2025-08-25 23:13:28,783 - INFO - Logging into  Vault...
+2025-08-25 23:13:28,786 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-08-25 23:13:28,789 - INFO - User : pradnyavantg@sb-gilead.com
+2025-08-25 23:13:29,462 - INFO - sessionID : 79E41D47948D76F06C44872EE6117D946E16E9E3C04CD9E5452D688B4FA13822541A67FDCB10D68B860E14E437A6FCAA7E5BC1416570CF0343F14678AA5515B3
+2025-08-25 23:13:29,472 - INFO - Logged into  Vault!!!
+2025-08-25 23:13:56,225 - INFO - PKG-0153 -  Deployed Successfully into Vault 
+2025-08-25 23:13:56,699 - INFO - Downloaded PKG-0153-8-Validation.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_validation.log
+2025-08-25 23:13:56,981 - INFO - Downloaded PKG-0153-8-Deployment.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_deployment.log
+2025-08-25 23:17:56,859 - INFO - ******Started  Deployment Automation Script******
+2025-08-25 23:17:56,882 - INFO - Logging into  Vault...
+2025-08-25 23:17:56,886 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-08-25 23:17:56,889 - INFO - User : pradnyavantg@sb-gilead.com
+2025-08-25 23:17:57,411 - INFO - sessionID : 79E41D47948D76F06C44872EE6117D946E16E9E3C04CD9E5452D688B4FA13822541A67FDCB10D68B860E14E437A6FCAA7E5BC1416570CF0343F14678AA5515B3
+2025-08-25 23:17:57,422 - INFO - Logged into  Vault!!!
+2025-08-25 23:18:24,008 - INFO - PKG-0153 -  Deployed Successfully into Vault 
+2025-08-25 23:18:24,358 - INFO - Downloaded PKG-0153-9-Deployment.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_deployment.log
+2025-08-25 23:18:24,660 - INFO - Downloaded PKG-0153-9-Validation.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_validation.log
+2025-08-25 23:18:44,770 - INFO - Deployment Automation Script Completed

@@ -1,0 +1,37 @@
+ALTER Objecttype fmea_risk_event__v.haccp__v(
+   label('HACCP'),
+   label_plural('HACCP'),
+   description(),
+ADD Typefield impacted_regulation__c(
+      source('custom'),
+      required(false)
+   ),
+ADD Typefield risk_impact_scope__c(
+      source('custom'),
+      required(false)
+   ),
+ADD Typefield audit_standard__c(
+      source('custom'),
+      required(false)
+   ),
+ADD Typefield inspection_agency__c(
+      source('custom'),
+      required(false)
+   ),
+ADD Typefield study_stage__c(
+      source('custom'),
+      required(false)
+   ),
+ADD Typefield reporting_requirements__c(
+      source('custom'),
+      required(false)
+   ),
+ADD Typefield ract_id__c(
+      source('custom'),
+      required(false)
+   ),
+ADD Typefield sequence_of_events__c(
+      source('custom'),
+      required(false)
+   )
+);

@@ -1,0 +1,47 @@
+2025-07-03 14:53:34,793 - INFO - ******Started  Deployment Automation Script******
+2025-07-03 14:53:34,948 - INFO - Logging into  Vault...
+2025-07-03 14:53:34,951 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-07-03 14:53:34,954 - INFO - User : sabariraj@sb-gilead.com
+2025-07-03 14:54:51,246 - INFO - ******Started  Deployment Automation Script******
+2025-07-03 14:54:51,284 - INFO - Logging into  Vault...
+2025-07-03 14:54:51,288 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-07-03 14:54:51,291 - INFO - User : sabariraj@sb-gilead.com
+2025-07-03 14:54:52,178 - INFO - sessionID : 026A529B75F8EC25A788D4B7E416DE4162867BB07EB6D739B8D2BA2E4CD66D646F074445527543B64DEB79EBCDB5C2E090985C22BD1C2400F69B8FA70E547879
+2025-07-03 14:54:52,186 - INFO - Logged into  Vault!!!
+2025-07-03 14:55:20,923 - INFO - PKG-0153 -  Deployed Successfully into Vault 
+2025-07-03 14:55:41,064 - INFO - Deployment Automation Script Completed
+2025-07-03 15:00:24,940 - INFO - ******Started  Deployment Automation Script******
+2025-07-03 15:00:24,952 - INFO - Logging into  Vault...
+2025-07-03 15:00:24,956 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-07-03 15:00:24,960 - INFO - User : sabariraj@sb-gilead.com
+2025-07-03 15:00:25,707 - INFO - sessionID : 026A529B75F8EC25A788D4B7E416DE4162867BB07EB6D739B8D2BA2E4CD66D646F074445527543B64DEB79EBCDB5C2E090985C22BD1C2400F69B8FA70E547879
+2025-07-03 15:00:25,713 - INFO - Logged into  Vault!!!
+2025-07-03 15:00:25,757 - INFO - Deployment Automation Script Completed
+2025-07-03 15:01:13,419 - INFO - ******Started  Deployment Automation Script******
+2025-07-03 15:01:13,431 - INFO - Logging into  Vault...
+2025-07-03 15:01:13,435 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-07-03 15:01:13,439 - INFO - User : sabariraj@sb-gilead.com
+2025-07-03 15:01:14,193 - INFO - sessionID : 026A529B75F8EC25A788D4B7E416DE4162867BB07EB6D739B8D2BA2E4CD66D646F074445527543B64DEB79EBCDB5C2E090985C22BD1C2400F69B8FA70E547879
+2025-07-03 15:01:14,201 - INFO - Logged into  Vault!!!
+2025-07-03 15:01:42,616 - INFO - PKG-0153 -  Deployed Successfully into Vault 
+2025-07-03 15:02:02,722 - INFO - Deployment Automation Script Completed
+2025-07-03 15:35:34,031 - INFO - ******Started  Deployment Automation Script******
+2025-07-03 15:35:34,052 - INFO - Logging into  Vault...
+2025-07-03 15:35:34,056 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-07-03 15:35:34,059 - INFO - User : sabariraj@sb-gilead.com
+2025-07-03 15:35:34,767 - INFO - sessionID : 026A529B75F8EC25A788D4B7E416DE4162867BB07EB6D739B8D2BA2E4CD66D646F074445527543B64DEB79EBCDB5C2E090985C22BD1C2400F69B8FA70E547879
+2025-07-03 15:35:34,776 - INFO - Logged into  Vault!!!
+2025-07-03 15:37:56,400 - INFO - ******Started  Deployment Automation Script******
+2025-07-03 15:37:56,454 - INFO - Logging into  Vault...
+2025-07-03 15:37:56,454 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-07-03 15:37:56,467 - INFO - User : sabariraj@sb-gilead.com
+2025-07-03 15:37:57,255 - INFO - sessionID : 026A529B75F8EC25A788D4B7E416DE4162867BB07EB6D739B8D2BA2E4CD66D646F074445527543B64DEB79EBCDB5C2E090985C22BD1C2400F69B8FA70E547879
+2025-07-03 15:37:57,255 - INFO - Logged into  Vault!!!
+2025-07-03 15:38:25,490 - INFO - PKG-0153 -  Deployed Successfully into Vault 
+2025-07-03 15:38:45,583 - INFO - Deployment Automation Script Completed
+2025-07-03 19:49:01,603 - INFO - ******Started  Deployment Automation Script******
+2025-07-03 19:49:01,644 - INFO - Logging into  Vault...
+2025-07-03 19:49:01,651 - INFO - Vault URL : https://val-gilead.veevavault.com/api/v23.3
+2025-07-03 19:49:01,654 - INFO - User : ljayarasu_Admin@val-gilead.com
+2025-07-03 19:49:03,270 - INFO - sessionID : 6815D6AB785806A2956F0D0EBA24FA60B650168F9B4FD8320DAC9193C9CE525B04E43CBD88E7B339E9CECD3E94A5FA237662ED90A533A0119AEE7FEEB9A126B5
+2025-07-03 19:49:03,280 - INFO - Logged into  Vault!!!

@@ -1,0 +1,22 @@
+ALTER Objectlifecycle audit_lifecycle__c (
+   label('Audit Lifecycle'),
+   state_labels(),
+   labeled_states(),
+   starting_state('Objectlifecyclestate.define_team_state__c'),
+   description(),
+MODIFY Objectlifecyclestateuseraction pending_finding_closure_state__c.download_inspection_response_form_userac__c(
+      label('Inspection Response Form - External'),
+      rule({<?xml version="1.0" encoding="UTF-8"?>
+<rule><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.object_type__v</value></expression><expression operator="value" type="string"><value>Inspection</value></expression></expression><actions><action type="platform.all.formattedOutputs"><INPUT_USER_ACTION_LABEL>Inspection Response Form - External</INPUT_USER_ACTION_LABEL><attachFileToRecordCheckboxXmlControlKey>false</attachFileToRecordCheckboxXmlControlKey><includeRecordAttachmentsWithFileCheckboxXmlControlKey>false</includeRecordAttachmentsWithFileCheckboxXmlControlKey><templateKey>inspection_response_form_external__c</templateKey></action></actions></rule>
+}),
+      order(1006)
+   ),
+
+ADD Objectlifecyclestateuseraction pending_finding_closure_state__c.inspection_response_form_internal_user__c(
+      label('Inspection Response Form - Internal'),
+      rule({<?xml version="1.0" encoding="UTF-8"?>
+<rule><expression operator="eq" qualifier="veeva.ecm.common.care.condition.metadata.field"><expression operator="field" type="string"><value>Object.audit__qdm.object_type__v</value></expression><expression operator="value" type="string"><value>Inspection</value></expression></expression><actions><action type="platform.all.formattedOutputs"><INPUT_USER_ACTION_LABEL>Inspection Response Form - Internal</INPUT_USER_ACTION_LABEL><attachFileToRecordCheckboxXmlControlKey>false</attachFileToRecordCheckboxXmlControlKey><includeRecordAttachmentsWithFileCheckboxXmlControlKey>true</includeRecordAttachmentsWithFileCheckboxXmlControlKey><templateKey>inspection_response_form_internal__c</templateKey></action></actions></rule>
+}),
+      order(6001)
+   )
+);

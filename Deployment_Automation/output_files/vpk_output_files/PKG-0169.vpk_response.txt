@@ -1,0 +1,232 @@
+***Import Package API Response***
+{
+    "responseStatus": "SUCCESS",
+    "url": "/api/v23.3/services/jobs/911318",
+    "job_id": 911318
+}
+***Retrieve Job Status API Response***
+{
+    "responseStatus": "SUCCESS",
+    "data": {
+        "id": 911318,
+        "status": "SUCCESS",
+        "links": [
+            {
+                "rel": "self",
+                "href": "/api/v23.3/services/jobs/911318",
+                "method": "GET",
+                "accept": "application/json"
+            },
+            {
+                "rel": "artifacts",
+                "href": "/api/v23.3/vobject/vault_package__v/0PI000000001008/actions/import/results",
+                "method": "GET",
+                "accept": "application/json"
+            }
+        ],
+        "created_by": 16255753,
+        "created_date": "2025-06-23T13:08:02.000Z",
+        "run_start_date": "2025-06-23T13:08:03.000Z",
+        "run_end_date": "2025-06-23T13:08:04.000Z"
+    }
+}
+***Validate Package API Response***
+{
+    "responseStatus": "SUCCESS",
+    "responseDetails": {
+        "summary": "25GR2_13190_Inbound Email Address_Picklist_Layout_rule",
+        "author": "ljayarasu@sb-gilead.com",
+        "package_name": "PKG-0169-1",
+        "package_id": "N/A",
+        "source_vault": "223156",
+        "package_status": "Verified",
+        "total_steps": 4,
+        "total_steps_blocked": 0,
+        "start_time": "23:06:2025 01:08:13 PM",
+        "end_time": "23:06:2025 01:08:13 PM",
+        "package_error": "",
+        "package_steps": [
+            {
+                "name__v": "00010",
+                "step_type__v": "Component",
+                "step_name__v": "clinical_site_excursion__c",
+                "type__v": "Inboundemailaddress",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Add (missing in Vault)",
+                "dependencies": [
+                    {
+                        "component_name": "com.veeva.vault.app.quality.qms.supplierchangenotification.processor.CreateSupplierChangeNotificationEmailProcessor",
+                        "component_type": "Emailprocessor",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    }
+                ]
+            },
+            {
+                "name__v": "00020",
+                "step_type__v": "Component",
+                "step_name__v": "sna_subtype__c",
+                "type__v": "Picklist",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Update"
+            },
+            {
+                "name__v": "00030",
+                "step_type__v": "Component",
+                "step_name__v": "supplier_change_notification_detail_page__c.hide_product_action_fields__c",
+                "type__v": "Layoutrule",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Update"
+            },
+            {
+                "name__v": "00040",
+                "step_type__v": "Component",
+                "step_name__v": "supplier_change_notification_detail_page__c.hide_sna_subtype__c",
+                "type__v": "Layoutrule",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Update"
+            }
+        ]
+    }
+}
+***Deploy Package API Response***
+{
+    "responseStatus": "SUCCESS",
+    "url": "/api/v23.3/services/jobs/911420",
+    "job_id": 911420
+}
+***Retrieve Job Status API Response***
+{
+    "responseStatus": "SUCCESS",
+    "data": {
+        "id": 911420,
+        "status": "SUCCESS",
+        "links": [
+            {
+                "rel": "self",
+                "href": "/api/v23.3/services/jobs/911420",
+                "method": "GET",
+                "accept": "application/json"
+            },
+            {
+                "rel": "artifacts",
+                "href": "/api/v23.3/vobject/vault_package__v/0PI000000001008/actions/deploy/results",
+                "method": "GET",
+                "accept": "application/json"
+            }
+        ],
+        "created_by": 16255753,
+        "created_date": "2025-06-23T13:08:16.000Z",
+        "run_start_date": "2025-06-23T13:08:26.000Z",
+        "run_end_date": "2025-06-23T13:08:32.000Z"
+    }
+}
+***Retrieve Package Deploy Results API Response***
+{
+    "responseStatus": "SUCCESS",
+    "responseDetails": {
+        "total_steps": 4,
+        "deployed": 4,
+        "deployed_with_warnings": 0,
+        "deployed_with_failures": 0,
+        "deployed_with_error": 0,
+        "failed": 0,
+        "skipped": 0,
+        "package_status__v": "deployed__v",
+        "deployment_log": [
+            {
+                "filename": "PKG-0169-Validation.log",
+                "url": "https://sb-gilead-gvault-contingency.veevavault.com/api/v25.1/vobjects/vault_package__v/0PI000000001008/attachments/21/versions/1/file",
+                "created_date__v": "2025-06-23 13:08:03.599"
+            },
+            {
+                "filename": "PKG-0169-Deployment.log",
+                "url": "https://sb-gilead-gvault-contingency.veevavault.com/api/v25.1/vobjects/vault_package__v/0PI000000001008/attachments/148/versions/1/file",
+                "created_date__v": "2025-06-23 13:08:31.457"
+            }
+        ]
+    },
+    "package_steps": [
+        {
+            "id": "0IS000000001052",
+            "name__v": "00010",
+            "step_type__v": "Component",
+            "step_name__v": "clinical_site_excursion__c",
+            "type__v": "Inboundemailaddress",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "Clinical Site Excursion",
+            "package_components": [
+                {
+                    "id": "0VP000000002040",
+                    "name__v": "Clinical Site Excursion",
+                    "component_name__v": "clinical_site_excursion__c",
+                    "component_type__v": "Inboundemailaddress",
+                    "checksum__v": "e9204c4a38d03d862aa2fcc86496f02b"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        },
+        {
+            "id": "0IS000000001053",
+            "name__v": "00020",
+            "step_type__v": "Component",
+            "step_name__v": "sna_subtype__c",
+            "type__v": "Picklist",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "SNA Subtype",
+            "package_components": [
+                {
+                    "id": "0VP000000002041",
+                    "name__v": "SNA Subtype",
+                    "component_name__v": "sna_subtype__c",
+                    "component_type__v": "Picklist",
+                    "checksum__v": "763a912d2ea6ee07f3b2c45fe376cff3"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        },
+        {
+            "id": "0IS000000001054",
+            "name__v": "00030",
+            "step_type__v": "Component",
+            "step_name__v": "supplier_change_notification_detail_page__c.hide_product_action_fields__c",
+            "type__v": "Layoutrule",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "Hide Product Action Fields",
+            "package_components": [
+                {
+                    "id": "0VP000000002042",
+                    "name__v": "Hide Product Action Fields",
+                    "component_name__v": "supplier_change_notification_detail_page__c.hide_product_action_fields__c",
+                    "component_type__v": "Layoutrule",
+                    "checksum__v": "56df4d8ac7c7270aabc46d3ba3fb4785"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        },
+        {
+            "id": "0IS000000001055",
+            "name__v": "00040",
+            "step_type__v": "Component",
+            "step_name__v": "supplier_change_notification_detail_page__c.hide_sna_subtype__c",
+            "type__v": "Layoutrule",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "Hide SNA Subtype",
+            "package_components": [
+                {
+                    "id": "0VP000000002043",
+                    "name__v": "Hide SNA Subtype",
+                    "component_name__v": "supplier_change_notification_detail_page__c.hide_sna_subtype__c",
+                    "component_type__v": "Layoutrule",
+                    "checksum__v": "b8009f29e317542315bbd8362754d4a7"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        }
+    ]
+}

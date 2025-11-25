@@ -1,0 +1,24 @@
+{
+    "responseStatus": "SUCCESS",
+    "apiWarnings": [],
+    "script_execution": {
+        "code": "GEN-S-0",
+        "message": "OK",
+        "warnings": 0,
+        "failures": 0,
+        "exceptions": 0,
+        "skipped": 0,
+        "components_affected": 1,
+        "execution_time": 0.58
+    },
+    "statement_execution": [
+        {
+            "vault": "sb-gilead-gvault-contingency.veevavault.com",
+            "statement": 1,
+            "command": "ALTER",
+            "component": "Object.supplier_change_notification__v",
+            "message": "[SUCCESS] ALTER Object supplier_change_notification__v",
+            "response": "SUCCESS"
+        }
+    ]
+}

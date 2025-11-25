@@ -1,0 +1,332 @@
+***Import Package API Response***
+{
+    "responseStatus": "SUCCESS",
+    "url": "/api/v23.3/services/jobs/911426",
+    "job_id": 911426
+}
+***Retrieve Job Status API Response***
+{
+    "responseStatus": "SUCCESS",
+    "data": {
+        "id": 911426,
+        "status": "SUCCESS",
+        "links": [
+            {
+                "rel": "self",
+                "href": "/api/v23.3/services/jobs/911426",
+                "method": "GET",
+                "accept": "application/json"
+            },
+            {
+                "rel": "artifacts",
+                "href": "/api/v23.3/vobject/vault_package__v/0PI000000002015/actions/import/results",
+                "method": "GET",
+                "accept": "application/json"
+            }
+        ],
+        "created_by": 16255753,
+        "created_date": "2025-06-23T13:11:44.000Z",
+        "run_start_date": "2025-06-23T13:11:44.000Z",
+        "run_end_date": "2025-06-23T13:11:45.000Z"
+    }
+}
+***Validate Package API Response***
+{
+    "responseStatus": "SUCCESS",
+    "responseDetails": {
+        "summary": "25GR2_Impacted_Clinical Program Join",
+        "author": "ljayarasu@sb-gilead.com",
+        "package_name": "PKG-0172-1",
+        "package_id": "N/A",
+        "source_vault": "223156",
+        "package_status": "Verified",
+        "total_steps": 2,
+        "total_steps_blocked": 0,
+        "start_time": "23:06:2025 01:11:54 PM",
+        "end_time": "23:06:2025 01:11:55 PM",
+        "package_error": "",
+        "package_steps": [
+            {
+                "name__v": "00010",
+                "step_type__v": "Component",
+                "step_name__v": "related_clinical_study_protocol__c.sna_clinical__c",
+                "type__v": "Objecttype",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Add (missing in Vault)",
+                "dependencies": [
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "sna__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "site_number__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "site__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "pi_name__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "country_source_system__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "protocol_title__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "therapeutic_area1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "clinical_study_protocol__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    }
+                ]
+            },
+            {
+                "name__v": "00020",
+                "step_type__v": "Component",
+                "step_name__v": "related_clinical_study_protocol_detail_p__c",
+                "type__v": "Pagelayout",
+                "deployment_status__v": "Verified",
+                "deployment_action": "Update",
+                "dependencies": [
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "clinical_study_protocol__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c.base__v",
+                        "component_type": "Objecttype",
+                        "subcomponent_name": "",
+                        "subcomponent_type": "",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "therapeutic_area1__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "audit__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "finding__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "risk_event__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "site_number__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "pi_name__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "quality_event__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "issue_escalation__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "proposed_audit__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "site__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "country_source_system__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    },
+                    {
+                        "component_name": "related_clinical_study_protocol__c",
+                        "component_type": "Object",
+                        "subcomponent_name": "sna__c",
+                        "subcomponent_type": "Field",
+                        "status": "In Target"
+                    }
+                ]
+            }
+        ]
+    }
+}
+***Deploy Package API Response***
+{
+    "responseStatus": "SUCCESS",
+    "url": "/api/v23.3/services/jobs/911322",
+    "job_id": 911322
+}
+***Retrieve Job Status API Response***
+{
+    "responseStatus": "SUCCESS",
+    "data": {
+        "id": 911322,
+        "status": "SUCCESS",
+        "links": [
+            {
+                "rel": "self",
+                "href": "/api/v23.3/services/jobs/911322",
+                "method": "GET",
+                "accept": "application/json"
+            },
+            {
+                "rel": "artifacts",
+                "href": "/api/v23.3/vobject/vault_package__v/0PI000000002015/actions/deploy/results",
+                "method": "GET",
+                "accept": "application/json"
+            }
+        ],
+        "created_by": 16255753,
+        "created_date": "2025-06-23T13:11:58.000Z",
+        "run_start_date": "2025-06-23T13:12:02.000Z",
+        "run_end_date": "2025-06-23T13:12:05.000Z"
+    }
+}
+***Retrieve Package Deploy Results API Response***
+{
+    "responseStatus": "SUCCESS",
+    "responseDetails": {
+        "total_steps": 2,
+        "deployed": 2,
+        "deployed_with_warnings": 0,
+        "deployed_with_failures": 0,
+        "deployed_with_error": 0,
+        "failed": 0,
+        "skipped": 0,
+        "package_status__v": "deployed__v",
+        "deployment_log": [
+            {
+                "filename": "PKG-0172-Validation.log",
+                "url": "https://sb-gilead-gvault-contingency.veevavault.com/api/v25.1/vobjects/vault_package__v/0PI000000002015/attachments/154/versions/1/file",
+                "created_date__v": "2025-06-23 13:11:44.319"
+            },
+            {
+                "filename": "PKG-0172-Deployment.log",
+                "url": "https://sb-gilead-gvault-contingency.veevavault.com/api/v25.1/vobjects/vault_package__v/0PI000000002015/attachments/156/versions/1/file",
+                "created_date__v": "2025-06-23 13:12:04.316"
+            }
+        ]
+    },
+    "package_steps": [
+        {
+            "id": "0IS000000002086",
+            "name__v": "00010",
+            "step_type__v": "Component",
+            "step_name__v": "related_clinical_study_protocol__c.sna_clinical__c",
+            "type__v": "Objecttype",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "SNA Clinical Study Protocol",
+            "package_components": [
+                {
+                    "id": "0VP000000001068",
+                    "name__v": "SNA Clinical Study Protocol",
+                    "component_name__v": "related_clinical_study_protocol__c.sna_clinical__c",
+                    "component_type__v": "Objecttype",
+                    "checksum__v": "e181f627d0ebc6e2d21e4598c652482b"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        },
+        {
+            "id": "0IS000000002087",
+            "name__v": "00020",
+            "step_type__v": "Component",
+            "step_name__v": "related_clinical_study_protocol_detail_p__c",
+            "type__v": "Pagelayout",
+            "deployment_status__v": "deployed__v",
+            "step_label__v": "Clinical Study Protocol-Quality Event Detail Page Layout",
+            "package_components": [
+                {
+                    "id": "0VP000000001069",
+                    "name__v": "Clinical Study Protocol-Quality Event Detail Page Layout",
+                    "component_name__v": "related_clinical_study_protocol_detail_p__c",
+                    "component_type__v": "Pagelayout",
+                    "checksum__v": "f246ce494afdef87c6cbc6aadb1cf85e"
+                }
+            ],
+            "package_data": [],
+            "package_code": []
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "responseStatus": "SUCCESS",
+    "apiWarnings": [],
+    "script_execution": {
+        "code": "GEN-S-0",
+        "message": "OK",
+        "warnings": 0,
+        "failures": 0,
+        "exceptions": 0,
+        "skipped": 0,
+        "components_affected": 1,
+        "execution_time": 2.528
+    },
+    "statement_execution": [
+        {
+            "vault": "sb-gilead-gvault-contingency.veevavault.com",
+            "statement": 1,
+            "command": "ALTER",
+            "component": "Objecttype.fmea_risk_event__v.hazop__v",
+            "message": "[SUCCESS] ALTER Objecttype fmea_risk_event__v.hazop__v",
+            "response": "SUCCESS"
+        }
+    ]
+}

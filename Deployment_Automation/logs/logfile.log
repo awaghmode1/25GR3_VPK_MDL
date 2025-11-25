@@ -1,0 +1,42 @@
+2025-09-09 09:27:41,048 - INFO - ******Started  Deployment Automation Script******
+2025-09-09 09:27:41,185 - INFO - Logging into  Vault...
+2025-09-09 09:27:41,185 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-09-09 09:27:41,185 - INFO - User : pradnyavantg@sb-gilead.com
+2025-09-09 09:27:42,367 - INFO - sessionID : 3D97B08C4D9825864436B42173F5552084C742A80843CE3E00FC9639F063B007D6617E8E68473A16AD04C137FF6AC9A7E37E61BB7343B70B8F27DA06A7375D9F
+2025-09-09 09:27:42,367 - INFO - Logged into  Vault!!!
+2025-09-09 09:27:42,367 - ERROR - CSV file is open/locked: GVault_Deployment_Steps.csv
+2025-09-09 09:28:25,333 - INFO - ******Started  Deployment Automation Script******
+2025-09-09 09:28:25,348 - INFO - Logging into  Vault...
+2025-09-09 09:28:25,351 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-09-09 09:28:25,351 - INFO - User : pradnyavantg@sb-gilead.com
+2025-09-09 09:28:25,865 - INFO - sessionID : 3D97B08C4D9825864436B42173F5552084C742A80843CE3E00FC9639F063B007D6617E8E68473A16AD04C137FF6AC9A7E37E61BB7343B70B8F27DA06A7375D9F
+2025-09-09 09:28:25,865 - INFO - Logged into  Vault!!!
+2025-09-09 09:28:52,663 - INFO - PKG-0153 -  Deployed Successfully into Vault 
+2025-09-09 09:28:53,164 - INFO - Downloaded PKG-0153-1-Validation.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_validation.log
+2025-09-09 09:28:53,433 - INFO - Downloaded PKG-0153-1-Deployment.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_deployment.log
+2025-09-09 09:29:13,537 - INFO - Deployment Automation Script Completed
+2025-09-09 09:33:30,788 - INFO - ******Started  Deployment Automation Script******
+2025-09-09 09:33:30,799 - INFO - Logging into  Vault...
+2025-09-09 09:33:30,802 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-09-09 09:33:30,805 - INFO - User : pradnyavantg@sb-gilead.com
+2025-09-09 09:33:31,297 - INFO - sessionID : 3D97B08C4D9825864436B42173F5552084C742A80843CE3E00FC9639F063B007D6617E8E68473A16AD04C137FF6AC9A7E37E61BB7343B70B8F27DA06A7375D9F
+2025-09-09 09:33:31,297 - INFO - Logged into  Vault!!!
+2025-09-09 09:33:58,215 - INFO - PKG-0153 -  Deployed Successfully into Vault 
+2025-09-09 09:33:58,549 - INFO - Downloaded PKG-0153-2-Deployment.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_deployment.log
+2025-09-09 09:33:58,798 - INFO - Downloaded PKG-0153-2-Validation.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_validation.log
+2025-09-09 17:58:48,690 - INFO - ******Started  Deployment Automation Script******
+2025-09-09 17:58:48,705 - INFO - Logging into  Vault...
+2025-09-09 17:58:48,720 - INFO - Vault URL : https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3
+2025-09-09 17:58:48,720 - INFO - User : pradnyavantg@sb-gilead.com
+2025-09-09 17:58:49,861 - INFO - sessionID : 7831F6A7F002FC401306579A2992D5FCF7A6981836814154713BA020595B1C584A65D3CEABD7292F2793D0710C36BEF28F6A53904C744608F8D899B4FA806438
+2025-09-09 17:58:49,861 - INFO - Logged into  Vault!!!
+2025-09-09 17:59:16,695 - INFO - PKG-0153 -  Deployed Successfully into Vault 
+2025-09-09 17:59:16,976 - INFO -  Downloaded: PKG-0153_validation.log
+2025-09-09 17:59:16,980 - INFO -   Location: \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_validation.log
+2025-09-09 17:59:16,980 - INFO -   Created: 2025-09-09 12:28:53.436
+2025-09-09 17:59:16,980 - INFO - Downloaded PKG-0153-Validation.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_validation.log
+2025-09-09 17:59:17,180 - INFO -  Downloaded: PKG-0153_deployment.log
+2025-09-09 17:59:17,180 - INFO -   Location: \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_deployment.log
+2025-09-09 17:59:17,180 - INFO -   Created: 2025-09-09 12:29:09.568
+2025-09-09 17:59:17,195 - INFO - Downloaded PKG-0153-Deployment.log to \\z1xa7prdhomes.file.core.windows.net\prdhomes\Homes\pgangawne\Documents\Deployment_Automation\Deployment_Automation\deployment_logs\PKG-0153_deployment.log
+2025-09-09 17:59:37,307 - INFO - Deployment Automation Script Completed
