@@ -1,5 +1,5 @@
 
-# Azure DevOps Pipeline for GVault Deployment Automation (base64 secrets version)
+# Azure DevOps Pipeline for GVault Deployment Automation
 trigger:
 - 25GR3
 
@@ -19,21 +19,21 @@ steps:
     pip install requests pandas
   displayName: 'Install dependencies'
 
-# Step 3: Decode base64 secrets into JSON files and validate
+# Step 3: Create & validate configuration files from plain JSON env variables
 - script: |
     set -euo pipefail
 
-    # Ensure env variables exist
-    [ -n "${AUTH_JSON_B64:-}" ] || { echo "AUTH_JSON_B64 is empty"; exit 1; }
-    [ -n "${PAYLOAD_JSON_B64:-}" ] || { echo "PAYLOAD_JSON_B64 is empty"; exit 1; }
-    [ -n "${DEPLOYMENT_JSON_B64:-}" ] || { echo "DEPLOYMENT_JSON_B64 is empty"; exit 1; }
+    # Check variables exist
+    [ -n "${AUTH_JSON:-}" ] || { echo "AUTH_JSON is empty"; exit 1; }
+    [ -n "${PAYLOAD_JSON:-}" ] || { echo "PAYLOAD_JSON is empty"; exit 1; }
+    [ -n "${DEPLOYMENT_JSON:-}" ] || { echo "DEPLOYMENT_JSON is empty"; exit 1; }
 
-    # Decode to files (no secret value printed to logs)
-    echo "$AUTH_JSON_B64"       | base64 -d > authentication.json
-    echo "$PAYLOAD_JSON_B64"    | base64 -d > payload.json
-    echo "$DEPLOYMENT_JSON_B64" | base64 -d > deployment.json
+    # Write JSON files
+    printf '%s' "$AUTH_JSON"       > authentication.json
+    printf '%s' "$PAYLOAD_JSON"    > payload.json
+    printf '%s' "$DEPLOYMENT_JSON" > deployment.json
 
-    # Validate JSON via Python
+    # Validate JSON using Python
     python - << 'PY'
     import json,sys
     for f in ("authentication.json","payload.json","deployment.json"):
@@ -44,15 +44,14 @@ steps:
             print(f"{f}: INVALID => {e}")
             sys.exit(1)
     PY
-  displayName: 'Decode & validate configuration files'
+  displayName: 'Create & validate configuration files (plain JSON)'
   env:
-    AUTH_JSON_B64: $(AUTH_JSON_B64)
-    PAYLOAD_JSON_B64: $(PAYLOAD_JSON_B64)
-    DEPLOYMENT_JSON_B64: $(DEPLOYMENT_JSON_B64)
+    AUTH_JSON: $(AUTH_JSON)
+    PAYLOAD_JSON: $(PAYLOAD_JSON)
+    DEPLOYMENT_JSON: $(DEPLOYMENT_JSON)
 
-# Step 4: Debug workspace (non-secret)
+# Step 4: Debug workspace (optional)
 - script: |
-    set -euo pipefail
     pwd
     ls -R
     echo "Preview CSV (if present):"
@@ -65,7 +64,7 @@ steps:
     python Deployment_Automation/gvault_25gr2_deployment.py
   displayName: 'Run deployment script'
 
-# Step 6: Publish logs and outputs
+# Step 6: Publish logs and outputs (always)
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: 'Deployment_Automation/logs'
