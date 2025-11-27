@@ -39,32 +39,3 @@ for f in ("authentication.json","payload.json","deployment.json"):
 PY
   displayName: 'Create & validate configuration files'
 
-# Step 4: Debug workspace
-- script: |
-    pwd
-    ls -R
-  displayName: 'Debug workspace'
-
-# Step 5: Run deployment script
-- script: |
-    python Deployment_Automation/gvault_25gr2_deployment.py
-  displayName: 'Run deployment script'
-
-# Step 6: Publish logs and outputs
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: 'Deployment_Automation/logs'
-    artifactName: 'logs'
-  condition: succeededOrFailed()
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: 'Deployment_Automation/output_files'
-    artifactName: 'outputs'
-  condition: succeededOrFailed()
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: 'Deployment_Automation/deployment_logs'
-    artifactName: 'deployment_logs'
-  condition: succeededOrFailed()
