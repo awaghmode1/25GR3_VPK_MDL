@@ -73,7 +73,7 @@ steps:
         with:
           name: deployment-logs
           path: |
-            logs/
-            output_files/
-            deployment_logs/
+            Deployment_Automation/logs/
+            Deployment_Automation/output_files/
+            Deployment_Automation/deployment_logs/
 
