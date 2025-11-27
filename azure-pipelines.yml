@@ -1,5 +1,5 @@
 
-# Azure DevOps Pipeline for GVault Deployment Automation
+# Azure DevOps Pipeline for GVault Deployment Automation (base64 secrets version)
 trigger:
 - 25GR3
 
@@ -19,15 +19,21 @@ steps:
     pip install requests pandas
   displayName: 'Install dependencies'
 
-# Step 3: Create configuration files from pipeline variables
-# Define AUTH_JSON, PAYLOAD_JSON, DEPLOYMENT_JSON in pipeline Variables (UI)
+# Step 3: Decode base64 secrets into JSON files and validate
 - script: |
     set -euo pipefail
-    printf '%s' "$(AUTH_JSON)"       > authentication.json
-    printf '%s' "$(PAYLOAD_JSON)"    > payload.json
-    printf '%s' "$(DEPLOYMENT_JSON)" > deployment.json
 
-    # Validate JSON using Python
+    # Ensure env variables exist
+    [ -n "${AUTH_JSON_B64:-}" ] || { echo "AUTH_JSON_B64 is empty"; exit 1; }
+    [ -n "${PAYLOAD_JSON_B64:-}" ] || { echo "PAYLOAD_JSON_B64 is empty"; exit 1; }
+    [ -n "${DEPLOYMENT_JSON_B64:-}" ] || { echo "DEPLOYMENT_JSON_B64 is empty"; exit 1; }
+
+    # Decode to files (no secret value printed to logs)
+    echo "$AUTH_JSON_B64"       | base64 -d > authentication.json
+    echo "$PAYLOAD_JSON_B64"    | base64 -d > payload.json
+    echo "$DEPLOYMENT_JSON_B64" | base64 -d > deployment.json
+
+    # Validate JSON via Python
     python - << 'PY'
     import json,sys
     for f in ("authentication.json","payload.json","deployment.json"):
@@ -38,13 +44,18 @@ steps:
             print(f"{f}: INVALID => {e}")
             sys.exit(1)
     PY
-  displayName: 'Create & validate configuration files'
+  displayName: 'Decode & validate configuration files'
+  env:
+    AUTH_JSON_B64: $(AUTH_JSON_B64)
+    PAYLOAD_JSON_B64: $(PAYLOAD_JSON_B64)
+    DEPLOYMENT_JSON_B64: $(DEPLOYMENT_JSON_B64)
 
-# Step 4: Debug workspace
+# Step 4: Debug workspace (non-secret)
 - script: |
+    set -euo pipefail
     pwd
     ls -R
-    echo "Preview CSV:"
+    echo "Preview CSV (if present):"
     head -n 5 Deployment_Automation/GVault_Deployment_Steps.csv || true
   displayName: 'Debug workspace'
 
