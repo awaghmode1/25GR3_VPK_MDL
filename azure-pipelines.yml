@@ -55,7 +55,7 @@ steps:
       # Step 4: Verify required files exist
       - name: Check required files
         run: |
-          for file in authentication.json payload.json deployment.json GVault_Deployment_Steps.csv; do
+          for file in Deployment_Automation/authentication.json Deployment_Automation/payload.json Deployment_Automation/deployment.json Deployment_Automation/GVault_Deployment_Steps.csv; do
             if [ ! -f "$file" ]; then
               echo "Missing required file: $file"
               exit 1
