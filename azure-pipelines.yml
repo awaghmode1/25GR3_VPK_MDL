@@ -19,19 +19,20 @@ steps:
     pip install requests pandas
   displayName: 'Install dependencies'
 
-# Step 3: Create & validate configuration files from plain JSON env variables
+
+# Step 3: Decode & validate configuration files from Base64 env variables
 - script: |
     set -euo pipefail
 
     # Check variables exist
-    [ -n "${AUTH_JSON:-}" ] || { echo "AUTH_JSON is empty"; exit 1; }
-    [ -n "${PAYLOAD_JSON:-}" ] || { echo "PAYLOAD_JSON is empty"; exit 1; }
-    [ -n "${DEPLOYMENT_JSON:-}" ] || { echo "DEPLOYMENT_JSON is empty"; exit 1; }
+    [ -n "${AUTH_JSON_B64:-}" ] || { echo "AUTH_JSON_B64 is empty"; exit 1; }
+    [ -n "${PAYLOAD_JSON_B64:-}" ] || { echo "PAYLOAD_JSON_B64 is empty"; exit 1; }
+    [ -n "${DEPLOYMENT_JSON_B64:-}" ] || { echo "DEPLOYMENT_JSON_B64 is empty"; exit 1; }
 
-    # Write JSON files
-    printf '%s' "$AUTH_JSON"       > authentication.json
-    printf '%s' "$PAYLOAD_JSON"    > payload.json
-    printf '%s' "$DEPLOYMENT_JSON" > deployment.json
+    # Decode Base64 and write JSON files
+    echo "$AUTH_JSON_B64"       | base64 --decode > authentication.json
+    echo "$PAYLOAD_JSON_B64"    | base64 --decode > payload.json
+    echo "$DEPLOYMENT_JSON_B64" | base64 --decode > deployment.json
 
     # Validate JSON using Python
     python - << 'PY'
@@ -44,11 +45,11 @@ steps:
             print(f"{f}: INVALID => {e}")
             sys.exit(1)
     PY
-  displayName: 'Create & validate configuration files (plain JSON)'
+  displayName: 'Decode & validate configuration files'
   env:
-    AUTH_JSON: $(AUTH_JSON)
-    PAYLOAD_JSON: $(PAYLOAD_JSON)
-    DEPLOYMENT_JSON: $(DEPLOYMENT_JSON)
+    AUTH_JSON_B64: $(AUTH_JSON_B64)
+    PAYLOAD_JSON_B64: $(PAYLOAD_JSON_B64)
+    DEPLOYMENT_JSON_B64: $(DEPLOYMENT_JSON_B64)
 
 # Step 4: Debug workspace (optional)
 - script: |
