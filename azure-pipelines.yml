@@ -1,5 +1,5 @@
 
-# azure-pipelines.yml
+# Azure DevOps Pipeline for GVault Deployment Automation
 trigger:
 - 25GR3
 
@@ -14,6 +14,7 @@ steps:
 
 # Step 2: Install dependencies
 - script: |
+    set -euo pipefail
     python -m pip install --upgrade pip
     pip install requests pandas
   displayName: 'Install dependencies'
@@ -26,16 +27,48 @@ steps:
     printf '%s' "$(PAYLOAD_JSON)"    > payload.json
     printf '%s' "$(DEPLOYMENT_JSON)" > deployment.json
 
-    # Validate JSON
+    # Validate JSON using Python
     python - << 'PY'
-import json,sys
-for f in ("authentication.json","payload.json","deployment.json"):
-    try:
-        with open(f) as fh: json.load(fh)
-        print(f"{f}: OK")
-    except Exception as e:
-        print(f"{f}: INVALID => {e}")
-        sys.exit(1)
-PY
+    import json,sys
+    for f in ("authentication.json","payload.json","deployment.json"):
+        try:
+            with open(f) as fh: json.load(fh)
+            print(f"{f}: OK")
+        except Exception as e:
+            print(f"{f}: INVALID => {e}")
+            sys.exit(1)
+    PY
   displayName: 'Create & validate configuration files'
 
+# Step 4: Debug workspace
+- script: |
+    pwd
+    ls -R
+    echo "Preview CSV:"
+    head -n 5 Deployment_Automation/GVault_Deployment_Steps.csv || true
+  displayName: 'Debug workspace'
+
+# Step 5: Run deployment script
+- script: |
+    set -euo pipefail
+    python Deployment_Automation/gvault_25gr2_deployment.py
+  displayName: 'Run deployment script'
+
+# Step 6: Publish logs and outputs
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'Deployment_Automation/logs'
+    artifactName: 'logs'
+  condition: succeededOrFailed()
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'Deployment_Automation/output_files'
+    artifactName: 'outputs'
+  condition: succeededOrFailed()
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'Deployment_Automation/deployment_logs'
+    artifactName: 'deployment_logs'
+  condition: succeededOrFailed()
