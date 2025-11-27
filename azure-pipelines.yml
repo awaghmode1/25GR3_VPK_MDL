@@ -65,7 +65,7 @@ steps:
       # Step 5: Run the deployment script
       - name: Execute deployment script
         run: |
-          python gvault_25gr2_deployment.py
+          python Deployment_Automation/gvault_25gr2_deployment.py
 
       # Step 6: Upload logs and outputs as artifacts
       - name: Upload logs
