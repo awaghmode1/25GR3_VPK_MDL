@@ -31,6 +31,49 @@ steps:
 
 
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    jobs:
+    run-deployment-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pandas
+
+      # Step 4: Verify required files exist
+      - name: Check required files
+        run: |
+          for file in authentication.json payload.json deployment.json GVault_Deployment_Steps.csv; do
+            if [ ! -f "$file" ]; then
+              echo "Missing required file: $file"
+              exit 1
+            fi
+          done
+
+      # Step 5: Run the deployment script
+      - name: Execute deployment script
+        run: |
+          python gvault_25gr2_deployment.py
+
+      # Step 6: Upload logs and outputs as artifacts
+      - name: Upload logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: deployment-logs
+          path: |
+            logs/
+            output_files/
+            deployment_logs/
+
