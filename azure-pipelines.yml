@@ -4,49 +4,46 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-# Step 1: Use Python
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.10'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
-# Step 2: Install dependencies
-- script: |
-    python -m pip install --upgrade pip
-    pip install requests pandas
-  displayName: 'Install dependencies'
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-# Step 3: Download secure files (authentication.json, payload.json, deployment.json)
-- task: DownloadSecureFile@1
-  name: authFile
-  inputs:
-    secureFile: authentication.json
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
-- task: DownloadSecureFile@1
-  name: payloadFile
-  inputs:
-    secureFile: payload.json
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pandas
 
-- task: DownloadSecureFile@1
-  name: deployFile
-  inputs:
-    secureFile: deployment.json
+      # Step 4: Create config files from GitHub Secrets
+      - name: Create configuration files
+        run: |
+          echo "${{ secrets.AUTH_JSON }}" > authentication.json
+          echo "${{ secrets.PAYLOAD_JSON }}" > payload.json
+          echo "${{ secrets.DEPLOYMENT_JSON }}" > deployment.json
 
-# Step 4: Copy secure files to working directory
-- script: |
-    cp $(authFile.secureFilePath) authentication.json
-    cp $(payloadFile.secureFilePath) payload.json
-    cp $(deployFile.secureFilePath) deployment.json
-  displayName: 'Prepare config files'
+      # Step 5: Run the deployment script
+      - name: Execute deployment script
+        run: |
+          ls -R
+          python Deployment_Automation/gvault_25gr2_deployment.py
 
-# Step 5: Run the script
-- script: |
-    ls -R
-    python Deployment_Automation/gvault_25gr2_deployment.py
-  displayName: 'Run deployment script'
-
-# Step 6: Publish logs and outputs
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: 'Deployment_Automation/logs'
-    artifactName: 'logs'
+      # Step 6: Upload logs and outputs as artifacts
+      - name: Upload logs and outputs
+        uses: actions/upload-artifact@v3
+        with:
+          name: deployment-artifacts
+          path: |
+            Deployment_Automation/logs/
+            Deployment_Automation/output_files/
+            Deployment_Automation/deployment_logs/
