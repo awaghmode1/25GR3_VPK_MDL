@@ -1,33 +1,34 @@
 
+# azure-pipelines.yml
 trigger:
-- main
+- 25GR3
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+# 1) Use Python 3.10
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.10'
 
+# 2) Install dependencies
 - script: |
     set -euo pipefail
     python -m pip install --upgrade pip
     pip install requests pandas
   displayName: 'Install dependencies'
 
+# 3) Create configuration files from variables (define AUTH_JSON, PAYLOAD_JSON, DEPLOYMENT_JSON in pipeline Variables)
 - script: |
     set -euo pipefail
+    [ -n "$(AUTH_JSON)" ] || { echo "AUTH_JSON is empty"; exit 1; }
+    [ -n "$(PAYLOAD_JSON)" ] || { echo "PAYLOAD_JSON is empty"; exit 1; }
+    [ -n "$(DEPLOYMENT_JSON)" ] || { echo "DEPLOYMENT_JSON is empty"; exit 1; }
 
-    # Ensure the base64 variables are present
-    [ -n "$(AUTH_JSON_B64)" ] || { echo "AUTH_JSON_B64 is empty"; exit 1; }
-    [ -n "$(PAYLOAD_JSON_B64)" ] || { echo "PAYLOAD_JSON_B64 is empty"; exit 1; }
-    [ -n "$(DEPLOYMENT_JSON_B64)" ] || { echo "DEPLOYMENT_JSON_B64 is empty"; exit 1; }
-
-    # Decode & write the JSON files
-    echo "$(AUTH_JSON_B64)"       | base64 -d > authentication.json
-    echo "$(PAYLOAD_JSON_B64)"    | base64 -d > payload.json
-    echo "$(DEPLOYMENT_JSON_B64)" | base64 -d > deployment.json
+    printf '%s' "$(AUTH_JSON)"       > authentication.json
+    printf '%s' "$(PAYLOAD_JSON)"    > payload.json
+    printf '%s' "$(DEPLOYMENT_JSON)" > deployment.json
 
     # Validate JSON
     python - << 'PY'
@@ -40,13 +41,22 @@ for f in ("authentication.json","payload.json","deployment.json"):
         print(f"{f}: INVALID => {e}")
         sys.exit(1)
 PY
-  displayName: 'Decode & validate configuration files'
+  displayName: 'Create & validate configuration files'
 
+# 4) Optional: debug the workspace
+- script: |
+    pwd
+    ls -R
+    head -n 5 Deployment_Automation/GVault_Deployment_Steps.csv || true
+  displayName: 'Debug workspace listing'
+
+# 5) Run your script
 - script: |
     set -euo pipefail
     python Deployment_Automation/gvault_25gr2_deployment.py
   displayName: 'Run deployment script'
 
+# 6) Publish artifacts (always)
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: 'Deployment_Automation/logs'
