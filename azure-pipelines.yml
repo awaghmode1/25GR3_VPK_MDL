@@ -1,10 +1,3 @@
-- task: Ant@1
-  inputs:
-    buildFile: 'build.xml'
-    options: 
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
 # Azure DevOps Pipeline for GVault Deployment Automation
 trigger:
 - 25GR3
