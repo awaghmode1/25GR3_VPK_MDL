@@ -1,48 +1,52 @@
 
-# azure-pipelines.yml
-
 trigger:
-- 25GR3
+- main
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-# 1) Use Python 3.10
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.10'
 
-# 2) Install dependencies
 - script: |
+    set -euo pipefail
     python -m pip install --upgrade pip
     pip install requests pandas
   displayName: 'Install dependencies'
 
-# 3) Create config files from pipeline variables (replace with Secure Files or Key Vault in production)
-#    In Azure DevOps, define variables AUTH_JSON, PAYLOAD_JSON, DEPLOYMENT_JSON in the pipeline or variable group.
 - script: |
-    echo "$(AUTH_JSON)" > authentication.json
-    echo "$(PAYLOAD_JSON)" > payload.json
-    echo "$(DEPLOYMENT_JSON)" > deployment.json
-  displayName: 'Create configuration files from variables'
+    set -euo pipefail
 
-# 4) Optional: verify expected files are present
-- script: |
-    echo "Workspace:"
-    pwd
-    echo "Listing files recursively:"
-    ls -R
-    echo "Showing first lines of input CSV (if present):"
-    head -n 5 Deployment_Automation/GVault_Deployment_Steps.csv || true
-  displayName: 'Debug workspace'
+    # Ensure the base64 variables are present
+    [ -n "$(AUTH_JSON_B64)" ] || { echo "AUTH_JSON_B64 is empty"; exit 1; }
+    [ -n "$(PAYLOAD_JSON_B64)" ] || { echo "PAYLOAD_JSON_B64 is empty"; exit 1; }
+    [ -n "$(DEPLOYMENT_JSON_B64)" ] || { echo "DEPLOYMENT_JSON_B64 is empty"; exit 1; }
 
-# 5) Run the deployment script
+    # Decode & write the JSON files
+    echo "$(AUTH_JSON_B64)"       | base64 -d > authentication.json
+    echo "$(PAYLOAD_JSON_B64)"    | base64 -d > payload.json
+    echo "$(DEPLOYMENT_JSON_B64)" | base64 -d > deployment.json
+
+    # Validate JSON
+    python - << 'PY'
+import json,sys
+for f in ("authentication.json","payload.json","deployment.json"):
+    try:
+        with open(f) as fh: json.load(fh)
+        print(f"{f}: OK")
+    except Exception as e:
+        print(f"{f}: INVALID => {e}")
+        sys.exit(1)
+PY
+  displayName: 'Decode & validate configuration files'
+
 - script: |
+    set -euo pipefail
     python Deployment_Automation/gvault_25gr2_deployment.py
   displayName: 'Run deployment script'
 
-# 6) Publish artifacts (logs, outputs)
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: 'Deployment_Automation/logs'
