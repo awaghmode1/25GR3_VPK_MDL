@@ -1,7 +1,7 @@
 
 # azure-pipelines.yml
 trigger:
-- main
+- 25GR3
 
 pool:
   vmImage: 'ubuntu-latest'
