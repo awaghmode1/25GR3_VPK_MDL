@@ -19,7 +19,6 @@ steps:
     pip install requests pandas
   displayName: 'Install dependencies'
 
-
 # Step 3: Decode & validate configuration files from Base64 env variables (Python-only, robust)
 - script: |
     set -euo pipefail
@@ -64,7 +63,6 @@ def decode_to_json(var_name: str, out_file: str):
         data = base64.b64decode(cleaned, validate=True)
     except Exception as e:
         print(f"ERROR: Base64 decode failed for {var_name}: {e}", file=sys.stderr)
-        # Diagnostics: show a small sanitized preview of start/end
         head = cleaned[:16]
         tail = cleaned[-16:]
         print(f"{var_name} head: {head} ... tail: ... {tail}", file=sys.stderr)
@@ -80,19 +78,16 @@ def decode_to_json(var_name: str, out_file: str):
         obj = json.loads(text)
     except json.JSONDecodeError as e:
         print(f"ERROR: Decoded text for {var_name} is not valid JSON: {e}", file=sys.stderr)
-        # Optional: print first 120 chars to help debugging
         print(f"Preview: {text[:120]!r}", file=sys.stderr)
         sys.exit(1)
 
     with open(out_file, 'w', encoding='utf-8') as f:
         f.write(text)
-    # Success diagnostics
     print(f"{out_file}: OK (size {len(text)} bytes)")
     if isinstance(obj, dict):
         keys = list(obj.keys())[:10]
         print(f"{out_file} keys: {', '.join(keys)}")
 
-# Decode all three
 decode_to_json('AUTH_JSON_B64',       'authentication.json')
 decode_to_json('PAYLOAD_JSON_B64',    'payload.json')
 decode_to_json('DEPLOYMENT_JSON_B64', 'deployment.json')
@@ -105,6 +100,7 @@ PY
 
 # Step 4: Debug workspace (optional)
 - script: |
+    set -euo pipefail
     pwd
     ls -R
     echo "Preview CSV (if present):"
