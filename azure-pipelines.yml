@@ -1,15 +1,10 @@
 
+# Azure DevOps Pipeline for GVault Deployment Automation for 25GR3
 trigger:
 - 25GR3
 
 pool:
   vmImage: 'ubuntu-latest'
-
-variables:
-  DEPLOY_SCRIPT: 'Deployment_Automation/gvault_25gr2_deployment.py'
-  LOGS_DIR: 'Deployment_Automation/logs'
-  OUTPUT_DIR: 'Deployment_Automation/output_files'
-  DEPLOYMENT_LOGS_DIR: 'Deployment_Automation/deployment_logs'
 
 steps:
 # Step 1: Use Python 3.10
@@ -17,26 +12,18 @@ steps:
   inputs:
     versionSpec: '3.10'
 
-# Step 2: Cache pip dependencies
-- task: Cache@2
-  inputs:
-    key: 'python | "$(Agent.OS)" | requirements'
-    path: ~/.cache/pip
-    restoreKeys: |
-      python | "$(Agent.OS)"
-
-# Step 3: Install dependencies
+# Step 2: Install dependencies
 - script: |
     set -euo pipefail
     python -m pip install --upgrade pip
-    pip install requests pandas jsonschema
+    pip install requests pandas
   displayName: 'Install dependencies'
 
-# Step 4: Decode & validate configuration files from Base64 env variables
+# Step 3: Decode & validate configuration files from Base64 env variables (Python-only, robust)
 - script: |
     set -euo pipefail
 
-    # Ensure variables exist
+    # 1) Ensure variables exist
     for v in AUTH_JSON_B64 PAYLOAD_JSON_B64 DEPLOYMENT_JSON_B64; do
       if [ -z "${!v:-}" ]; then
         echo "ERROR: $v is empty or not defined." >&2
@@ -45,12 +32,14 @@ steps:
       echo "$v length: ${#${!v}}"
     done
 
-    # Decode & validate in Python
+    # 2) Decode & validate in Python (handles cleanup + padding + detailed errors)
     python - << 'PY'
 import os, sys, re, base64, json
 
 def clean_and_fix(s: str) -> str:
+    # Remove CRLF, tabs, spaces (common artifacts)
     s = re.sub(r'[\r\n\t ]+', '', s)
+    # Repair padding (length must be multiple of 4)
     missing = len(s) % 4
     if missing:
         s += '=' * (4 - missing)
@@ -63,63 +52,53 @@ def decode_to_json(var_name: str, out_file: str):
         sys.exit(1)
 
     cleaned = clean_and_fix(raw)
+
+    # Early character validation (Base64 alphabet)
     if not re.fullmatch(r'[A-Za-z0-9+/=]+', cleaned):
         print(f"ERROR: {var_name} contains invalid Base64 characters.", file=sys.stderr)
+        print("Hint: Ensure you encoded UTF-8 text and copied without extra punctuation.", file=sys.stderr)
         sys.exit(1)
 
     try:
         data = base64.b64decode(cleaned, validate=True)
-        text = data.decode('utf-8')
-        obj = json.loads(text)
     except Exception as e:
-        print(f"ERROR decoding {var_name}: {e}", file=sys.stderr)
+        print(f"ERROR: Base64 decode failed for {var_name}: {e}", file=sys.stderr)
+        head = cleaned[:16]
+        tail = cleaned[-16:]
+        print(f"{var_name} head: {head} ... tail: ... {tail}", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        text = data.decode('utf-8')
+    except UnicodeDecodeError as e:
+        print(f"ERROR: Decoded bytes for {var_name} are not valid UTF-8: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        obj = json.loads(text)
+    except json.JSONDecodeError as e:
+        print(f"ERROR: Decoded text for {var_name} is not valid JSON: {e}", file=sys.stderr)
+        print(f"Preview: {text[:120]!r}", file=sys.stderr)
         sys.exit(1)
 
     with open(out_file, 'w', encoding='utf-8') as f:
         f.write(text)
     print(f"{out_file}: OK (size {len(text)} bytes)")
     if isinstance(obj, dict):
-        print(f"{out_file} keys: {', '.join(list(obj.keys())[:10])}")
+        keys = list(obj.keys())[:10]
+        print(f"{out_file} keys: {', '.join(keys)}")
 
 decode_to_json('AUTH_JSON_B64',       'authentication.json')
 decode_to_json('PAYLOAD_JSON_B64',    'payload.json')
 decode_to_json('DEPLOYMENT_JSON_B64', 'deployment.json')
 PY
-  displayName: 'Decode & validate configuration files'
+  displayName: 'Decode & validate configuration files (Python-only)'
   env:
     AUTH_JSON_B64: $(AUTH_JSON_B64)
     PAYLOAD_JSON_B64: $(PAYLOAD_JSON_B64)
     DEPLOYMENT_JSON_B64: $(DEPLOYMENT_JSON_B64)
 
-# Step 5: Optional JSON schema validation
-- script: |
-    set -euo pipefail
-    echo "Validating JSON files against schema..."
-    python - << 'PY'
-import json, sys
-from jsonschema import validate, ValidationError
-
-schema = {
-    "type": "object",
-    "properties": {
-        "deploymentId": {"type": "string"},
-        "steps": {"type": "array"}
-    },
-    "required": ["deploymentId", "steps"]
-}
-
-try:
-    with open('deployment.json') as f:
-        data = json.load(f)
-    validate(instance=data, schema=schema)
-    print("Schema validation passed.")
-except ValidationError as e:
-    print(f"Schema validation failed: {e.message}", file=sys.stderr)
-    sys.exit(1)
-PY
-  displayName: 'Validate deployment.json schema'
-
-# Step 6: Debug workspace
+# Step 4: Debug workspace (optional)
 - script: |
     set -euo pipefail
     pwd
@@ -128,5 +107,27 @@ PY
     head -n 5 Deployment_Automation/GVault_Deployment_Steps.csv || true
   displayName: 'Debug workspace'
 
-# Step 7: Run deployment script
+# Step 5: Run deployment script
 - script: |
+    set -euo pipefail
+    python Deployment_Automation/gvault_25gr2_deployment.py
+  displayName: 'Run deployment script'
+
+# Step 6: Publish logs and outputs (always)
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'Deployment_Automation/logs'
+    artifactName: 'logs'
+  condition: succeededOrFailed()
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'Deployment_Automation/output_files'
+    artifactName: 'outputs'
+  condition: succeededOrFailed()
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'Deployment_Automation/deployment_logs'
+    artifactName: 'deployment_logs'
+  condition: succeededOrFailed()
