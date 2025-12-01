@@ -23,6 +23,25 @@ steps:
     pip install requests pandas
   displayName: 'Install dependencies'
 
+
+- checkout: self
+
+# Download the secure file
+- task: DownloadSecureFile@1
+  name: authFile
+  displayName: Download authentication.json
+  inputs:
+    secureFile: authentication.json
+
+# Run the deployment script with --auth argument
+- task: Bash@3
+  displayName: Run deployment script
+  inputs:
+    targetType: inline
+    script: |
+      set -euo pipefail
+      python3 "$(Build.SourcesDirectory)/Deployment_Automation/gvault_25gr2_deployment.py" --auth "$(authFile.secureFilePath)"
+
 # Step 3: Decode & validate configuration files
 - script: |
     set -euo pipefail
@@ -74,27 +93,3 @@ PY
     PAYLOAD_JSON_B64: $(PAYLOAD_JSON_B64)
     DEPLOYMENT_JSON_B64: $(DEPLOYMENT_JSON_B64)
 
-# Step 4: Run deployment script
-- script: |
-    set -euo pipefail
-    python Deployment_Automation/gvault_25gr2_deployment.py
-  displayName: 'Run deployment script'
-
-# Step 5: Publish logs and outputs
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: 'Deployment_Automation/logs'
-    artifactName: 'logs'
-  condition: succeededOrFailed()
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: 'Deployment_Automation/output_files'
-    artifactName: 'outputs'
-  condition: succeededOrFailed()
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: 'Deployment_Automation/deployment_logs'
-    artifactName: 'deployment_logs'
-  condition: succeededOrFailed()
