@@ -1,3 +1,4 @@
+
 # Azure DevOps Pipeline for GVault Deployment Automation for 25GR3
 trigger:
 - 25GR3
@@ -22,74 +23,4 @@ steps:
     python -m pip install --upgrade pip
     pip install requests pandas
   displayName: 'Install dependencies'
-
-
-- checkout: self
-
-# Download the secure file
-- task: DownloadSecureFile@1
-  name: authFile
-  displayName: Download authentication.json
-  inputs:
-    secureFile: authentication.json
-
-# Run the deployment script with --auth argument
-- task: Bash@3
-  displayName: Run deployment script
-  inputs:
-    targetType: inline
-    script: |
-      set -euo pipefail
-      python3 "$(Build.SourcesDirectory)/Deployment_Automation/gvault_25gr2_deployment.py" --auth "$(authFile.secureFilePath)"
-
-# Step 3: Decode & validate configuration files
-- script: |
-    set -euo pipefail
-
-    # Validate variables exist
-    for v in AUTH_JSON_B64 PAYLOAD_JSON_B64 DEPLOYMENT_JSON_B64; do
-      if [ -z "${!v:-}" ]; then
-        echo "ERROR: $v is empty or not defined." >&2
-        exit 1
-      fi
-      echo "$v length: ${#${!v}}"
-    done
-
-    # Decode and validate in Python
-    python - << 'PY'
-import os, sys, re, base64, json
-
-def clean_and_fix(s: str) -> str:
-    s = re.sub(r'[\r\n\t ]+', '', s)
-    missing = len(s) % 4
-    if missing:
-        s += '=' * (4 - missing)
-    return s
-
-def decode_to_json(var_name: str, out_file: str):
-    raw = os.environ.get(var_name, '')
-    if not raw:
-        print(f"ERROR: {var_name} is empty or not defined.", file=sys.stderr)
-        sys.exit(1)
-    cleaned = clean_and_fix(raw)
-    try:
-        data = base64.b64decode(cleaned, validate=True)
-        text = data.decode('utf-8')
-        json.loads(text)  # Validate JSON
-    except Exception as e:
-        print(f"ERROR decoding {var_name}: {e}", file=sys.stderr)
-        sys.exit(1)
-    with open(out_file, 'w', encoding='utf-8') as f:
-        f.write(text)
-    print(f"{out_file}: OK (size {len(text)} bytes)")
-
-decode_to_json('AUTH_JSON_B64', 'authentication.json')
-decode_to_json('PAYLOAD_JSON_B64', 'payload.json')
-decode_to_json('DEPLOYMENT_JSON_B64', 'deployment.json')
-PY
-  displayName: 'Decode & validate configuration files'
-  env:
-    AUTH_JSON_B64: $(AUTH_JSON_B64)
-    PAYLOAD_JSON_B64: $(PAYLOAD_JSON_B64)
-    DEPLOYMENT_JSON_B64: $(DEPLOYMENT_JSON_B64)
 
