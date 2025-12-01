@@ -24,3 +24,28 @@ steps:
     pip install requests pandas
   displayName: 'Install dependencies'
 
+
+# Step 4: Run deployment script
+- script: |
+    set -euo pipefail
+    python Deployment_Automation/gvault_25gr2_deployment.py
+  displayName: 'Run deployment script'
+
+# Step 5: Publish logs and outputs
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'Deployment_Automation/logs'
+    artifactName: 'logs'
+  condition: succeededOrFailed()
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'Deployment_Automation/output_files'
+    artifactName: 'outputs'
+  condition: succeededOrFailed()
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'Deployment_Automation/deployment_logs'
+    artifactName: 'deployment_logs'
+  condition: succeededOrFailed()
