@@ -6,10 +6,11 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+# Prefer variable groups / Key Vault for secrets. For demo only, inline variables shown here:
 variables:
-  AUTH_JSON_B64: "<Base64-encoded-authentication.json>"
-  PAYLOAD_JSON_B64: "<Base64-encoded-payload.json>"
-  DEPLOYMENT_JSON_B64: "<Base64-encoded-deployment.json>"
+  AUTH_JSON_B64: '<Base64-encoded-authentication.json>'
+  PAYLOAD_JSON_B64: '<Base64-encoded-payload.json>'
+  DEPLOYMENT_JSON_B64: '<Base64-encoded-deployment.json>'
 
 steps:
 # Step 1: Use Python 3.10
@@ -17,36 +18,59 @@ steps:
   inputs:
     versionSpec: '3.10'
 
-# Step 2: Install dependencies
+# Step 2: Install dependencies your script uses
 - script: |
     set -euo pipefail
     python -m pip install --upgrade pip
-    pip install requests pandas
-  displayName: 'Install dependencies'
+    python -m pip install requests pandas
+  displayName: 'Install Python dependencies'
 
-
+# Step 3: Decode & validate configuration files into the script folder
 - script: |
     set -euo pipefail
+
+    # Sanity check that variables are present (do NOT print them)
+    for v in AUTH_JSON_B64 PAYLOAD_JSON_B64 DEPLOYMENT_JSON_B64; do
+      if [ -z "${!v:-}" ]; then
+        echo "ERROR: $v is empty or not defined." >&2
+        exit 1
+      fi
+      echo "$v is present."
+    done
+
     python - << 'PY'
 import os, sys, re, base64, json
+
 def clean_and_fix(s: str) -> str:
     s = re.sub(r'[\r\n\t ]+', '', s)
     missing = len(s) % 4
-    if missing: s += '=' * (4 - missing)
+    if missing:
+        s += '=' * (4 - missing)
     return s
-def write(var_name, out_path):
+
+def decode_to_json(var_name: str, out_file: str):
     raw = os.environ.get(var_name, '')
-    if not raw: 
-        print(f"ERROR: {var_name} missing", file=sys.stderr); sys.exit(1)
-    txt = base64.b64decode(clean_and_fix(raw), validate=True).decode('utf-8')
-    json.loads(txt)
-    os.makedirs(os.path.dirname(out_path), exist_ok=True)
-    with open(out_path, 'w', encoding='utf-8') as f: f.write(txt)
-    print(f"Wrote {out_path}")
+    if not raw:
+        print(f"ERROR: {var_name} is empty or not defined.", file=sys.stderr)
+        sys.exit(1)
+    cleaned = clean_and_fix(raw)
+    try:
+        data = base64.b64decode(cleaned, validate=True)
+        text = data.decode('utf-8')
+        json.loads(text)  # validate JSON
+    except Exception as e:
+        print(f"ERROR decoding {var_name}: {e}", file=sys.stderr)
+        sys.exit(1)
+    os.makedirs(os.path.dirname(out_file), exist_ok=True)
+    with open(out_file, 'w', encoding='utf-8') as f:
+        f.write(text)
+    print(f"{out_file}: OK (size {len(text)} bytes)")
+
+# Write files into the Deployment_Automation directory (same place as the script)
 dst = os.path.join(os.environ['Build_SourcesDirectory'], 'Deployment_Automation')
-write('AUTH_JSON_B64', os.path.join(dst, 'authentication.json'))
-write('PAYLOAD_JSON_B64', os.path.join(dst, 'payload.json'))
-write('DEPLOYMENT_JSON_B64', os.path.join(dst, 'deployment.json'))
+decode_to_json('AUTH_JSON_B64', os.path.join(dst, 'authentication.json'))
+decode_to_json('PAYLOAD_JSON_B64', os.path.join(dst, 'payload.json'))
+decode_to_json('DEPLOYMENT_JSON_B64', os.path.join(dst, 'deployment.json'))
 PY
   displayName: 'Decode & validate configuration files'
   workingDirectory: '$(Build.SourcesDirectory)/Deployment_Automation'
@@ -55,27 +79,48 @@ PY
     PAYLOAD_JSON_B64: $(PAYLOAD_JSON_B64)
     DEPLOYMENT_JSON_B64: $(DEPLOYMENT_JSON_B64)
 
-# Step 4: Run deployment script
+# Step 4: (Optional) Verify files exist
 - script: |
     set -euo pipefail
-    python Deployment_Automation/gvault_25gr2_deployment.py
+    echo "Listing folder:"
+    ls -la .
+    echo "Show first lines of authentication.json:"
+    sed -n '1,5p' authentication.json || true
+    echo "Show first lines of payload.json:"
+    sed -n '1,5p' payload.json || true
+    echo "Show first lines of deployment.json:"
+    sed -n '1,5p' deployment.json || true
+  displayName: 'Verify decoded files'
+  workingDirectory: '$(Build.SourcesDirectory)/Deployment_Automation'
+
+# Step 5: Run deployment script from its folder (so relative paths work)
+- script: |
+    set -euo pipefail
+    python gvault_25gr2_deployment.py
   displayName: 'Run deployment script'
+  workingDirectory: '$(Build.SourcesDirectory)/Deployment_Automation'
 
-# Step 5: Publish logs and outputs
+# Step 6: Publish logs and outputs as artifacts
 - task: PublishBuildArtifacts@1
+  displayName: 'Publish logs'
   inputs:
-    pathToPublish: 'Deployment_Automation/logs'
+    pathToPublish: '$(Build.SourcesDirectory)/Deployment_Automation/logs'
     artifactName: 'logs'
+    publishLocation: 'Container'
   condition: succeededOrFailed()
 
 - task: PublishBuildArtifacts@1
+  displayName: 'Publish output_files'
   inputs:
-    pathToPublish: 'Deployment_Automation/output_files'
+    pathToPublish: '$(Build.SourcesDirectory)/Deployment_Automation/output_files'
     artifactName: 'outputs'
+    publishLocation: 'Container'
   condition: succeededOrFailed()
 
 - task: PublishBuildArtifacts@1
+  displayName: 'Publish deployment_logs'
   inputs:
-    pathToPublish: 'Deployment_Automation/deployment_logs'
+    pathToPublish: '$(Build.SourcesDirectory)/Deployment_Automation/deployment_logs'
     artifactName: 'deployment_logs'
+    publishLocation: 'Container'
   condition: succeededOrFailed()
