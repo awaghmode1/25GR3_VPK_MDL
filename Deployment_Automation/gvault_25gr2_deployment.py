@@ -46,8 +46,16 @@ json_data = json.loads(auth_text)
     password = json_data[ env+'.password']
 
 #Reading a payload.json file    
-with open("payload.json") as json_file:
-    payload_json_data = json.load(json_file)
+#with open("payload.json") as json_file:
+    #payload_json_data = json.load(json_file)
+PAYLOAD_JSON_B64 = os.getenv("PAYLOAD_JSON_B64")
+if not auth_b64:
+    raise RuntimeError("PAYLOAD_JSON_B64 is missing")
+
+# Decode Base64 and parse JSON
+PAYLOAD_JSON = PAYLOAD_JSON_B64.b64decode(PAYLOAD_JSON_B64).decode("utf-8")
+payload_json_data = json.loads(PAYLOAD_JSON)
+
 api_version = payload_json_data['api']['version']
 api_job_task = payload_json_data['api']['job_task']
 api_job_status = payload_json_data['api']['job_status']
@@ -59,8 +67,17 @@ loader_output_dir = payload_json_data['output_dir']['loader_output_dir']
 ftp_folder = payload_json_data['ftp']['ftp_folder']
 
 #Reading a deployment.json file    
-with open("deployment.json") as deployment_json_file:
-    deployment_json_data = json.load(deployment_json_file)
+#with open("deployment.json") as deployment_json_file:
+    #deployment_json_data = json.load(deployment_json_file)
+
+DEPLOYMENT_JSON_B64 = os.getenv("DEPLOYMENT_JSON_B64")
+if not auth_b64:
+    raise RuntimeError("DEPLOYMENT_JSON_B64 is missing")
+
+# Decode Base64 and parse JSON
+DEPLOYMENT_JSON = DEPLOYMENT_JSON_B64.b64decode(DEPLOYMENT_JSON_B64).decode("utf-8")
+deployment_json_data = json.loads(DEPLOYMENT_JSON)
+
 vpk_deployment_type = deployment_json_data['deployment_type']['vpk']
 mdl_deployment_type = deployment_json_data['deployment_type']['mdl']
 loader_deployment_type = deployment_json_data['deployment_type']['loader']
