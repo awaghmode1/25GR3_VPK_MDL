@@ -26,8 +26,17 @@ join_dir3 = os.path.join(output_dir, sub_dir3)
 
 
 #Getting  vault URL and credentials from authentication.json for Vault
-with open("authentication.json") as json_file:
-    json_data = json.load(json_file)
+#with open("authentication.json") as json_file:
+    #json_data = json.load(json_file
+
+auth_b64 = os.getenv("AUTH_JSON_B64")
+if not auth_b64:
+    raise RuntimeError("AUTH_JSON_B64 environment variable is missing")
+
+# Decode Base64 and parse JSON
+auth_text = base64.b64decode(auth_b64).decode("utf-8")
+json_data = json.loads(auth_text)
+
     env = json_data['env']
     
     #ENV_CREDENTIALS
