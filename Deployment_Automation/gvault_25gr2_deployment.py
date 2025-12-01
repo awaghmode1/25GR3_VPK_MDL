@@ -37,13 +37,13 @@ if not auth_b64:
 auth_text = base64.b64decode(auth_b64).decode("utf-8")
 json_data = json.loads(auth_text)
 
-    env = json_data['env']
+env = json_data['env']
     
-    #ENV_CREDENTIALS
-    baseurl = json_data[ env+'.baseurl']
-    authurl = json_data[ env+'.authurl']
-    username = json_data[ env+'.username']
-    password = json_data[ env+'.password']
+#ENV_CREDENTIALS
+baseurl = json_data[ env+'.baseurl']
+authurl = json_data[ env+'.authurl']
+username = json_data[ env+'.username']
+password = json_data[ env+'.password']
 
 #Reading a payload.json file    
 #with open("payload.json") as json_file:
