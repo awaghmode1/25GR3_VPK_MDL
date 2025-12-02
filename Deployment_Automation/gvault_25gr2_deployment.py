@@ -488,7 +488,7 @@ for idx, row in df.iterrows():
         
 logger.info("Deployment Automation Script Completed")        
             
-def _diagnose_and_read_csv(path):
+def diagnose_and_read_csv(path):
     abs_path = os.path.abspath(path)
     print(f"[DIAG] CWD={os.getcwd()}")
     print(f"[DIAG] input_file={abs_path}")
