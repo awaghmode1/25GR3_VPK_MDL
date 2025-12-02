@@ -1,4 +1,5 @@
-# Azure DevOps Pipeline for GVault Deployment Automation for 25GR3
+
+# Azure DevOps Pipeline for GVault Deployment Automation (no Python code in YAML)
 trigger:
 - 25GR3
 
@@ -10,107 +11,56 @@ steps:
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.10'
+    addToPath: true
 
-# Step 2: Install dependencies
+# Step 2: Create & activate venv and install deps
 - script: |
     set -euo pipefail
+    python -m venv .venv
+    source .venv/bin/activate
     python -m pip install --upgrade pip
     pip install requests pandas
-  displayName: 'Install dependencies'
+    which python
+    python --version
+    pip --version
+  displayName: 'Create venv and install dependencies'
 
-# Step 3: Decode & validate configuration files from Base64 env variables (Python-only, robust)
-- script: |
+# Step 3: Download Secure Files (authentication.json, payload.json, deployment.json)
+# Upload these in Pipelines > Library > Secure files before running the pipeline
+- task: DownloadSecureFile@1
+  name: authJson
+  inputs:
+    secureFile: 'authentication.json'
+- task: DownloadSecureFile@1
+  name: payloadJson
+  inputs:
+    secureFile: 'payload.json'
+- task: DownloadSecureFile@1
+  name: deploymentJson
+  inputs:
+    secureFile: 'deployment.json'
+
+# Step 4: Place secure files into the working directory
+- bash: |
     set -euo pipefail
+    # Copy secure files into repo root (adjust path if needed)
+    cp "$(authJson.secureFilePath)" authentication.json
+    cp "$(payloadJson.secureFilePath)" payload.json
+    cp "$(deploymentJson.secureFilePath)" deployment.json
 
-    # 1) Ensure variables exist
-    for v in AUTH_JSON_B64 PAYLOAD_JSON_B64 DEPLOYMENT_JSON_B64; do
-      if [ -z "${!v:-}" ]; then
-        echo "ERROR: $v is empty or not defined." >&2
-        exit 1
-      fi
-      echo "$v length: ${#${!v}}"
-    done
-
-    # 2) Decode & validate in Python (handles cleanup + padding + detailed errors)
-    python - << 'PY'
-import os, sys, re, base64, json
-
-def clean_and_fix(s: str) -> str:
-    # Remove CRLF, tabs, spaces (common artifacts)
-    s = re.sub(r'[\r\n\t ]+', '', s)
-    # Repair padding (length must be multiple of 4)
-    missing = len(s) % 4
-    if missing:
-        s += '=' * (4 - missing)
-    return s
-
-def decode_to_json(var_name: str, out_file: str):
-    raw = os.environ.get(var_name, '')
-    if not raw:
-        print(f"ERROR: {var_name} is empty or not defined.", file=sys.stderr)
-        sys.exit(1)
-
-    cleaned = clean_and_fix(raw)
-
-    # Early character validation (Base64 alphabet)
-    if not re.fullmatch(r'[A-Za-z0-9+/=]+', cleaned):
-        print(f"ERROR: {var_name} contains invalid Base64 characters.", file=sys.stderr)
-        print("Hint: Ensure you encoded UTF-8 text and copied without extra punctuation.", file=sys.stderr)
-        sys.exit(1)
-
-    try:
-        data = base64.b64decode(cleaned, validate=True)
-    except Exception as e:
-        print(f"ERROR: Base64 decode failed for {var_name}: {e}", file=sys.stderr)
-        head = cleaned[:16]
-        tail = cleaned[-16:]
-        print(f"{var_name} head: {head} ... tail: ... {tail}", file=sys.stderr)
-        sys.exit(1)
-
-    try:
-        text = data.decode('utf-8')
-    except UnicodeDecodeError as e:
-        print(f"ERROR: Decoded bytes for {var_name} are not valid UTF-8: {e}", file=sys.stderr)
-        sys.exit(1)
-
-    try:
-        obj = json.loads(text)
-    except json.JSONDecodeError as e:
-        print(f"ERROR: Decoded text for {var_name} is not valid JSON: {e}", file=sys.stderr)
-        print(f"Preview: {text[:120]!r}", file=sys.stderr)
-        sys.exit(1)
-
-    with open(out_file, 'w', encoding='utf-8') as f:
-        f.write(text)
-    print(f"{out_file}: OK (size {len(text)} bytes)")
-    if isinstance(obj, dict):
-        keys = list(obj.keys())[:10]
-        print(f"{out_file} keys: {', '.join(keys)}")
-
-decode_to_json('AUTH_JSON_B64',       'authentication.json')
-decode_to_json('PAYLOAD_JSON_B64',    'payload.json')
-decode_to_json('DEPLOYMENT_JSON_B64', 'deployment.json')
-PY
-  displayName: 'Decode & validate configuration files (Python-only)'
-  env:
-    AUTH_JSON_B64: $(AUTH_JSON_B64)
-    PAYLOAD_JSON_B64: $(PAYLOAD_JSON_B64)
-    DEPLOYMENT_JSON_B64: $(DEPLOYMENT_JSON_B64)
-
-# Step 4: Debug workspace (optional)
-- script: |
-    set -euo pipefail
+    echo "Working dir:"
     pwd
-    ls -R
-    echo "Preview CSV (if present):"
-    head -n 5 Deployment_Automation/GVault_Deployment_Steps.csv || true
-  displayName: 'Debug workspace'
+    ls -la
+    echo "Deployment_Automation tree:"
+    ls -R Deployment_Automation || true
+  displayName: 'Prepare configuration files (Secure Files)'
 
-# Step 5: Run deployment script
-- script: |
+# Step 5: Run the Python script (via venv)
+- bash: |
     set -euo pipefail
+    source .venv/bin/activate
     python Deployment_Automation/gvault_25gr2_deployment.py
-  displayName: 'Run deployment script'
+  displayName: 'Run gvault_25gr2_deployment.py'
 
 # Step 6: Publish logs and outputs (always)
 - task: PublishBuildArtifacts@1
