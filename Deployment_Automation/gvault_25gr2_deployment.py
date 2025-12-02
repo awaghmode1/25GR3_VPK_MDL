@@ -391,7 +391,7 @@ mdl_headers = {'Authorization': sessionID,'Accept':'application/json','Content-T
 #Reading the input file
 ensure_csv_not_open(input_file)
 #df = pd.read_csv(input_file)
-df = pd.read_csv(input_file, compression='infer')
+df = diagnose_and_read_csv(input_file)
 for idx, row in df.iterrows():
     start_time = datetime.now().strftime("%H:%M:%S")
     if row['File Type'] == 'VPK' and vpk_deployment_type is True and row['Step Status'] != 'Completed':
@@ -488,6 +488,52 @@ for idx, row in df.iterrows():
         
 logger.info("Deployment Automation Script Completed")        
             
+def _diagnose_and_read_csv(path):
+    abs_path = os.path.abspath(path)
+    print(f"[DIAG] CWD={os.getcwd()}")
+    print(f"[DIAG] input_file={abs_path}")
+
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"Input file does not exist: {abs_path}")
+
+    if not os.path.isfile(path):
+        raise IsADirectoryError(f"Input path is not a file: {abs_path}")
+
+    size = os.path.getsize(path)
+    print(f"[DIAG] size={size} bytes")
+    if size == 0:
+        raise ValueError(f"Input file is empty: {abs_path}")
+
+    # Peek at first 2 lines
+    with open(path, 'rb') as f:
+        head = f.read(512)
+    print(f"[DIAG] first-bytes-sample={head[:128]!r}")
+
+    suffix = pathlib.Path(path).suffix.lower()
+    if suffix in ('.xls', '.xlsx'):
+        print("[DIAG] Detected Excel file, using read_excel")
+        return pd.read_excel(path, engine='openpyxl')
+
+    # Try CSV with sensible fallbacks
+    try:
+        return pd.read_csv(path)
+    except pd.errors.EmptyDataError:
+        print("[DIAG] EmptyDataError with defaults; retrying with encoding and delimiter fallbacks...", file=sys.stderr)
+        # Try common fallbacks
+        for kwargs in (
+            {'encoding': 'utf-8-sig'},
+            {'sep': '\t'},
+            {'sep': '|'},
+            {'header': None},
+            {'compression': 'infer'},
+        ):
+            try:
+                print(f"[DIAG] retry kwargs={kwargs}")
+                return pd.read_csv(path, **kwargs)
+            except Exception as e:
+                print(f"[DIAG] retry failed: {e}", file=sys.stderr)
+        # If all retries fail, raise with a helpful message
+        raise
 
 
 
