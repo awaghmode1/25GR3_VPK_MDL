@@ -21,17 +21,4 @@ steps:
     python -m pip install requests pandas
   displayName: 'Install Python dependencies'
 
-- script: |
-    set -euo pipefail
-
-    for v in AUTH_JSON_B64 PAYLOAD_JSON_B64 DEPLOYMENT_JSON_B64; do
-      if [ -z "${!v:-}" ]; then
-        echo "ERROR: $v is empty or not defined." >&2
-        exit 1
-      fi
-      echo "$v is present."
-    done
-
-    python - << 'PY'
-import os, sys, re, base64, json
 
