@@ -1,24 +1,132 @@
-
+# Azure DevOps Pipeline for GVault Deployment Automation for 25GR3
 trigger:
 - 25GR3
 
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  AUTH_JSON_B64: "<Base64-encoded-authentication.json>"
-  PAYLOAD_JSON_B64: "<Base64-encoded-payload.json>"
-  DEPLOYMENT_JSON_B64: "<Base64-encoded-deployment.json>"
-
 steps:
+# Step 1: Use Python 3.10
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.10'
 
+# Step 2: Install dependencies
 - script: |
     set -euo pipefail
     python -m pip install --upgrade pip
-    python -m pip install requests pandas
-  displayName: 'Install Python dependencies'
+    pip install requests pandas
+  displayName: 'Install dependencies'
 
+# Step 3: Decode & validate configuration files from Base64 env variables (Python-only, robust)
+- script: |
+    set -euo pipefail
 
+    # 1) Ensure variables exist
+    for v in AUTH_JSON_B64 PAYLOAD_JSON_B64 DEPLOYMENT_JSON_B64; do
+      if [ -z "${!v:-}" ]; then
+        echo "ERROR: $v is empty or not defined." >&2
+        exit 1
+      fi
+      echo "$v length: ${#${!v}}"
+    done
+
+    # 2) Decode & validate in Python (handles cleanup + padding + detailed errors)
+    python - << 'PY'
+import os, sys, re, base64, json
+
+def clean_and_fix(s: str) -> str:
+    # Remove CRLF, tabs, spaces (common artifacts)
+    s = re.sub(r'[\r\n\t ]+', '', s)
+    # Repair padding (length must be multiple of 4)
+    missing = len(s) % 4
+    if missing:
+        s += '=' * (4 - missing)
+    return s
+
+def decode_to_json(var_name: str, out_file: str):
+    raw = os.environ.get(var_name, '')
+    if not raw:
+        print(f"ERROR: {var_name} is empty or not defined.", file=sys.stderr)
+        sys.exit(1)
+
+    cleaned = clean_and_fix(raw)
+
+    # Early character validation (Base64 alphabet)
+    if not re.fullmatch(r'[A-Za-z0-9+/=]+', cleaned):
+        print(f"ERROR: {var_name} contains invalid Base64 characters.", file=sys.stderr)
+        print("Hint: Ensure you encoded UTF-8 text and copied without extra punctuation.", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        data = base64.b64decode(cleaned, validate=True)
+    except Exception as e:
+        print(f"ERROR: Base64 decode failed for {var_name}: {e}", file=sys.stderr)
+        head = cleaned[:16]
+        tail = cleaned[-16:]
+        print(f"{var_name} head: {head} ... tail: ... {tail}", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        text = data.decode('utf-8')
+    except UnicodeDecodeError as e:
+        print(f"ERROR: Decoded bytes for {var_name} are not valid UTF-8: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        obj = json.loads(text)
+    except json.JSONDecodeError as e:
+        print(f"ERROR: Decoded text for {var_name} is not valid JSON: {e}", file=sys.stderr)
+        print(f"Preview: {text[:120]!r}", file=sys.stderr)
+        sys.exit(1)
+
+    with open(out_file, 'w', encoding='utf-8') as f:
+        f.write(text)
+    print(f"{out_file}: OK (size {len(text)} bytes)")
+    if isinstance(obj, dict):
+        keys = list(obj.keys())[:10]
+        print(f"{out_file} keys: {', '.join(keys)}")
+
+decode_to_json('AUTH_JSON_B64',       'authentication.json')
+decode_to_json('PAYLOAD_JSON_B64',    'payload.json')
+decode_to_json('DEPLOYMENT_JSON_B64', 'deployment.json')
+PY
+  displayName: 'Decode & validate configuration files (Python-only)'
+  env:
+    AUTH_JSON_B64: $(AUTH_JSON_B64)
+    PAYLOAD_JSON_B64: $(PAYLOAD_JSON_B64)
+    DEPLOYMENT_JSON_B64: $(DEPLOYMENT_JSON_B64)
+
+# Step 4: Debug workspace (optional)
+- script: |
+    set -euo pipefail
+    pwd
+    ls -R
+    echo "Preview CSV (if present):"
+    head -n 5 Deployment_Automation/GVault_Deployment_Steps.csv || true
+  displayName: 'Debug workspace'
+
+# Step 5: Run deployment script
+- script: |
+    set -euo pipefail
+    python Deployment_Automation/gvault_25gr2_deployment.py
+  displayName: 'Run deployment script'
+
+# Step 6: Publish logs and outputs (always)
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'Deployment_Automation/logs'
+    artifactName: 'logs'
+  condition: succeededOrFailed()
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'Deployment_Automation/output_files'
+    artifactName: 'outputs'
+  condition: succeededOrFailed()
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'Deployment_Automation/deployment_logs'
+    artifactName: 'deployment_logs'
+  condition: succeededOrFailed()
