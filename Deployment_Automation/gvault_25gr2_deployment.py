@@ -390,7 +390,8 @@ mdl_headers = {'Authorization': sessionID,'Accept':'application/json','Content-T
 
 #Reading the input file
 ensure_csv_not_open(input_file)
-df = pd.read_csv(input_file)
+#df = pd.read_csv(input_file)
+df = pd.read_csv(input_file, skiprows=1)  # if header starts on line 2
 for idx, row in df.iterrows():
     start_time = datetime.now().strftime("%H:%M:%S")
     if row['File Type'] == 'VPK' and vpk_deployment_type is True and row['Step Status'] != 'Completed':
