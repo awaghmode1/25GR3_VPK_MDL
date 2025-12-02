@@ -26,36 +26,19 @@ join_dir3 = os.path.join(output_dir, sub_dir3)
 
 
 #Getting  vault URL and credentials from authentication.json for Vault
-#with open("authentication.json") as json_file:
-    #json_data = json.load(json_file
-
-auth_b64 = os.getenv("AUTH_JSON_B64")
-if not auth_b64:
-    raise RuntimeError("AUTH_JSON_B64 environment variable is missing")
-
-# Decode Base64 and parse JSON
-auth_text = base64.b64decode(auth_b64).decode("utf-8")
-json_data = json.loads(auth_text)
-
-env = json_data['env']
+with open("authentication.json") as json_file:
+    json_data = json.load(json_file)
+    env = json_data['env']
     
-#ENV_CREDENTIALS
-baseurl = json_data[ env+'.baseurl']
-authurl = json_data[ env+'.authurl']
-username = json_data[ env+'.username']
-password = json_data[ env+'.password']
+    #ENV_CREDENTIALS
+    baseurl = json_data[ env+'.baseurl']
+    authurl = json_data[ env+'.authurl']
+    username = json_data[ env+'.username']
+    password = json_data[ env+'.password']
 
 #Reading a payload.json file    
-#with open("payload.json") as json_file:
-    #payload_json_data = json.load(json_file)
-PAYLOAD_JSON_B64 = os.getenv("PAYLOAD_JSON_B64")
-if not auth_b64:
-    raise RuntimeError("PAYLOAD_JSON_B64 is missing")
-
-# Decode Base64 and parse JSON
-PAYLOAD_JSON = PAYLOAD_JSON_B64.b64decode(PAYLOAD_JSON_B64).decode("utf-8")
-payload_json_data = json.loads(PAYLOAD_JSON)
-
+with open("payload.json") as json_file:
+    payload_json_data = json.load(json_file)
 api_version = payload_json_data['api']['version']
 api_job_task = payload_json_data['api']['job_task']
 api_job_status = payload_json_data['api']['job_status']
@@ -67,17 +50,8 @@ loader_output_dir = payload_json_data['output_dir']['loader_output_dir']
 ftp_folder = payload_json_data['ftp']['ftp_folder']
 
 #Reading a deployment.json file    
-#with open("deployment.json") as deployment_json_file:
-    #deployment_json_data = json.load(deployment_json_file)
-
-DEPLOYMENT_JSON_B64 = os.getenv("DEPLOYMENT_JSON_B64")
-if not auth_b64:
-    raise RuntimeError("DEPLOYMENT_JSON_B64 is missing")
-
-# Decode Base64 and parse JSON
-DEPLOYMENT_JSON = DEPLOYMENT_JSON_B64.b64decode(DEPLOYMENT_JSON_B64).decode("utf-8")
-deployment_json_data = json.loads(DEPLOYMENT_JSON)
-
+with open("deployment.json") as deployment_json_file:
+    deployment_json_data = json.load(deployment_json_file)
 vpk_deployment_type = deployment_json_data['deployment_type']['vpk']
 mdl_deployment_type = deployment_json_data['deployment_type']['mdl']
 loader_deployment_type = deployment_json_data['deployment_type']['loader']
