@@ -15,7 +15,7 @@ steps:
 
 # Step 2: Create & activate venv and install dependencies
 - script: |
-    set -euo pipefail
+    set -e
     python -m venv .venv
     source .venv/bin/activate
     python -m pip install --upgrade pip
@@ -46,28 +46,30 @@ steps:
   inputs:
     secureFile: 'GVault_Deployment_Steps.csv'
 
-# Step 4: Place secure files into working directory (correct env var syntax)
+# Step 4: Copy secure files to working directory (safe checks + debug)
 - bash: |
-    set -euo pipefail
-    cp "$authJson_secureFilePath" authentication.json
-    cp "$payloadJson_secureFilePath" payload.json
-    cp "$deploymentJson_secureFilePath" deployment.json
-    cp "$deploymentStepsCsv_secureFilePath" GVault_Deployment_Steps.csv
+    set -e
+    echo "Debug: Secure file paths available in environment:"
+    env | grep secureFilePath || true
+
+    # Copy files if variables exist
+    if [ -n "${authJson_secureFilePath:-}" ]; then cp "$authJson_secureFilePath" authentication.json; fi
+    if [ -n "${payloadJson_secureFilePath:-}" ]; then cp "$payloadJson_secureFilePath" payload.json; fi
+    if [ -n "${deploymentJson_secureFilePath:-}" ]; then cp "$deploymentJson_secureFilePath" deployment.json; fi
+    if [ -n "${deploymentStepsCsv_secureFilePath:-}" ]; then cp "$deploymentStepsCsv_secureFilePath" GVault_Deployment_Steps.csv; fi
 
     echo "Files in working directory:"
     ls -la
   displayName: 'Prepare configuration files (Secure Files + CSV)'
 
-# Step 5: Run the Python deployment script (pass CSV path explicitly)
-# If your script expects the CSV by argument, use --csv GVault_Deployment_Steps.csv.
-# If it reads from CWD, you can omit the argument; keeping it explicit is safer.
+# Step 5: Run the Python deployment script (pass CSV explicitly)
 - bash: |
-    set -euo pipefail
+    set -e
     source .venv/bin/activate
     python Deployment_Automation/gvault_25gr2_deployment.py --csv "GVault_Deployment_Steps.csv" --auth "authentication.json" --payload "payload.json" --deployment "deployment.json"
   displayName: 'Run gvault_25gr2_deployment.py'
 
-# Step 6: Publish logs and outputs (always)
+# Step 6: Publish logs and outputs
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: 'Deployment_Automation/logs'
