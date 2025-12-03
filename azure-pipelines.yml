@@ -47,14 +47,15 @@ steps:
     cp "$(authJson.secureFilePath)" authentication.json
     cp "$(payloadJson.secureFilePath)" payload.json
     cp "$(deploymentJson.secureFilePath)" deployment.json
-
+    
     echo "Working dir:"
     pwd
     ls -la
     echo "Deployment_Automation tree:"
     ls -R Deployment_Automation || true
   displayName: 'Prepare configuration files (Secure Files)'
-
+    
+    cp "$(GVault_Deployment_Steps)" GVault_Deployment_Steps.csv
 # Step 5: Run the Python script (via venv)
 - bash: |
     set -euo pipefail
