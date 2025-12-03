@@ -1,5 +1,5 @@
 
-# Azure DevOps Pipeline for GVault Deployment Automation (no Python code in YAML)
+# Azure DevOps Pipeline for GVault Deployment Automation
 trigger:
 - 25GR3
 
@@ -25,37 +25,43 @@ steps:
     pip --version
   displayName: 'Create venv and install dependencies'
 
-# Step 3: Download Secure Files (authentication.json, payload.json, deployment.json)
-# Upload these in Pipelines > Library > Secure files before running the pipeline
+# Step 3: Download Secure Files (authentication.json, payload.json, deployment.json, GVault_Deployment_Steps.csv)
 - task: DownloadSecureFile@1
   name: authJson
   inputs:
     secureFile: 'authentication.json'
+
 - task: DownloadSecureFile@1
   name: payloadJson
   inputs:
     secureFile: 'payload.json'
+
 - task: DownloadSecureFile@1
   name: deploymentJson
   inputs:
     secureFile: 'deployment.json'
 
+- task: DownloadSecureFile@1
+  name: deploymentStepsCsv
+  inputs:
+    secureFile: 'GVault_Deployment_Steps.csv'
+
 # Step 4: Place secure files into the working directory
 - bash: |
     set -euo pipefail
-    # Copy secure files into repo root (adjust path if needed)
-    cp "$(authJson.secureFilePath)" authentication.json
-    cp "$(payloadJson.secureFilePath)" payload.json
-    cp "$(deploymentJson.secureFilePath)" deployment.json
-    cp "$(deploymentStepsCsv.secureFilePath)" GVault_Deployment_Steps.csv
+    # Copy secure files into repo root
+    cp "$authJson_secureFilePath" authentication.json
+    cp "$payloadJson_secureFilePath" payload.json
+    cp "$deploymentJson_secureFilePath" deployment.json
+    cp "$deploymentStepsCsv_secureFilePath" GVault_Deployment_Steps.csv
+
     echo "Working dir:"
     pwd
     ls -la
     echo "Deployment_Automation tree:"
     ls -R Deployment_Automation || true
-  displayName: 'Prepare configuration files (Secure Files)'
-    
-    
+  displayName: 'Prepare configuration files (Secure Files + CSV)'
+
 # Step 5: Run the Python script (via venv)
 - bash: |
     set -euo pipefail
