@@ -390,16 +390,7 @@ mdl_headers = {'Authorization': sessionID,'Accept':'application/json','Content-T
 
 #Reading the input file
 ensure_csv_not_open(input_file)
-#df = pd.read_csv(input_file)
-if os.path.exists(input_file):
-    try:
-        df = pd.read_csv(input_file)
-    except FileNotFoundError:
-        print(f"File not found: {input_file}")
-    except pd.errors.EmptyDataError:
-        print("The file is empty.")
-    except Exception as e:
-        print(f"Error reading file: {e}")
+df = pd.read_csv(input_file)
 
 for idx, row in df.iterrows():
     start_time = datetime.now().strftime("%H:%M:%S")
