@@ -13,7 +13,7 @@ steps:
     versionSpec: '3.10'
     addToPath: true
 
-# Step 2: Create & activate venv and install deps
+# Step 2: Create & activate venv and install dependencies
 - script: |
     set -euo pipefail
     python -m venv .venv
@@ -46,27 +46,25 @@ steps:
   inputs:
     secureFile: 'GVault_Deployment_Steps.csv'
 
-# Step 4: Place secure files into the working directory
+# Step 4: Place secure files into working directory (correct env var syntax)
 - bash: |
     set -euo pipefail
-    # Copy secure files into repo root
     cp "$authJson_secureFilePath" authentication.json
     cp "$payloadJson_secureFilePath" payload.json
     cp "$deploymentJson_secureFilePath" deployment.json
     cp "$deploymentStepsCsv_secureFilePath" GVault_Deployment_Steps.csv
 
-    echo "Working dir:"
-    pwd
+    echo "Files in working directory:"
     ls -la
-    echo "Deployment_Automation tree:"
-    ls -R Deployment_Automation || true
   displayName: 'Prepare configuration files (Secure Files + CSV)'
 
-# Step 5: Run the Python script (via venv)
+# Step 5: Run the Python deployment script (pass CSV path explicitly)
+# If your script expects the CSV by argument, use --csv GVault_Deployment_Steps.csv.
+# If it reads from CWD, you can omit the argument; keeping it explicit is safer.
 - bash: |
     set -euo pipefail
     source .venv/bin/activate
-    python Deployment_Automation/gvault_25gr2_deployment.py
+    python Deployment_Automation/gvault_25gr2_deployment.py --csv "GVault_Deployment_Steps.csv" --auth "authentication.json" --payload "payload.json" --deployment "deployment.json"
   displayName: 'Run gvault_25gr2_deployment.py'
 
 # Step 6: Publish logs and outputs (always)
