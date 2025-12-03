@@ -47,7 +47,7 @@ steps:
     cp "$(authJson.secureFilePath)" authentication.json
     cp "$(payloadJson.secureFilePath)" payload.json
     cp "$(deploymentJson.secureFilePath)" deployment.json
-    cp "$(deploymentStepsCsv.secureFilePath)" GVault_Deployment_Steps.csv
+    #cp "$(deploymentStepsCsv.secureFilePath)" GVault_Deployment_Steps.csv
     echo "Working dir:"
     pwd
     ls -la
