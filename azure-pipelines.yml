@@ -1,50 +1,83 @@
 
+# Azure DevOps Pipeline for GVault Deployment Automation
 trigger:
 - 25GR3
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 steps:
+# Step 1: Use Python 3.10
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.10'
     addToPath: true
 
-- powershell: |
+# Step 2: Create & activate venv and install dependencies
+- script: |
+    set -e
     python -m venv .venv
-    .\.venv\Scripts\Activate.ps1
+    source .venv/bin/activate
     python -m pip install --upgrade pip
     pip install requests pandas
+    which python
     python --version
     pip --version
   displayName: 'Create venv and install dependencies'
 
+# Step 3: Download Secure Files (authentication.json, payload.json, deployment.json, GVault_Deployment_Steps.csv)
 - task: DownloadSecureFile@1
   name: authJson
   inputs:
     secureFile: 'authentication.json'
+
 - task: DownloadSecureFile@1
   name: payloadJson
   inputs:
     secureFile: 'payload.json'
+
 - task: DownloadSecureFile@1
   name: deploymentJson
   inputs:
     secureFile: 'deployment.json'
 
-- powershell: |
-    Copy-Item "$(authJson.secureFilePath)" -Destination authentication.json -Force
-    Copy-Item "$(payloadJson.secureFilePath)" -Destination payload.json -Force
-    Copy-Item "$(deploymentJson.secureFilePath)" -Destination deployment.json -Force
-    Get-ChildItem -Recurse
-  displayName: 'Prepare configuration files (Secure Files)'
+- task: DownloadSecureFile@1
+  name: deploymentStepsCsv
+  inputs:
+    secureFile: 'GVault_Deployment_Steps.csv'
 
-- powershell: |
-    .\.venv\Scripts\Activate.ps1
-    python Deployment_Automation/gvault_25gr2_deployment.py
+# Step 4: Copy secure files to expected locations and verify CSV
+- bash: |
+    set -e
+    echo "Debug: Secure file paths"
+    env | grep secureFilePath || true
+
+    # Copy JSON files to working directory
+    cp "$authJson_secureFilePath" authentication.json
+    cp "$payloadJson_secureFilePath" payload.json
+    cp "$deploymentJson_secureFilePath" deployment.json
+
+    # Copy CSV to Deployment_Automation/input_files/
+    mkdir -p Deployment_Automation/input_files
+    cp "$deploymentStepsCsv_secureFilePath" Deployment_Automation/input_files/GVault_Deployment_Steps.csv
+
+    echo "Verify CSV in target folder:"
+    ls -la Deployment_Automation/input_files/
+    cat Deployment_Automation/input_files/GVault_Deployment_Steps.csv
+  displayName: 'Prepare configuration files (Secure Files + CSV)'
+
+# Step 5: Run the Python deployment script (pass CSV explicitly)
+- bash: |
+    set -e
+    source .venv/bin/activate
+    python Deployment_Automation/gvault_25gr2_deployment.py \
+      --csv "Deployment_Automation/input_files/GVault_Deployment_Steps.csv" \
+      --auth "authentication.json" \
+      --payload "payload.json" \
+      --deployment "deployment.json"
   displayName: 'Run gvault_25gr2_deployment.py'
 
+# Step 6: Publish logs and outputs
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: 'Deployment_Automation/logs'
