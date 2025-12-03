@@ -10,44 +10,4 @@
     "POC.ftp_username" : "sb-gilead-gvault-contingency.veevavault.com+pradnyavantg@sb-gilead.com",
     "POC.ftp_password" : "QEFiY2QxNTEx",
 
-    "CONT.baseurl" : "https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3",
-    "CONT.authurl" : "https://sb-gilead-gvault-contingency.veevavault.com/api",
-    "CONT.username" : "pradnyavantg@sb-gilead.com",
-    "CONT.password" : "QEFiY2QxNTEx",
-    "CONT.ftp_hostname" : "vlt-22-ftp.veevavault.com",
-    "CONT.ftp_username" : "sb-gilead-gvault-contingency.veevavault.com+pradnyavantg@sb-gilead.com",
-    "CONT.ftp_password" : "QEFiY2QxNTEx",
-
-    "DEV.baseurl" : "https://sb-gilead-gvault-dev.veevavault.com/api/v23.3",
-    "DEV.authurl" : "https://sb-gilead-gvault-dev.veevavault.com/api",
-    "DEV.username" : "sabariraj@sb-gilead.com",
-    "DEV.password" : "",
-    "DEV.ftp_hostname" : "vlt-22-ftp.veevavault.com",
-    "DEV.ftp_username" : "sb-gilead-gvault-dev.veevavault.com+sabariraj@sb-gilead.com",
-    "DEV.ftp_password" : "",
-
-    "IT.baseurl" : "https://sb-gilead-gvault-it.veevavault.com/api/v23.3",
-    "IT.authurl" : "https://sb-gilead-gvault-it.veevavault.com/api",
-    "IT.username" : "sabariraj@sb-gilead.com",
-    "IT.password" : "",
-    "IT.ftp_hostname" : "vlt-22-ftp.veevavault.com",
-    "IT.ftp_username" : "sb-gilead-gvault-it.veevavault.com+sabariraj@sb-gilead.com",
-    "IT.ftp_password" : "",
-
-    "VAL.baseurl" : "https://val-gilead.veevavault.com/api/v23.3",
-    "VAL.authurl" : "https://val-gilead.veevavault.com/api",
-    "VAL.username" : "ljayarasu_Admin@val-gilead.com",
-    "VAL.password" : "=",
-    "VAL.ftp_hostname" : "vlt-22-ftp.veevavault.com",
-    "VAL.ftp_username" : "val-gilead.veevavault.com+ljayarasu_Admin@val-gilead.com",
-    "VAL.ftp_password" : "=",
-
-    "PROD.baseurl" : "https://gvault.veevavault.com/api/v23.3",
-    "PROD.authurl" : "https://gvault.veevavault.com/api",
-    "PROD.username" : "",
-    "PROD.password" : "",
-    "PROD.ftp_hostname" : "vlt-22-ftp.veevavault.com",
-    "PROD.ftp_username" : "gvault.veevavault.com+ljayarasu_Admin@gvault.gilead.com",
-    "PROD.ftp_password" : ""
-    
 }
