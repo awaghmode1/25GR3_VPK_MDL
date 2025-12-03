@@ -46,11 +46,21 @@ steps:
   inputs:
     secureFile: 'GVault_Deployment_Steps.csv'
 
-# Step 4: Copy secure files to expected locations and verify CSV
+# Step 4: Debug and safely copy secure files
 - bash: |
     set -e
-    echo "Debug: Secure file paths"
+    echo "=== Debug: Secure file paths ==="
     env | grep secureFilePath || true
+
+    # Validate variables before copying
+    for var in authJson_secureFilePath payloadJson_secureFilePath deploymentJson_secureFilePath deploymentStepsCsv_secureFilePath; do
+      if [ -z "${!var:-}" ]; then
+        echo "ERROR: $var is empty or not set"
+        exit 1
+      else
+        echo "$var -> ${!var}"
+      fi
+    done
 
     # Copy JSON files to working directory
     cp "$authJson_secureFilePath" authentication.json
@@ -61,12 +71,13 @@ steps:
     mkdir -p Deployment_Automation/input_files
     cp "$deploymentStepsCsv_secureFilePath" Deployment_Automation/input_files/GVault_Deployment_Steps.csv
 
-    echo "Verify CSV in target folder:"
-    ls -la Deployment_Automation/input_files/
+    echo "=== Verify copied files ==="
+    ls -la
+    echo "--- CSV Content ---"
     cat Deployment_Automation/input_files/GVault_Deployment_Steps.csv
   displayName: 'Prepare configuration files (Secure Files + CSV)'
 
-# Step 5: Run the Python deployment script (pass CSV explicitly)
+# Step 5: Run the Python deployment script
 - bash: |
     set -e
     source .venv/bin/activate
