@@ -4,10 +4,10 @@
 
     "POC.baseurl" : "https://sb-gilead-gvault-poc1.veevavault.com/api/v23.3",
     "POC.authurl" : "https://sb-gilead-gvault-poc1.veevavault.com/api",
-    "POC.username" : "awaghmode1@sb-gilead.com",
-    "POC.password" : "QCQjVGVANzc=",
+    "POC.username" : "pradnyavantg@sb-gilead.com",
+    "POC.password" : "QEFiY2QxNTEx",
     "POC.ftp_hostname" : "vlt-22-ftp.veevavault.com",
-    "POC.ftp_username" : "sb-gilead-gvault-poc1.veevavault.com+awaghmode1@sb-gilead.com",
-    "POC.ftp_password" : "QCQjVGVANzc=",
+    "POC.ftp_username" : "sb-gilead-gvault-contingency.veevavault.com+pradnyavantg@sb-gilead.com",
+    "POC.ftp_password" : "QEFiY2QxNTEx"
 
 }
