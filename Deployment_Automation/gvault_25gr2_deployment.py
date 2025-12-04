@@ -14,7 +14,9 @@ from logging.handlers import TimedRotatingFileHandler
 warnings.filterwarnings("ignore")
 
 #Input File
-input_file = 'GVault_Deployment_Steps.csv'
+#input_file = 'GVault_Deployment_Steps.csv'
+input_file = Path("Deployment_Automation/GVault_Deployment_Steps.csv")  # adjust if your script expects another location
+
 output_dir = 'output_files'
 sub_dir1 = "mdl_output_files"
 sub_dir2 = "vpk_output_files"
