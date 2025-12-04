@@ -63,7 +63,7 @@ steps:
     set -euo pipefail
     echo "Copying CSV from repository..."
 
-    REPO_CSV="$(Build.SourcesDirectory)/Deployment_Automation/input_files/GVault_Deployment_Steps.csv"
+    REPO_CSV="$(Build.SourcesDirectory)/Deployment_Automation/GVault_Deployment_Steps.csv"
     DEST_DIR="Deployment_Automation/input_files"
 
     mkdir -p "${DEST_DIR}"
@@ -72,7 +72,7 @@ steps:
       echo "ERROR: CSV not found at ${REPO_CSV}"
       echo "Repo contents for debugging:"
       ls -la "$(Build.SourcesDirectory)" || true
-      ls -la "$(Build.SourcesDirectory)/Deployment_Automation/input_files" || true
+      ls -la "$(Build.SourcesDirectory)/Deployment_Automation" || true
       exit 1
     fi
 
