@@ -396,7 +396,7 @@ ensure_csv_not_open(input_file)
 #df = pd.read_csv(input_file)
 
 try:
-    df = pd.read_csv(input_file
+    df = pd.read_csv(input_file)
     print("df ...",df)
 except FileNotFoundError:
     print(f"File not found: {input_file}")
