@@ -26,24 +26,26 @@ steps:
   displayName: 'Create venv and install dependencies'
 
 # Step 3: Download Secure Files (authentication.json, payload.json, deployment.json)
-# Upload these in Pipelines > Library > Secure files before running the pipeline
+# These reside in Pipelines > Library > Secure files
 - task: DownloadSecureFile@1
   name: authJson
   inputs:
     secureFile: 'authentication.json'
+
 - task: DownloadSecureFile@1
   name: payloadJson
   inputs:
     secureFile: 'payload.json'
+
 - task: DownloadSecureFile@1
   name: deploymentJson
   inputs:
     secureFile: 'deployment.json'
 
-# Step 4: Place secure files into the working directory
+# Step 4: Place secure files into the working directory (use correct output vars)
 - bash: |
     set -euo pipefail
-    # Copy secure files into repo root (adjust path if needed)
+    echo "Preparing secure files..."
     cp "$(authJson.secureFilePath)" authentication.json
     cp "$(payloadJson.secureFilePath)" payload.json
     cp "$(deploymentJson.secureFilePath)" deployment.json
@@ -51,54 +53,39 @@ steps:
     echo "Working dir:"
     pwd
     ls -la
+
     echo "Deployment_Automation tree:"
     ls -R Deployment_Automation || true
   displayName: 'Prepare configuration files (Secure Files)'
-  
-  
-# Step Important: Copy secure files to expected locations
+
+# Step 4b: Copy CSV from repository (NOT a secure file)
 - bash: |
-    set -e
-    echo "Debug: Secure file paths"
-    env | grep secureFilePath || true
+    set -euo pipefail
+    echo "Copying CSV from repository..."
 
-    # Copy JSON files to working directory
-    cp "$authJson_secureFilePath" authentication.json
-    cp "$payloadJson_secureFilePath" payload.json
-    cp "$deploymentJson_secureFilePath" deployment.json
+    REPO_CSV="$(Build.SourcesDirectory)/Deployment_Automation/input_files/GVault_Deployment_Steps.csv"
+    DEST_DIR="Deployment_Automation/input_files"
 
-    # Copy CSV to Deployment_Automation/input_files/
-    mkdir -p Deployment_Automation/input_files
-    cp "$deploymentStepsCsv_secureFilePath" Deployment_Automation/input_files/GVault_Deployment_Steps.csv
+    mkdir -p "${DEST_DIR}"
+
+    if [[ ! -f "${REPO_CSV}" ]]; then
+      echo "ERROR: CSV not found at ${REPO_CSV}"
+      echo "Repo contents for debugging:"
+      ls -la "$(Build.SourcesDirectory)" || true
+      ls -la "$(Build.SourcesDirectory)/Deployment_Automation/input_files" || true
+      exit 1
+    fi
+
+    cp -v "${REPO_CSV}" "${DEST_DIR}/GVault_Deployment_Steps.csv"
 
     echo "Verify CSV in target folder:"
-    ls -la Deployment_Automation/input_files/
-    cat Deployment_Automation/input_files/GVault_Deployment_Steps.csv
-  displayName: 'Prepare configuration files (Secure Files + CSV)'
+    ls -la "${DEST_DIR}/"
+    head -n 5 "${DEST_DIR}/GVault_Deployment_Steps.csv" || true
+  displayName: 'Copy CSV from repository'
 
-
-# Step 5: Run the Python script (via venv)
+# Step 5: Run the Python script (via venv) -- unchanged except for robust flags
 - bash: |
     set -euo pipefail
     source .venv/bin/activate
     python Deployment_Automation/gvault_25gr2_deployment.py
   displayName: 'Run gvault_25gr2_deployment.py'
-
-# Step 6: Publish logs and outputs (always)
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: 'Deployment_Automation/logs'
-    artifactName: 'logs'
-  condition: succeededOrFailed()
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: 'Deployment_Automation/output_files'
-    artifactName: 'outputs'
-  condition: succeededOrFailed()
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: 'Deployment_Automation/deployment_logs'
-    artifactName: 'deployment_logs'
-  condition: succeededOrFailed()
