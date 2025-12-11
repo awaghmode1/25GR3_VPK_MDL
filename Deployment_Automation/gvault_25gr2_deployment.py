@@ -31,6 +31,12 @@ join_dir3 = os.path.join(output_dir, sub_dir3)
 #Getting  vault URL and credentials from authentication.json for Vault
 with open("authentication.json") as json_file:
     json_data = json.load(json_file)
+    
+    # If the pipeline passes ENVIRONMENT, override json_data['env']
+    ENVIRONMENT = os.getenv("ENVIRONMENT")
+    if ENVIRONMENT:
+        json_data["env"] = ENVIRONMENT
+
     env = json_data['env']
     
     #ENV_CREDENTIALS
