@@ -584,8 +584,7 @@ def process_df(df_local: pd.DataFrame) -> pd.DataFrame:
                 with open(vpk_path, "rb") as vpk_file:
                     global files
                     files = {'file': vpk_file}
-                    global response
-                    response = []
+                    response.clear()
                     try:
                         package_id = row.get('Vault Package ID')
                         if import_deployment_settings is True:
