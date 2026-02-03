@@ -87,5 +87,5 @@ steps:
 - bash: |
     set -euo pipefail
     source .venv/bin/activate
-    python Deployment_Automation/gvault_25gr2_deployment.py
-  displayName: 'Run gvault_25gr2_deployment.py'
+    python Deployment_Automation/gvault_25gr2_deployment_all_sheets_approvers.py
+  displayName: 'Run gvault_25gr2_deployment_all_sheets_approvers.py'
