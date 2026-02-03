@@ -145,7 +145,7 @@ stages:
                   cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
                   source .venv/bin/activate
                   echo "ENVIRONMENT=POC1"
-                  ENVIRONMENT=POC1 python Deployment_Automation/gvault_25gr2_deployment.py
+                  ENVIRONMENT=POC1 python Deployment_Automation/gvault_25gr2_deployment_all_sheets_approvers_all_sheets_approvers_all_sheets_approvers_all_sheets_approvers_all_sheets_approvers.py
                 displayName: 'Run deployment script (POC1)'
                 # The updated script prefers XLSX and falls back to CSV. [2](blob:https://m365.cloud.microsoft/34d91353-03ab-4eda-8761-09318ccaf9d3)
 
@@ -312,7 +312,7 @@ stages:
                   cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
                   source .venv/bin/activate
                   echo "ENVIRONMENT=Contigency"
-                  ENVIRONMENT=Contigency python Deployment_Automation/gvault_25gr2_deployment.py
+                  ENVIRONMENT=Contigency python Deployment_Automation/gvault_25gr2_deployment_all_sheets_approvers_all_sheets_approvers_all_sheets_approvers_all_sheets_approvers_all_sheets_approvers.py
                 displayName: 'Run deployment script (CONTIGENCY)'
                 # Script prefers XLSX, falls back to CSV. [2](blob:https://m365.cloud.microsoft/34d91353-03ab-4eda-8761-09318ccaf9d3)
 
