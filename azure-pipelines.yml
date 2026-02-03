@@ -1,91 +1,348 @@
 
-# Azure DevOps Pipeline for GVault Deployment Automation (no Python code in YAML)
+# Multi-stage Azure DevOps pipeline for GVault Deployment Automation
+# Stages: build -> deploy_poc1 -> deploy_Contigency
 trigger:
-- 25GR3
+  branches:
+    include:
+      - main
 
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-# Step 1: Use Python 3.10
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.10'
-    addToPath: true
+variables:
+  pythonVersion: '3.10'
+  artifactName: 'Deployment Automation'
 
-# Step 2: Create & activate venv and install deps
-- script: |
-    set -euo pipefail
-    python -m venv .venv
-    source .venv/bin/activate
-    python -m pip install --upgrade pip
-    pip install requests pandas
-    which python
-    python --version
-    pip --version
-  displayName: 'Create venv and install dependencies'
+stages:
+# ======================================
+# Stage 1: Build (package + publish)
+# ======================================
+- stage: build
+  displayName: Build & Package
+  jobs:
+  - job: build_job
+    displayName: Build artifact
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '$(pythonVersion)'
+        addToPath: true
 
-# Step 3: Download Secure Files (authentication.json, payload.json, deployment.json)
-# These reside in Pipelines > Library > Secure files
-- task: DownloadSecureFile@1
-  name: authJson
-  inputs:
-    secureFile: 'authentication.json'
+    - bash: |
+        set -euo pipefail
+        python -m venv .venv
+        source .venv/bin/activate
+        python -m pip install --upgrade pip
+        pip install requests pandas
+        mkdir -p .package/project_root
+        rsync -a --exclude='.venv' --exclude='.git' ./ ./.package/project_root/
+      displayName: 'Create venv, install deps, copy source to artifact'
 
-- task: DownloadSecureFile@1
-  name: payloadJson
-  inputs:
-    secureFile: 'payload.json'
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '.package'
+        artifact: '$(artifactName)'
+        publishLocation: 'pipeline'
+      displayName: 'Publish pipeline artifact'
 
-- task: DownloadSecureFile@1
-  name: deploymentJson
-  inputs:
-    secureFile: 'deployment.json'
+# ======================================
+# Stage 2: Deploy to POC1
+# ======================================
+- stage: deploy_poc1
+  displayName: Deploy to POC1
+  dependsOn: build
+  jobs:
+  - deployment: poc1_deploy
+    displayName: Execute script in POC1
+    environment: 'POC1'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          # Checkout with credentials for push
+          - checkout: self
+            persistCredentials: true
 
-# Step 4: Place secure files into the working directory (use correct output vars)
-- bash: |
-    set -euo pipefail
-    echo "Preparing secure files..."
-    cp "$(authJson.secureFilePath)" authentication.json
-    cp "$(payloadJson.secureFilePath)" payload.json
-    cp "$(deploymentJson.secureFilePath)" deployment.json
+          # Download build artifact
+          - download: current
+            artifact: '$(artifactName)'
 
-    echo "Working dir:"
-    pwd
-    ls -la
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '$(pythonVersion)'
+              addToPath: true
 
-    echo "Deployment_Automation tree:"
-    ls -R Deployment_Automation || true
-  displayName: 'Prepare configuration files (Secure Files)'
+          - bash: |
+              set -euo pipefail
+              cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
+              python -m venv .venv
+              source .venv/bin/activate
+              python -m pip install --upgrade pip
+              pip install requests pandas
+            displayName: 'Create venv & install dependencies (POC1)'
 
-# Step 4b: Copy CSV from repository (NOT a secure file)
-- bash: |
-    set -euo pipefail
-    echo "Copying CSV from repository..."
+          # Secure files
+          - task: DownloadSecureFile@1
+            name: authJson
+            inputs:
+              secureFile: 'authentication.json'
+          - task: DownloadSecureFile@1
+            name: payloadJson
+            inputs:
+              secureFile: 'payload.json'
+          - task: DownloadSecureFile@1
+            name: deploymentJson
+            inputs:
+              secureFile: 'deployment.json'
 
-    REPO_CSV="$(Build.SourcesDirectory)/Deployment_Automation/GVault_Deployment_Steps.csv"
-    DEST_DIR="Deployment_Automation/input_files"
+          # Prepare inputs (copy JSONs + CSV)
+          - bash: |
+              set -euo pipefail
+              cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
+              cp "$(authJson.secureFilePath)" authentication.json
+              cp "$(payloadJson.secureFilePath)" payload.json
+              cp "$(deploymentJson.secureFilePath)" deployment.json
 
-    mkdir -p "${DEST_DIR}"
+              echo "Preparing input CSV..."
+              REPO_CSV="$(Build.SourcesDirectory)/Deployment_Automation/GVault_Deployment_Steps.csv"
+              ALT_CSV="$(Build.SourcesDirectory)/GVault_Deployment_Steps.csv"
+              if [[ ! -f "${REPO_CSV}" && -f "${ALT_CSV}" ]]; then
+                REPO_CSV="${ALT_CSV}"
+              fi
+              DEST_DIR="Deployment_Automation"
+              mkdir -p "${DEST_DIR}"
+              if [[ ! -f "${REPO_CSV}" ]]; then
+                echo "ERROR: CSV not found at ${REPO_CSV}"
+                echo "Checked out repo path: $(Build.SourcesDirectory)"
+                ls -la "$(Build.SourcesDirectory)" || true
+                exit 1
+              fi
+              cp -v "${REPO_CSV}" "${DEST_DIR}/GVault_Deployment_Steps.csv"
+              echo "Directory tree:"
+              ls -R .
+            displayName: 'Prepare configuration & inputs (POC1)'
 
-    if [[ ! -f "${REPO_CSV}" ]]; then
-      echo "ERROR: CSV not found at ${REPO_CSV}"
-      echo "Repo contents for debugging:"
-      ls -la "$(Build.SourcesDirectory)" || true
-      ls -la "$(Build.SourcesDirectory)/Deployment_Automation" || true
-      exit 1
-    fi
+          # Run the Python deployment script (sets ENVIRONMENT and renames CSV)
+          - bash: |
+              set -euo pipefail
+              cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
+              source .venv/bin/activate
+              echo "ENVIRONMENT=POC1"
+              ENVIRONMENT=POC1 python Deployment_Automation/gvault_25gr2_deployment_all_sheets_approvers.py
+            displayName: 'Run deployment script (POC1)'
 
-    cp -v "${REPO_CSV}" "${DEST_DIR}/GVault_Deployment_Steps.csv"
+          # Find latest env-named CSV and sync to repo checkout with stable names
+          - bash: |
+              set -euo pipefail
 
-    echo "Verify CSV in target folder:"
-    ls -la "${DEST_DIR}/"
-    head -n 5 "${DEST_DIR}/GVault_Deployment_Steps.csv" || true
-  displayName: 'Copy CSV from repository'
+              ENV_NAME="POC1"
+              SRC_DIR="$(Pipeline.Workspace)/$(artifactName)/project_root/Deployment_Automation"
+              REPO_DIR="$(Build.SourcesDirectory)/Deployment_Automation"
+              mkdir -p "${REPO_DIR}"
 
-# Step 5: Run the Python script (via venv) -- unchanged except for robust flags
-- bash: |
-    set -euo pipefail
-    source .venv/bin/activate
-    python Deployment_Automation/gvault_25gr2_deployment_all_sheets_approvers.py
-  displayName: 'Run gvault_25gr2_deployment_all_sheets_approvers.py'
+              echo "=== Sync diagnostics ==="
+              echo "SRC_DIR : ${SRC_DIR}"
+              echo "ENV_NAME: ${ENV_NAME}"
+              echo "REPO_DIR: ${REPO_DIR}"
+
+              # Locate latest env-specific CSV produced by the script
+              LATEST_CSV="$(ls -1t "${SRC_DIR}/GVault_Deployment_Steps_${ENV_NAME}_"*.csv 2>/dev/null | head -n 1 || true)"
+              if [[ -z "${LATEST_CSV}" ]]; then
+                echo "ERROR: No environment-specific CSV found in ${SRC_DIR} for ENV=${ENV_NAME}"
+                ls -la "${SRC_DIR}" || true
+                exit 1
+              fi
+              echo "Found updated CSV: ${LATEST_CSV}"
+
+              # Copy as stable env-specific file
+              STABLE_ENV="${REPO_DIR}/GVault_Deployment_Steps_${ENV_NAME}.csv"
+              cp -f "${LATEST_CSV}" "${STABLE_ENV}"
+              echo "Copied ${LATEST_CSV} -> ${STABLE_ENV}"
+
+              # Also copy as common name (optional)
+              COMMON="${REPO_DIR}/GVault_Deployment_Steps.csv"
+              cp -f "${STABLE_ENV}" "${COMMON}" || true
+              echo "Also synced common name: ${COMMON}"
+
+              echo "=== Repo checkout listing after sync ==="
+              ls -la "${REPO_DIR}"
+            displayName: 'Sync updated CSV to repo checkout (POC1)'
+            condition: succeededOrFailed()
+
+          # Preview top 25 lines (sanity)
+          - bash: |
+              set -euo pipefail
+              head -n 25 "$(Build.SourcesDirectory)/Deployment_Automation/GVault_Deployment_Steps_POC1.csv" || true
+              head -n 25 "$(Build.SourcesDirectory)/Deployment_Automation/GVault_Deployment_Steps.csv" || true
+            displayName: 'Show updated CSV content (POC1)'
+            condition: succeededOrFailed()
+           
+          # Commit & push CSV back to branch
+          - bash: |
+              set -e
+              cd "$(Build.SourcesDirectory)"
+              echo "Source branch: $(Build.SourceBranch)"
+              echo "Source branch name: $(Build.SourceBranchName)"
+
+              git --version
+              git config --global --add safe.directory "$(Build.SourcesDirectory)"
+              git config user.name  "azure-pipelines"
+              git config user.email "azure-pipelines@local"
+
+              git add Deployment_Automation/GVault_Deployment_Steps_POC1.csv
+              git add Deployment_Automation/GVault_Deployment_Steps.csv || true
+
+              if ! git diff --cached --quiet; then
+                git commit -m "Pipeline: update deployment steps CSV (POC1)"
+                git push origin HEAD:$(Build.SourceBranchName)
+                echo "Pushed changes to $(Build.SourceBranchName)"
+              else
+                echo "No changes to commit."
+              fi
+            displayName: 'Commit & push CSV updates (POC1)'
+            condition: succeededOrFailed()
+            env:
+              SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+            
+# ======================================
+# Stage 3: Deploy to CONTIGENCY
+# (Keep the spelling consistent with your JSON/env keys)
+# ======================================
+- stage: deploy_Contigency
+  displayName: Deploy to CONTIGENCY
+  #dependsOn: deploy_poc1
+  dependsOn: build
+  jobs:
+  - deployment: Contigency_deploy
+    displayName: Execute script in CONTIGENCY
+    environment: 'Contigency'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+            fetchDepth: 0
+            persistCredentials: true
+
+          - download: current
+            artifact: '$(artifactName)'
+
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '$(pythonVersion)'
+              addToPath: true
+
+          - bash: |
+              set -euo pipefail
+              cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
+              python -m venv .venv
+              source .venv/bin/activate
+              python -m pip install --upgrade pip
+              pip install requests pandas
+            displayName: 'Create venv & install dependencies (CONTIGENCY)'
+
+          - task: DownloadSecureFile@1
+            name: authJson
+            inputs:
+              secureFile: 'authentication.json'
+          - task: DownloadSecureFile@1
+            name: payloadJson
+            inputs:
+              secureFile: 'payload.json'
+          - task: DownloadSecureFile@1
+            name: deploymentJson
+            inputs:
+              secureFile: 'deployment.json'
+
+          - bash: |
+              set -euo pipefail
+              cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
+              cp "$(authJson.secureFilePath)" authentication.json
+              cp "$(payloadJson.secureFilePath)" payload.json
+              cp "$(deploymentJson.secureFilePath)" deployment.json
+
+              echo "Preparing input CSV..."
+              REPO_CSV="$(Build.SourcesDirectory)/Deployment_Automation/GVault_Deployment_Steps_Contigency.csv"
+              # Fallback to common if env-specific not present yet
+              if [[ ! -f "${REPO_CSV}" ]]; then
+                REPO_CSV="$(Build.SourcesDirectory)/Deployment_Automation/GVault_Deployment_Steps.csv"
+              fi
+              DEST_DIR="Deployment_Automation"
+              mkdir -p "${DEST_DIR}"
+              if [[ ! -f "${REPO_CSV}" ]]; then
+                echo "ERROR: CSV not found at ${REPO_CSV}"
+                ls -la "$(Build.SourcesDirectory)/Deployment_Automation" || true
+                exit 1
+              fi
+              cp -v "${REPO_CSV}" "${DEST_DIR}/GVault_Deployment_Steps.csv"
+            displayName: 'Prepare configuration & inputs (CONTIGENCY)'
+
+          - bash: |
+              set -euo pipefail
+              cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
+              source .venv/bin/activate
+              echo "ENVIRONMENT=Contigency"
+              ENVIRONMENT=Contigency python Deployment_Automation/gvault_25gr2_deployment_all_sheets_approvers.py
+            displayName: 'Run deployment script (CONTIGENCY)'
+
+          - bash: |
+              set -euo pipefail
+
+              ENV_NAME="Contigency"
+              SRC_DIR="$(Pipeline.Workspace)/$(artifactName)/project_root/Deployment_Automation"
+              REPO_DIR="$(Build.SourcesDirectory)/Deployment_Automation"
+              mkdir -p "${REPO_DIR}"
+
+              echo "=== Sync diagnostics ==="
+              echo "SRC_DIR : ${SRC_DIR}"
+              echo "ENV_NAME: ${ENV_NAME}"
+              echo "REPO_DIR: ${REPO_DIR}"
+
+              LATEST_CSV="$(ls -1t "${SRC_DIR}/GVault_Deployment_Steps_${ENV_NAME}_"*.csv 2>/dev/null | head -n 1 || true)"
+              if [[ -z "${LATEST_CSV}" ]]; then
+                echo "ERROR: No environment-specific CSV found in ${SRC_DIR} for ENV=${ENV_NAME}"
+                ls -la "${SRC_DIR}" || true
+                exit 1
+              fi
+              echo "Found updated CSV: ${LATEST_CSV}"
+
+              STABLE_ENV="${REPO_DIR}/GVault_Deployment_Steps_${ENV_NAME}.csv"
+              cp -f "${LATEST_CSV}" "${STABLE_ENV}"
+              echo "Copied ${LATEST_CSV} -> ${STABLE_ENV}"
+
+              COMMON="${REPO_DIR}/GVault_Deployment_Steps.csv"
+              cp -f "${STABLE_ENV}" "${COMMON}" || true
+              echo "Also synced common name: ${COMMON}"
+            displayName: 'Sync updated CSV to repo checkout (CONTIGENCY)'
+            condition: succeededOrFailed()
+
+          - bash: |
+              set -euo pipefail
+              head -n 25 "$(Build.SourcesDirectory)/Deployment_Automation/GVault_Deployment_Steps_Contigency.csv" || true
+              head -n 25 "$(Build.SourcesDirectory)/Deployment_Automation/GVault_Deployment_Steps.csv" || true
+            displayName: 'Show updated CSV content (CONTIGENCY)'
+            condition: succeededOrFailed()
+
+          - bash: |
+              set -e
+              cd "$(Build.SourcesDirectory)"
+
+              git --version
+              git config --global --add safe.directory "$(Build.SourcesDirectory)"
+              git config user.name  "azure-pipelines"
+              git config user.email "azure-pipelines@local"
+
+              git add Deployment_Automation/GVault_Deployment_Steps_Contigency.csv
+              git add Deployment_Automation/GVault_Deployment_Steps.csv || true
+
+              if ! git diff --cached --quiet; then
+                git commit -m "Pipeline: update deployment steps CSV (Contigency)"
+                git push origin HEAD:$(Build.SourceBranchName)
+                echo "Pushed changes to $(Build.SourceBranchName)"
+              else
+                echo "No changes to commit."
+              fi
+            displayName: 'Commit & push CSV updates (CONTIGENCY)'
+            condition: succeededOrFailed()
+            env:
+              SYSTEM_ACCESSTOKEN: $(System.AccessToken)
