@@ -33,7 +33,6 @@ parameters:
       contApprovers: [ 'Ashwini.Waghmode1@gilead.com' ]
       contPolicy: ALL
       contN: 1
-    
 
 variables:
   pythonVersion: '3.10'
@@ -146,32 +145,6 @@ stages:
                   cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
                   source .venv/bin/activate
                   python - <<'PY'
-import pandas as pd
-from pathlib import Path
-module = r"${{ m.name }}"
-p = Path('Deployment_Automation/GVault_Deployment_Steps.csv')
-df = pd.read_csv(p)
-if 'Module Name' not in df.columns:
-    raise SystemExit("CSV must contain 'Module Name' column")
-filtered = df[df['Module Name'].astype(str).str.strip() == module]
-if filtered.empty:
-    raise SystemExit(f"No rows found for module '{module}' in CSV.")
-filtered.to_csv(p, index=False)
-print(f"Filtered CSV to module: {module}; rows: {len(filtered)}")
-PY
-                displayName: 'Filter CSV to this module only'
-              # Module-specific approval gate
-              - task: ManualValidation@0
-                displayName: "Approval: ${{ m.name }} (POC1)"
-                inputs:
-                  notifyUsers: |
-                    ${{ join(m.poc1Approvers, '\n') }}
-                  instructions: |
-                    Please approve deployment for module "${{ m.name }}" to POC1.
-                    Policy: ${{ m.poc1Policy }}${{ ' N=' }}${{ m.poc1N }} (informational; not enforced by task)
-                    The job reads CSV filtered to this module only.
-                  onTimeout: 'reject'
-                  timeout: '43200'
               # Run the Python deployment script (CSV mode)
               - bash: |
                   set -euo pipefail
@@ -277,32 +250,6 @@ PY
                   cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
                   source .venv/bin/activate
                   python - <<'PY'
-import pandas as pd
-from pathlib import Path
-module = r"${{ m.name }}"
-p = Path('Deployment_Automation/GVault_Deployment_Steps.csv')
-df = pd.read_csv(p)
-if 'Module Name' not in df.columns:
-    raise SystemExit("CSV must contain 'Module Name' column")
-filtered = df[df['Module Name'].astype(str).str.strip() == module]
-if filtered.empty:
-    raise SystemExit(f"No rows found for module '{module}' in CSV.")
-filtered.to_csv(p, index=False)
-print(f"Filtered CSV to module: {module}; rows: {len(filtered)}")
-PY
-                displayName: 'Filter CSV to this module only'
-              # Module-specific approval gate
-              - task: ManualValidation@0
-                displayName: "Approval: ${{ m.name }} (Contigency)"
-                inputs:
-                  notifyUsers: |
-                    ${{ join(m.contApprovers, '\n') }}
-                  instructions: |
-                    Please approve deployment for module "${{ m.name }}" to Contigency.
-                    Policy: ${{ m.contPolicy }}${{ ' N=' }}${{ m.contN }} (informational; not enforced by task)
-                    The job reads CSV filtered to this module only.
-                  onTimeout: 'reject'
-                  timeout: '43200'
               # Run the Python deployment script (CSV mode)
               - bash: |
                   set -euo pipefail
