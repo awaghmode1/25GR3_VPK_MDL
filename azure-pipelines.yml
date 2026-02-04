@@ -20,7 +20,7 @@ parameters:
     # Findings
     - name: Findings
       poc1Approvers: [ 'Ashwini.Waghmode1@gilead.com', 'Rahul.Padole@gilead.com' ]
-      poc1Policy: ALL
+      poc1Policy: ANY
       poc1N: 2
       contApprovers: [ 'Ashwini.Waghmode1@gilead.com' ]
       contPolicy: ANY
