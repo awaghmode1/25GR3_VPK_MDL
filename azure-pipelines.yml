@@ -1,5 +1,8 @@
-# Multi-stage Azure DevOps pipeline for GVault Deployment Automation
-# Stages: build -> deploy_poc1 -> deploy_Contigency
+# Azure Pipelines: CSV-driven, per-module approvals (POC1 & Contigency)
+# - Source of truth: Deployment_Automation/GVault_Deployment_Steps.csv
+# - One deployment job per Module Name, with different approvers per environment
+# - Uses ManualValidation@0 for module-specific approval notifications
+# - Python venv installs pandas/openpyxl/requests; script reads CSV (not Excel)
 
 trigger:
   branches:
@@ -8,6 +11,29 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
+
+parameters:
+- name: modules
+  type: object
+  default:
+    # Defaults below are derived from your sample Approvals sheets
+    # Findings
+    - name: Findings
+      poc1Approvers: [ 'Ashwini.Waghmode1@gilead.com', 'Rahul.Padole@gilead.com' ]
+      poc1Policy: ALL
+      poc1N: 2
+      contApprovers: [ 'Ashwini.Waghmode1@gilead.com' ]
+      contPolicy: ANY
+      contN: 1
+    # Safety
+    - name: Safety
+      poc1Approvers: [ 'Rahul.Padole@gilead.com' ]
+      poc1Policy: ANY
+      poc1N: 1
+      contApprovers: [ 'Ashwini.Waghmode1@gilead.com' ]
+      contPolicy: ALL
+      contN: 1
+    
 
 variables:
   pythonVersion: '3.10'
@@ -20,67 +46,196 @@ stages:
 - stage: build
   displayName: Build & Package
   jobs:
-    - job: build_job
-      displayName: Build artifact
-      steps:
-        - task: UsePythonVersion@0
-          inputs:
-            versionSpec: '$(pythonVersion)'
-            addToPath: true
-
-        - bash: |
-            set -euo pipefail
-            python -m venv .venv
-            source .venv/bin/activate
-            python -m pip install --upgrade pip
-            pip install requests pandas
-            mkdir -p .package/project_root
-            rsync -a --exclude='.venv' --exclude='.git' ./ ./.package/project_root/
-          displayName: 'Create venv, install deps, copy source to artifact'
-
-        - task: PublishPipelineArtifact@1
-          inputs:
-            targetPath: '.package'
-            artifact: '$(artifactName)'
-            publishLocation: 'pipeline'
-          displayName: 'Publish pipeline artifact'
+  - job: build_job
+    displayName: Build artifact
+    steps:
+    - checkout: self
+      path: s
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '$(pythonVersion)'
+        addToPath: true
+    - bash: |
+        set -euo pipefail
+        python -m venv .venv
+        source .venv/bin/activate
+        python -m pip install --upgrade pip
+        pip install --no-cache-dir requests pandas openpyxl
+        mkdir -p .package/project_root
+        rsync -a --exclude='.venv' --exclude='.git' ./ ./.package/project_root/
+      displayName: 'Create venv, install deps (incl. openpyxl), copy source to artifact'
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '.package'
+        artifact: '$(artifactName)'
+        publishLocation: 'pipeline'
+      displayName: 'Publish pipeline artifact'
 
 # ======================================
-# Stage 2: Deploy to POC1
+# Stage 2: Deploy to POC1 — per-module approvals
 # ======================================
 - stage: deploy_poc1
-  displayName: Deploy to POC1
+  displayName: Deploy to POC1 (per module approvals)
   dependsOn: build
   jobs:
-    - deployment: poc1_deploy
-      displayName: Execute script in POC1
-      environment: 'POC1'
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-              # Checkout with credentials (for pushing CSV/XLSX back)
+    - ${{ each m in parameters.modules }}:
+      - deployment: deploy_${{ replace(m.name, ' ', '_') }}_POC1
+        displayName: Deploy ${{ m.name }} (POC1)
+        environment: 'POC1'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
               - checkout: self
                 persistCredentials: true
-
-              # Download build artifact
+                path: s
               - download: current
                 artifact: '$(artifactName)'
-
               - task: UsePythonVersion@0
                 inputs:
                   versionSpec: '$(pythonVersion)'
                   addToPath: true
-
               - bash: |
                   set -euo pipefail
                   cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
                   python -m venv .venv
                   source .venv/bin/activate
                   python -m pip install --upgrade pip
-                  pip install requests pandas
-                displayName: 'Create venv & install dependencies (POC1)'
+                  pip install --no-cache-dir requests pandas openpyxl
+                  which python
+                  python --version
+                displayName: 'Create venv & install dependencies'
+              # Secure files used by the Python script
+              - task: DownloadSecureFile@1
+                name: authJson
+                inputs:
+                  secureFile: 'authentication.json'
+              - task: DownloadSecureFile@1
+                name: payloadJson
+                inputs:
+                  secureFile: 'payload.json'
+              - task: DownloadSecureFile@1
+                name: deploymentJson
+                inputs:
+                  secureFile: 'deployment.json'
+              - bash: |
+                  set -euo pipefail
+                  cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
+                  cp "$(authJson.secureFilePath)" authentication.json
+                  cp "$(payloadJson.secureFilePath)" payload.json
+                  cp "$(deploymentJson.secureFilePath)" deployment.json
+                  SRC_DIR="$(Build.SourcesDirectory)"
+                  DEST_DIR="Deployment_Automation"
+                  mkdir -p "$DEST_DIR"
+                  CANDIDATES=(
+                    "$SRC_DIR/Deployment_Automation/GVault_Deployment_Steps.csv"
+                    "$SRC_DIR/GVault_Deployment_Steps.csv"
+                  )
+                  FOUND=""
+                  for f in "${CANDIDATES[@]}"; do
+                    if [[ -f "$f" ]]; then FOUND="$f"; break; fi
+                  done
+                  if [[ -z "$FOUND" ]]; then
+                    echo "ERROR: GVault_Deployment_Steps.csv not found in repo."; exit 1
+                  fi
+                  cp -v "$FOUND" "$DEST_DIR/GVault_Deployment_Steps.csv"
+                displayName: 'Copy CSV to working directory'
+              # Filter CSV to the current module
+              - bash: |
+                  set -euo pipefail
+                  cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
+                  source .venv/bin/activate
+                  python - <<'PY'
+import pandas as pd
+from pathlib import Path
+module = r"${{ m.name }}"
+p = Path('Deployment_Automation/GVault_Deployment_Steps.csv')
+df = pd.read_csv(p)
+if 'Module Name' not in df.columns:
+    raise SystemExit("CSV must contain 'Module Name' column")
+filtered = df[df['Module Name'].astype(str).str.strip() == module]
+if filtered.empty:
+    raise SystemExit(f"No rows found for module '{module}' in CSV.")
+filtered.to_csv(p, index=False)
+print(f"Filtered CSV to module: {module}; rows: {len(filtered)}")
+PY
+                displayName: 'Filter CSV to this module only'
+              # Module-specific approval gate
+              - task: ManualValidation@0
+                displayName: "Approval: ${{ m.name }} (POC1)"
+                inputs:
+                  notifyUsers: |
+                    ${{ join(m.poc1Approvers, '\n') }}
+                  instructions: |
+                    Please approve deployment for module "${{ m.name }}" to POC1.
+                    Policy: ${{ m.poc1Policy }}${{ ' N=' }}${{ m.poc1N }} (informational; not enforced by task)
+                    The job reads CSV filtered to this module only.
+                  onTimeout: 'reject'
+                  timeout: '43200'
+              # Run the Python deployment script (CSV mode)
+              - bash: |
+                  set -euo pipefail
+                  cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
+                  source .venv/bin/activate
+                  echo "ENVIRONMENT=POC1"
+                  ENVIRONMENT=POC1 python Deployment_Automation/gvault_25gr2_deployment.py
+                displayName: 'Run deployment script for this module (POC1)'
+              # (Optional) Commit back CSV updates
+              - bash: |
+                  set -e
+                  SRC_DIR="$(Pipeline.Workspace)/$(artifactName)/project_root/Deployment_Automation"
+                  REPO_DIR="$(Build.SourcesDirectory)/Deployment_Automation"
+                  mkdir -p "$REPO_DIR"
+                  ls -la "$SRC_DIR" || true
+                  cp -f "$SRC_DIR"/*.csv "$REPO_DIR"/ 2>/dev/null || true
+                  cd "$(Build.SourcesDirectory)"
+                  git --version
+                  git config --global --add safe.directory "$(Build.SourcesDirectory)"
+                  git config user.name "azure-pipelines"
+                  git config user.email "azure-pipelines@local"
+                  git add Deployment_Automation/*.csv || true
+                  if ! git diff --cached --quiet; then
+                    git commit -m "Pipeline: update CSV after deploying module ${{ m.name }} (POC1)"
+                    git push origin HEAD:$(Build.SourceBranchName)
+                    echo "Pushed CSV updates for module ${{ m.name }}"
+                  else
+                    echo "No CSV changes to commit for module ${{ m.name }}."
+                  fi
+                displayName: 'Commit updated CSV (POC1)'
+                condition: succeededOrFailed()
 
+# ======================================
+# Stage 3: Deploy to CONTIGENCY — per-module approvals
+# ======================================
+- stage: deploy_contigency
+  displayName: Deploy to CONTIGENCY (per module approvals)
+  dependsOn: deploy_poc1
+  jobs:
+    - ${{ each m in parameters.modules }}:
+      - deployment: deploy_${{ replace(m.name, ' ', '_') }}_CONT
+        displayName: Deploy ${{ m.name }} (Contigency)
+        environment: 'Contigency'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+              - checkout: self
+                persistCredentials: true
+                path: s
+              - download: current
+                artifact: '$(artifactName)'
+              - task: UsePythonVersion@0
+                inputs:
+                  versionSpec: '$(pythonVersion)'
+                  addToPath: true
+              - bash: |
+                  set -euo pipefail
+                  cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
+                  python -m venv .venv
+                  source .venv/bin/activate
+                  python -m pip install --upgrade pip
+                  pip install --no-cache-dir requests pandas openpyxl
+                displayName: 'Create venv & install dependencies'
               # Secure files
               - task: DownloadSecureFile@1
                 name: authJson
@@ -94,285 +249,87 @@ stages:
                 name: deploymentJson
                 inputs:
                   secureFile: 'deployment.json'
-
-              # --- FIX 1: Robust copy from repository (XLSX or CSV; root or Deployment_Automation) ---
               - bash: |
-                  echo "Copying deployment input from repository..."
                   set -euo pipefail
                   cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
-
-                  # Place configs
                   cp "$(authJson.secureFilePath)" authentication.json
                   cp "$(payloadJson.secureFilePath)" payload.json
                   cp "$(deploymentJson.secureFilePath)" deployment.json
-
                   SRC_DIR="$(Build.SourcesDirectory)"
                   DEST_DIR="Deployment_Automation"
                   mkdir -p "$DEST_DIR"
-
                   CANDIDATES=(
-                    "$SRC_DIR/Deployment_Automation/GVault_Deployment_Steps.xlsx"
-                    "$SRC_DIR/GVault_Deployment_Steps.xlsx"
                     "$SRC_DIR/Deployment_Automation/GVault_Deployment_Steps.csv"
                     "$SRC_DIR/GVault_Deployment_Steps.csv"
                   )
-
                   FOUND=""
                   for f in "${CANDIDATES[@]}"; do
-                    if [[ -f "$f" ]]; then
-                      FOUND="$f"
-                      break
-                    fi
+                    if [[ -f "$f" ]]; then FOUND="$f"; break; fi
                   done
-
                   if [[ -z "$FOUND" ]]; then
-                    echo "ERROR: No GVault_Deployment_Steps.{xlsx|csv} found in repo."
-                    echo "Repo listing:"
-                    ls -la "$SRC_DIR" || true
-                    ls -la "$SRC_DIR/Deployment_Automation" || true
-                    exit 1
+                    echo "ERROR: GVault_Deployment_Steps.csv not found in repo."; exit 1
                   fi
-
-                  ext="${FOUND##*.}"
-                  cp -v "$FOUND" "$DEST_DIR/GVault_Deployment_Steps.$ext"
-                  echo "Copied: $FOUND -> $DEST_DIR/GVault_Deployment_Steps.$ext"
-                displayName: 'Copy deployment input from repository (robust)'
-                # Based on earlier step intent but extended to handle Excel and both locations. [1](https://gileadconnect-my.sharepoint.com/personal/ashwini_waghmode1_gilead_com/Documents/Microsoft%20Copilot%20Chat%20Files/azure-pipelines.yml)
-
-              # Run the Python deployment script (prefers Excel, falls back to CSV)
+                  cp -v "$FOUND" "$DEST_DIR/GVault_Deployment_Steps.csv"
+                displayName: 'Copy CSV to working directory'
+              # Filter CSV to the current module
               - bash: |
                   set -euo pipefail
                   cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
                   source .venv/bin/activate
-                  echo "ENVIRONMENT=POC1"
-                  ENVIRONMENT=POC1 python Deployment_Automation/gvault_25gr2_deployment_all_sheets_approvers.py
-                displayName: 'Run deployment script (POC1)'
-                # The updated script prefers XLSX and falls back to CSV. [2](blob:https://m365.cloud.microsoft/34d91353-03ab-4eda-8761-09318ccaf9d3)
-
-              # --- FIX 2: Sync back env CSV if present; else fallback to Excel workbook ---
-              - bash: |
-                  set -euo pipefail
-                  ENV_NAME="POC1"
-                  SRC_DIR="$(Pipeline.Workspace)/$(artifactName)/project_root/Deployment_Automation"
-                  REPO_DIR="$(Build.SourcesDirectory)/Deployment_Automation"
-                  mkdir -p "$REPO_DIR"
-
-                  # Prefer env-named CSV that the script produces in CSV mode
-                  LATEST_CSV="$(ls -1t "$SRC_DIR/GVault_Deployment_Steps_${ENV_NAME}_"*.csv 2>/dev/null | head -n 1 || true)"
-
-                  if [[ -n "$LATEST_CSV" ]]; then
-                    cp -f "$LATEST_CSV" "$REPO_DIR/GVault_Deployment_Steps_${ENV_NAME}.csv"
-                    # (optional) update common name as well
-                    cp -f "$REPO_DIR/GVault_Deployment_Steps_${ENV_NAME}.csv" "$REPO_DIR/GVault_Deployment_Steps.csv" || true
-                    echo "Synced CSV: ${LATEST_CSV}"
-                  else
-                    # Excel mode: persist the workbook updated in-place by the script
-                    if [[ -f "$SRC_DIR/GVault_Deployment_Steps.xlsx" ]]; then
-                      cp -f "$SRC_DIR/GVault_Deployment_Steps.xlsx" "$REPO_DIR/GVault_Deployment_Steps.xlsx"
-                      echo "Synced Excel workbook: $SRC_DIR/GVault_Deployment_Steps.xlsx"
-                    else
-                      echo "ERROR: Neither env CSV nor Excel found in $SRC_DIR"
-                      ls -la "$SRC_DIR" || true
-                      exit 1
-                    fi
-                  fi
-                displayName: 'Sync updated deployment file(s) to repo checkout (POC1)'
-
-              # Preview (optional)
-              - bash: |
-                  set -euo pipefail
-                  echo "=== Repo checkout listing after sync (POC1) ==="
-                  ls -la "$(Build.SourcesDirectory)/Deployment_Automation"
-                  # Show head of CSV if present
-                  if [[ -f "$(Build.SourcesDirectory)/Deployment_Automation/GVault_Deployment_Steps_POC1.csv" ]]; then
-                    echo "Top of env CSV:"
-                    head -n 25 "$(Build.SourcesDirectory)/Deployment_Automation/GVault_Deployment_Steps_POC1.csv" || true
-                  fi
-                displayName: 'Show updated content (POC1)'
-                condition: succeededOrFailed()
-
-              # Commit & push (add XLSX and CSV so either mode is versioned)
-              - bash: |
-                  set -e
-                  cd "$(Build.SourcesDirectory)"
-                  git --version
-                  git config --global --add safe.directory "$(Build.SourcesDirectory)"
-                  git config user.name "azure-pipelines"
-                  git config user.email "azure-pipelines@local"
-
-                  git add Deployment_Automation/GVault_Deployment_Steps_POC1.csv || true
-                  git add Deployment_Automation/GVault_Deployment_Steps.csv || true
-                  git add Deployment_Automation/GVault_Deployment_Steps.xlsx || true
-
-                  if ! git diff --cached --quiet; then
-                    git commit -m "Pipeline: update deployment steps (POC1)"
-                    git push origin HEAD:$(Build.SourceBranchName)
-                    echo "Pushed changes to $(Build.SourceBranchName)"
-                  else
-                    echo "No changes to commit."
-                  fi
-                displayName: 'Commit & push updates (POC1)'
-                condition: succeededOrFailed()
-                env:
-                  SYSTEM_ACCESSTOKEN: $(System.AccessToken)
-
-# ======================================
-# Stage 3: Deploy to CONTIGENCY
-# ======================================
-- stage: deploy_Contigency
-  displayName: Deploy to CONTIGENCY
-  dependsOn: build
-  jobs:
-    - deployment: Contigency_deploy
-      displayName: Execute script in CONTIGENCY
-      environment: 'Contigency'
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-              - checkout: self
-                fetchDepth: 0
-                persistCredentials: true
-
-              - download: current
-                artifact: '$(artifactName)'
-
-              - task: UsePythonVersion@0
+                  python - <<'PY'
+import pandas as pd
+from pathlib import Path
+module = r"${{ m.name }}"
+p = Path('Deployment_Automation/GVault_Deployment_Steps.csv')
+df = pd.read_csv(p)
+if 'Module Name' not in df.columns:
+    raise SystemExit("CSV must contain 'Module Name' column")
+filtered = df[df['Module Name'].astype(str).str.strip() == module]
+if filtered.empty:
+    raise SystemExit(f"No rows found for module '{module}' in CSV.")
+filtered.to_csv(p, index=False)
+print(f"Filtered CSV to module: {module}; rows: {len(filtered)}")
+PY
+                displayName: 'Filter CSV to this module only'
+              # Module-specific approval gate
+              - task: ManualValidation@0
+                displayName: "Approval: ${{ m.name }} (Contigency)"
                 inputs:
-                  versionSpec: '$(pythonVersion)'
-                  addToPath: true
-
-              - bash: |
-                  set -euo pipefail
-                  cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
-                  python -m venv .venv
-                  source .venv/bin/activate
-                  python -m pip install --upgrade pip
-                  pip install requests pandas
-                displayName: 'Create venv & install dependencies (CONTIGENCY)'
-
-              - task: DownloadSecureFile@1
-                name: authJson
-                inputs:
-                  secureFile: 'authentication.json'
-              - task: DownloadSecureFile@1
-                name: payloadJson
-                inputs:
-                  secureFile: 'payload.json'
-              - task: DownloadSecureFile@1
-                name: deploymentJson
-                inputs:
-                  secureFile: 'deployment.json'
-
-              # --- FIX 1 again for Contigency stage ---
-              - bash: |
-                  echo "Copying deployment input from repository..."
-                  set -euo pipefail
-                  cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
-
-                  cp "$(authJson.secureFilePath)" authentication.json
-                  cp "$(payloadJson.secureFilePath)" payload.json
-                  cp "$(deploymentJson.secureFilePath)" deployment.json
-
-                  SRC_DIR="$(Build.SourcesDirectory)"
-                  DEST_DIR="Deployment_Automation"
-                  mkdir -p "$DEST_DIR"
-
-                  CANDIDATES=(
-                    "$SRC_DIR/Deployment_Automation/GVault_Deployment_Steps.xlsx"
-                    "$SRC_DIR/GVault_Deployment_Steps.xlsx"
-                    "$SRC_DIR/Deployment_Automation/GVault_Deployment_Steps.csv"
-                    "$SRC_DIR/GVault_Deployment_Steps.csv"
-                  )
-
-                  FOUND=""
-                  for f in "${CANDIDATES[@]}"; do
-                    if [[ -f "$f" ]]; then
-                      FOUND="$f"
-                      break
-                    fi
-                  done
-
-                  if [[ -z "$FOUND" ]]; then
-                    echo "ERROR: No GVault_Deployment_Steps.{xlsx|csv} found in repo."
-                    echo "Repo listing:"
-                    ls -la "$SRC_DIR" || true
-                    ls -la "$SRC_DIR/Deployment_Automation" || true
-                    exit 1
-                  fi
-
-                  ext="${FOUND##*.}"
-                  cp -v "$FOUND" "$DEST_DIR/GVault_Deployment_Steps.$ext"
-                  echo "Copied: $FOUND -> $DEST_DIR/GVault_Deployment_Steps.$ext"
-                displayName: 'Copy deployment input from repository (robust - Contigency)'
-                # Mirrors the POC1 copy step with both extensions/locations. [1](https://gileadconnect-my.sharepoint.com/personal/ashwini_waghmode1_gilead_com/Documents/Microsoft%20Copilot%20Chat%20Files/azure-pipelines.yml)
-
+                  notifyUsers: |
+                    ${{ join(m.contApprovers, '\n') }}
+                  instructions: |
+                    Please approve deployment for module "${{ m.name }}" to Contigency.
+                    Policy: ${{ m.contPolicy }}${{ ' N=' }}${{ m.contN }} (informational; not enforced by task)
+                    The job reads CSV filtered to this module only.
+                  onTimeout: 'reject'
+                  timeout: '43200'
+              # Run the Python deployment script (CSV mode)
               - bash: |
                   set -euo pipefail
                   cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
                   source .venv/bin/activate
                   echo "ENVIRONMENT=Contigency"
-                  ENVIRONMENT=Contigency python Deployment_Automation/gvault_25gr2_deployment_all_sheets_approvers.py
-                displayName: 'Run deployment script (CONTIGENCY)'
-                # Script prefers XLSX, falls back to CSV. [2](blob:https://m365.cloud.microsoft/34d91353-03ab-4eda-8761-09318ccaf9d3)
-
-              # --- FIX 2 again for Contigency stage ---
+                  ENVIRONMENT=Contigency python Deployment_Automation/gvault_25gr2_deployment.py
+                displayName: 'Run deployment script for this module (Contigency)'
               - bash: |
-                  set -euo pipefail
-                  ENV_NAME="Contigency"
+                  set -e
                   SRC_DIR="$(Pipeline.Workspace)/$(artifactName)/project_root/Deployment_Automation"
                   REPO_DIR="$(Build.SourcesDirectory)/Deployment_Automation"
                   mkdir -p "$REPO_DIR"
-
-                  LATEST_CSV="$(ls -1t "$SRC_DIR/GVault_Deployment_Steps_${ENV_NAME}_"*.csv 2>/dev/null | head -n 1 || true)"
-
-                  if [[ -n "$LATEST_CSV" ]]; then
-                    cp -f "$LATEST_CSV" "$REPO_DIR/GVault_Deployment_Steps_${ENV_NAME}.csv"
-                    cp -f "$REPO_DIR/GVault_Deployment_Steps_${ENV_NAME}.csv" "$REPO_DIR/GVault_Deployment_Steps.csv" || true
-                    echo "Synced CSV: ${LATEST_CSV}"
-                  else
-                    if [[ -f "$SRC_DIR/GVault_Deployment_Steps.xlsx" ]]; then
-                      cp -f "$SRC_DIR/GVault_Deployment_Steps.xlsx" "$REPO_DIR/GVault_Deployment_Steps.xlsx"
-                      echo "Synced Excel workbook: $SRC_DIR/GVault_Deployment_Steps.xlsx"
-                    else
-                      echo "ERROR: Neither env CSV nor Excel found in $SRC_DIR"
-                      ls -la "$SRC_DIR" || true
-                      exit 1
-                    fi
-                  fi
-                displayName: 'Sync updated deployment file(s) to repo checkout (CONTIGENCY)'
-
-              - bash: |
-                  set -euo pipefail
-                  echo "=== Repo checkout listing after sync (CONTIGENCY) ==="
-                  ls -la "$(Build.SourcesDirectory)/Deployment_Automation"
-                  if [[ -f "$(Build.SourcesDirectory)/Deployment_Automation/GVault_Deployment_Steps_Contigency.csv" ]]; then
-                    echo "Top of env CSV:"
-                    head -n 25 "$(Build.SourcesDirectory)/Deployment_Automation/GVault_Deployment_Steps_Contigency.csv" || true
-                  fi
-                displayName: 'Show updated content (CONTIGENCY)'
-                condition: succeededOrFailed()
-
-              - bash: |
-                  set -e
+                  ls -la "$SRC_DIR" || true
+                  cp -f "$SRC_DIR"/*.csv "$REPO_DIR"/ 2>/dev/null || true
                   cd "$(Build.SourcesDirectory)"
                   git --version
                   git config --global --add safe.directory "$(Build.SourcesDirectory)"
                   git config user.name "azure-pipelines"
                   git config user.email "azure-pipelines@local"
-
-                  git add Deployment_Automation/GVault_Deployment_Steps_Contigency.csv || true
-                  git add Deployment_Automation/GVault_Deployment_Steps.csv || true
-                  git add Deployment_Automation/GVault_Deployment_Steps.xlsx || true
-
+                  git add Deployment_Automation/*.csv || true
                   if ! git diff --cached --quiet; then
-                    git commit -m "Pipeline: update deployment steps (Contigency)"
+                    git commit -m "Pipeline: update CSV after deploying module ${{ m.name }} (Contigency)"
                     git push origin HEAD:$(Build.SourceBranchName)
-                    echo "Pushed changes to $(Build.SourceBranchName)"
+                    echo "Pushed CSV updates for module ${{ m.name }} (Contigency)"
                   else
-                    echo "No changes to commit."
+                    echo "No CSV changes to commit for module ${{ m.name }} (Contigency)."
                   fi
-                displayName: 'Commit & push updates (CONTIGENCY)'
+                displayName: 'Commit updated CSV (Contigency)'
                 condition: succeededOrFailed()
-                env:
-                  SYSTEM_ACCESSTOKEN: $(System.AccessToken)
