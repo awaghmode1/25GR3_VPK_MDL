@@ -23,6 +23,10 @@ stages:
     - job: build_job
       displayName: Build artifact
       steps:
+        # (Optional) shorter checkout path to avoid long paths downstream
+        - checkout: self
+          path: s
+
         - task: UsePythonVersion@0
           inputs:
             versionSpec: '$(pythonVersion)'
@@ -33,10 +37,11 @@ stages:
             python -m venv .venv
             source .venv/bin/activate
             python -m pip install --upgrade pip
-            pip install requests pandas
+            # >>> OPENPYXL FIX (build) <<<
+            pip install requests pandas openpyxl
             mkdir -p .package/project_root
             rsync -a --exclude='.venv' --exclude='.git' ./ ./.package/project_root/
-          displayName: 'Create venv, install deps, copy source to artifact'
+          displayName: 'Create venv, install deps (incl. openpyxl), copy source to artifact'
 
         - task: PublishPipelineArtifact@1
           inputs:
@@ -59,9 +64,10 @@ stages:
         runOnce:
           deploy:
             steps:
-              # Checkout with credentials (for pushing CSV/XLSX back)
+              # Short checkout path to reduce path length risk
               - checkout: self
                 persistCredentials: true
+                path: s
 
               # Download build artifact
               - download: current
@@ -78,7 +84,8 @@ stages:
                   python -m venv .venv
                   source .venv/bin/activate
                   python -m pip install --upgrade pip
-                  pip install requests pandas
+                  # >>> OPENPYXL FIX (POC1) <<<
+                  pip install requests pandas openpyxl
                 displayName: 'Create venv & install dependencies (POC1)'
 
               # Secure files
@@ -100,23 +107,19 @@ stages:
                   echo "Copying deployment input from repository..."
                   set -euo pipefail
                   cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
-
                   # Place configs
                   cp "$(authJson.secureFilePath)" authentication.json
                   cp "$(payloadJson.secureFilePath)" payload.json
                   cp "$(deploymentJson.secureFilePath)" deployment.json
-
                   SRC_DIR="$(Build.SourcesDirectory)"
                   DEST_DIR="Deployment_Automation"
                   mkdir -p "$DEST_DIR"
-
                   CANDIDATES=(
                     "$SRC_DIR/Deployment_Automation/GVault_Deployment_Steps.xlsx"
                     "$SRC_DIR/GVault_Deployment_Steps.xlsx"
                     "$SRC_DIR/Deployment_Automation/GVault_Deployment_Steps.csv"
                     "$SRC_DIR/GVault_Deployment_Steps.csv"
                   )
-
                   FOUND=""
                   for f in "${CANDIDATES[@]}"; do
                     if [[ -f "$f" ]]; then
@@ -124,7 +127,6 @@ stages:
                       break
                     fi
                   done
-
                   if [[ -z "$FOUND" ]]; then
                     echo "ERROR: No GVault_Deployment_Steps.{xlsx|csv} found in repo."
                     echo "Repo listing:"
@@ -132,12 +134,10 @@ stages:
                     ls -la "$SRC_DIR/Deployment_Automation" || true
                     exit 1
                   fi
-
                   ext="${FOUND##*.}"
                   cp -v "$FOUND" "$DEST_DIR/GVault_Deployment_Steps.$ext"
                   echo "Copied: $FOUND -> $DEST_DIR/GVault_Deployment_Steps.$ext"
                 displayName: 'Copy deployment input from repository (robust)'
-                # Based on earlier step intent but extended to handle Excel and both locations. [1](https://gileadconnect-my.sharepoint.com/personal/ashwini_waghmode1_gilead_com/Documents/Microsoft%20Copilot%20Chat%20Files/azure-pipelines.yml)
 
               # Run the Python deployment script (prefers Excel, falls back to CSV)
               - bash: |
@@ -147,7 +147,6 @@ stages:
                   echo "ENVIRONMENT=POC1"
                   ENVIRONMENT=POC1 python Deployment_Automation/gvault_25gr2_deployment_all_sheets_approvers.py
                 displayName: 'Run deployment script (POC1)'
-                # The updated script prefers XLSX and falls back to CSV. [2](blob:https://m365.cloud.microsoft/34d91353-03ab-4eda-8761-09318ccaf9d3)
 
               # --- FIX 2: Sync back env CSV if present; else fallback to Excel workbook ---
               - bash: |
@@ -156,10 +155,8 @@ stages:
                   SRC_DIR="$(Pipeline.Workspace)/$(artifactName)/project_root/Deployment_Automation"
                   REPO_DIR="$(Build.SourcesDirectory)/Deployment_Automation"
                   mkdir -p "$REPO_DIR"
-
                   # Prefer env-named CSV that the script produces in CSV mode
                   LATEST_CSV="$(ls -1t "$SRC_DIR/GVault_Deployment_Steps_${ENV_NAME}_"*.csv 2>/dev/null | head -n 1 || true)"
-
                   if [[ -n "$LATEST_CSV" ]]; then
                     cp -f "$LATEST_CSV" "$REPO_DIR/GVault_Deployment_Steps_${ENV_NAME}.csv"
                     # (optional) update common name as well
@@ -189,7 +186,7 @@ stages:
                     head -n 25 "$(Build.SourcesDirectory)/Deployment_Automation/GVault_Deployment_Steps_POC1.csv" || true
                   fi
                 displayName: 'Show updated content (POC1)'
-                condition: succeededOrFailed()
+              condition: succeededOrFailed()
 
               # Commit & push (add XLSX and CSV so either mode is versioned)
               - bash: |
@@ -199,11 +196,9 @@ stages:
                   git config --global --add safe.directory "$(Build.SourcesDirectory)"
                   git config user.name "azure-pipelines"
                   git config user.email "azure-pipelines@local"
-
                   git add Deployment_Automation/GVault_Deployment_Steps_POC1.csv || true
                   git add Deployment_Automation/GVault_Deployment_Steps.csv || true
                   git add Deployment_Automation/GVault_Deployment_Steps.xlsx || true
-
                   if ! git diff --cached --quiet; then
                     git commit -m "Pipeline: update deployment steps (POC1)"
                     git push origin HEAD:$(Build.SourceBranchName)
@@ -212,9 +207,9 @@ stages:
                     echo "No changes to commit."
                   fi
                 displayName: 'Commit & push updates (POC1)'
-                condition: succeededOrFailed()
-                env:
-                  SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+              condition: succeededOrFailed()
+              env:
+                SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
 # ======================================
 # Stage 3: Deploy to CONTIGENCY
@@ -233,6 +228,7 @@ stages:
               - checkout: self
                 fetchDepth: 0
                 persistCredentials: true
+                path: s
 
               - download: current
                 artifact: '$(artifactName)'
@@ -248,7 +244,8 @@ stages:
                   python -m venv .venv
                   source .venv/bin/activate
                   python -m pip install --upgrade pip
-                  pip install requests pandas
+                  # >>> OPENPYXL FIX (CONTIGENCY) <<<
+                  pip install requests pandas openpyxl
                 displayName: 'Create venv & install dependencies (CONTIGENCY)'
 
               - task: DownloadSecureFile@1
@@ -269,22 +266,18 @@ stages:
                   echo "Copying deployment input from repository..."
                   set -euo pipefail
                   cd "$(Pipeline.Workspace)/$(artifactName)/project_root"
-
                   cp "$(authJson.secureFilePath)" authentication.json
                   cp "$(payloadJson.secureFilePath)" payload.json
                   cp "$(deploymentJson.secureFilePath)" deployment.json
-
                   SRC_DIR="$(Build.SourcesDirectory)"
                   DEST_DIR="Deployment_Automation"
                   mkdir -p "$DEST_DIR"
-
                   CANDIDATES=(
                     "$SRC_DIR/Deployment_Automation/GVault_Deployment_Steps.xlsx"
                     "$SRC_DIR/GVault_Deployment_Steps.xlsx"
                     "$SRC_DIR/Deployment_Automation/GVault_Deployment_Steps.csv"
                     "$SRC_DIR/GVault_Deployment_Steps.csv"
                   )
-
                   FOUND=""
                   for f in "${CANDIDATES[@]}"; do
                     if [[ -f "$f" ]]; then
@@ -292,7 +285,6 @@ stages:
                       break
                     fi
                   done
-
                   if [[ -z "$FOUND" ]]; then
                     echo "ERROR: No GVault_Deployment_Steps.{xlsx|csv} found in repo."
                     echo "Repo listing:"
@@ -300,12 +292,10 @@ stages:
                     ls -la "$SRC_DIR/Deployment_Automation" || true
                     exit 1
                   fi
-
                   ext="${FOUND##*.}"
                   cp -v "$FOUND" "$DEST_DIR/GVault_Deployment_Steps.$ext"
                   echo "Copied: $FOUND -> $DEST_DIR/GVault_Deployment_Steps.$ext"
                 displayName: 'Copy deployment input from repository (robust - Contigency)'
-                # Mirrors the POC1 copy step with both extensions/locations. [1](https://gileadconnect-my.sharepoint.com/personal/ashwini_waghmode1_gilead_com/Documents/Microsoft%20Copilot%20Chat%20Files/azure-pipelines.yml)
 
               - bash: |
                   set -euo pipefail
@@ -314,7 +304,6 @@ stages:
                   echo "ENVIRONMENT=Contigency"
                   ENVIRONMENT=Contigency python Deployment_Automation/gvault_25gr2_deployment_all_sheets_approvers.py
                 displayName: 'Run deployment script (CONTIGENCY)'
-                # Script prefers XLSX, falls back to CSV. [2](blob:https://m365.cloud.microsoft/34d91353-03ab-4eda-8761-09318ccaf9d3)
 
               # --- FIX 2 again for Contigency stage ---
               - bash: |
@@ -323,9 +312,7 @@ stages:
                   SRC_DIR="$(Pipeline.Workspace)/$(artifactName)/project_root/Deployment_Automation"
                   REPO_DIR="$(Build.SourcesDirectory)/Deployment_Automation"
                   mkdir -p "$REPO_DIR"
-
                   LATEST_CSV="$(ls -1t "$SRC_DIR/GVault_Deployment_Steps_${ENV_NAME}_"*.csv 2>/dev/null | head -n 1 || true)"
-
                   if [[ -n "$LATEST_CSV" ]]; then
                     cp -f "$LATEST_CSV" "$REPO_DIR/GVault_Deployment_Steps_${ENV_NAME}.csv"
                     cp -f "$REPO_DIR/GVault_Deployment_Steps_${ENV_NAME}.csv" "$REPO_DIR/GVault_Deployment_Steps.csv" || true
@@ -351,7 +338,7 @@ stages:
                     head -n 25 "$(Build.SourcesDirectory)/Deployment_Automation/GVault_Deployment_Steps_Contigency.csv" || true
                   fi
                 displayName: 'Show updated content (CONTIGENCY)'
-                condition: succeededOrFailed()
+              condition: succeededOrFailed()
 
               - bash: |
                   set -e
@@ -360,11 +347,9 @@ stages:
                   git config --global --add safe.directory "$(Build.SourcesDirectory)"
                   git config user.name "azure-pipelines"
                   git config user.email "azure-pipelines@local"
-
                   git add Deployment_Automation/GVault_Deployment_Steps_Contigency.csv || true
                   git add Deployment_Automation/GVault_Deployment_Steps.csv || true
                   git add Deployment_Automation/GVault_Deployment_Steps.xlsx || true
-
                   if ! git diff --cached --quiet; then
                     git commit -m "Pipeline: update deployment steps (Contigency)"
                     git push origin HEAD:$(Build.SourceBranchName)
@@ -373,6 +358,6 @@ stages:
                     echo "No changes to commit."
                   fi
                 displayName: 'Commit & push updates (CONTIGENCY)'
-                condition: succeededOrFailed()
-                env:
-                  SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+              condition: succeededOrFailed()
+              env:
+                SYSTEM_ACCESSTOKEN: $(System.AccessToken)
