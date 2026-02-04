@@ -22,7 +22,6 @@ import time
 import base64
 import logging
 import warnings
-import response
 from pathlib import Path
 from datetime import datetime
 from logging.handlers import TimedRotatingFileHandler
@@ -32,6 +31,11 @@ import pandas as pd
 
 warnings.filterwarnings("ignore")
 
+
+# Module-level mutable log to collect API responses (avoid globals inside functions)
+response = []
+# File form-data placeholder used by some API helpers
+files = None
 # -----------------------------------------------------------------------------
 # Resolve input file according to sample CSV + pipeline behavior
 # -----------------------------------------------------------------------------
@@ -585,8 +589,7 @@ def process_df(df_local: pd.DataFrame) -> pd.DataFrame:
                 with open(vpk_path, "rb") as vpk_file:
                     global files
                     files = {'file': vpk_file}
-                    global response
-                    response = []
+                    response.clear()
                     try:
                         package_id = row.get('Vault Package ID')
                         if import_deployment_settings is True:
@@ -624,8 +627,7 @@ def process_df(df_local: pd.DataFrame) -> pd.DataFrame:
         elif row.get('File Type') == 'MDL' and mdl_deployment_type is True:
             mdl_filename = (row.get('File Name'))
             try:
-                global response
-                response = []
+                response.clear()
                 mdl_status, mdl_log = excute_mdl(authurl, mdl_headers, mdl_filename)
                 df_local.loc[df_local['File Name'] == mdl_filename, 'Import Start Time'] = 'N/A'
                 df_local.loc[df_local['File Name'] == mdl_filename, 'Import End Time'] = 'N/A'
@@ -657,8 +659,7 @@ def process_df(df_local: pd.DataFrame) -> pd.DataFrame:
                 payload_dict = {key: prase_value(row.get(key, '')) for key in fields}
                 payload_dict['file'] = f"{ftp_folder}/{loader_file_name}"
                 payload = [payload_dict]
-                global response
-                response = []
+                response.clear()
                 file_staging(loader_file, payload, loader_file_name)
                 mark_result(loader_file_name, success=True, deploy_log='Loader executed')
                 response_text = "\n".join(response)
