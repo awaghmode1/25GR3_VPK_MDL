@@ -1,19 +1,20 @@
+
 {
-    "env" : "POC",
+  "env": "POC1",
 
-    "POC.baseurl" : "https://sb-gilead-gvault-poc1.veevavault.com/api/v23.3",
-    "POC.authurl" : "https://sb-gilead-gvault-poc1.veevavault.com/api",
-    "POC.username" : "pradnyavantg@sb-gilead.com",
-    "POC.password" : "QEFiY2QxNTEx",
-    "POC.ftp_hostname" : "vlt-22-ftp.veevavault.com",
-    "POC.ftp_username" : "sb-gilead-gvault-contingency.veevavault.com+pradnyavantg@sb-gilead.com",
-    "POC.ftp_password" : "QEFiY2QxNTEx",
+  "POC1.baseurl": "https://sb-gilead-gvault-poc1.veevavault.com/api/v23.3",
+  "POC1.authurl": "https://sb-gilead-gvault-poc1.veevavault.com/api",
+  "POC1.username": "pradnyavantg@sb-gilead.com",
+  "POC1.password": "QEFiY2QxNTEx",
+  "POC1.ftp_hostname": "vlt-22-ftp.veevavault.com",
+  "POC1.ftp_username": "sb-gilead-gvault-contingency.veevavault.com+pradnyavantg@sb-gilead.com",
+  "POC1.ftp_password": "QEFiY2QxNTEx",
 
-	"DEV.baseurl" : "https://sb-gilead-gvault-dev.veevavault.com/api/v23.3",
-    "DEV.authurl" : "https://sb-gilead-gvault-dev.veevavault.com/api",
-    "DEV.username" : "pradnyavantg@sb-gilead.com",
-    "DEV.password" : "QEFiY2QxNTEx",
-    "DEV.ftp_hostname" : "vlt-22-ftp.veevavault.com",
-    "DEV.ftp_username" : "sb-gilead-gvault-dev.veevavault.com+pradnyavantg@sb-gilead.com",
-    "DEV.ftp_password" : "QEFiY2QxNTEx",
+  "Contigency.baseurl": "https://sb-gilead-gvault-contingency.veevavault.com/api/v23.3",
+  "Contigency.authurl": "https://sb-gilead-gvault-contingency.veevavault.com/api",
+  "Contigency.username": "pradnyavantg@sb-gilead.com",
+  "Contigency.password": "QEFiY2QxNTEx",
+  "Contigency.ftp_hostname": "vlt-22-ftp.veevavault.com",
+  "Contigency.ftp_username": "sb-gilead-gvault-contingency.veevavault.com+pradnyavantg@sb-gilead.com",
+  "Contigency.ftp_password": "QEFiY2QxNTEx"
 }
