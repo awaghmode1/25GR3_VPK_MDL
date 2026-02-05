@@ -1,0 +1,121 @@
+# Parent pipeline: Manager approval => trigger two module pipelines (Findings & Safety)
+
+trigger: 25GR3
+pr: none
+
+# Helpful defaults
+variables:
+  Org: gilead                  # e.g., gilead
+  Project: Veeva Vault          # e.g., DevOps-Automation
+  ENVIRONMENT: POC1                   # or pass at queue time; also usable by children
+  # After you create child pipelines, fill their numeric IDs here:
+  FINDINGS_PIPELINE_ID: '123'         # azure devops pipeline id for Findings
+  SAFETY_PIPELINE_ID: '456'           # azure devops pipeline id for Safety
+
+stages:
+# ---- Stage 1: Manager Approval gate ----
+- stage: Manager_Approval
+  displayName: "Manager Approval (Global)"
+  jobs:
+  - job: WaitForApproval
+    displayName: "Manual validation by Manager"
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: ManualValidation@0
+      displayName: "Manager must approve this release"
+      inputs:
+        instructions: |
+          Please review the scope and approve the release for environment $(ENVIRONMENT).
+          Manager: Ashwini Waghmode.
+        notifyUsers: |
+          Ashwini.Waghmode1@gilead.com
+        onTimeout: 'reject'
+        timeout: '0'   # 0 = never timeout; set e.g. '2h' if you prefer
+
+# ---- Stage 2: Trigger module pipelines (in parallel) ----
+- stage: Trigger_Modules
+  displayName: "Trigger Module Pipelines"
+  dependsOn: Manager_Approval
+  condition: succeeded()
+  jobs:
+
+  # --- Trigger Findings module ---
+  - job: Trigger_Findings
+    displayName: "Trigger: Module – Findings"
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - checkout: self
+      persistCredentials: true   # exposes $(System.AccessToken) to scripts
+
+    - script: |
+        set -euo pipefail
+        echo "Triggering Findings pipeline via REST API..."
+        echo "Org=$(Org) Project=$(Project) PipelineID=$(FINDINGS_PIPELINE_ID) ENVIRONMENT=$(ENVIRONMENT)"
+
+        API="https://dev.azure.com/$(Org)/$(Project)/_apis/pipelines/$(FINDINGS_PIPELINE_ID)/runs?api-version=7.0"
+        # Start run; pass variables to child
+        data=$(cat <<JSON
+        {
+          "resources": {
+            "repositories": {
+              "self": { "refName": "$(Build.SourceBranch)" }
+            }
+          },
+          "variables": {
+            "ENVIRONMENT": { "value": "$(ENVIRONMENT)" }
+          }
+        }
+        JSON
+        )
+        echo "$data" | jq '.' || true
+
+        # Use OAuth token (System.AccessToken). Ensure 'Allow scripts to access OAuth token' is enabled.
+        run=$(curl -sS -f \
+              -H "Authorization: Bearer $(System.AccessToken)" \
+              -H "Content-Type: application/json" \
+              -d "$data" \
+              "$API")
+
+        echo "Triggered Findings: $run"
+      displayName: "Start Findings pipeline"
+
+  # --- Trigger Safety module ---
+  - job: Trigger_Safety
+    displayName: "Trigger: Module – Safety"
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - checkout: self
+      persistCredentials: true
+
+    - script: |
+        set -euo pipefail
+        echo "Triggering Safety pipeline via REST API..."
+        echo "Org=$(Org) Project=$(Project) PipelineID=$(SAFETY_PIPELINE_ID) ENVIRONMENT=$(ENVIRONMENT)"
+
+        API="https://dev.azure.com/$(Org)/$(Project)/_apis/pipelines/$(SAFETY_PIPELINE_ID)/runs?api-version=7.0"
+        data=$(cat <<JSON
+        {
+          "resources": {
+            "repositories": {
+              "self": { "refName": "$(Build.SourceBranch)" }
+            }
+          },
+          "variables": {
+            "ENVIRONMENT": { "value": "$(ENVIRONMENT)" }
+          }
+        }
+        JSON
+        )
+        echo "$data" | jq '.' || true
+
+        run=$(curl -sS -f \
+              -H "Authorization: Bearer $(System.AccessToken)" \
+              -H "Content-Type: application/json" \
+              -d "$data" \
+              "$API")
+
+        echo "Triggered Safety: $run"
+      displayName: "Start Safety pipeline"
