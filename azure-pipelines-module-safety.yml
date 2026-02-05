@@ -1,0 +1,88 @@
+# Module pipeline: Findings
+# - Triggered by parent (REST API call), or queue manually for testing
+# - Has its own module approval gate
+# - Calls the deployment script after approval
+
+trigger: 25GR3
+pr: none
+
+variables:
+  MODULE_NAME: "Findings"
+
+stages:
+# ---- Stage 1: Module approval (Findings owners) ----
+- stage: Findings_Approval
+  displayName: "Approval – Module: $(MODULE_NAME)"
+  jobs:
+  - job: WaitForModuleApproval
+    displayName: "Manual validation by module approvers"
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: ManualValidation@0
+      displayName: "Module approvers must approve: $(MODULE_NAME)"
+      inputs:
+        instructions: |
+          Please approve the deployment for module '$(MODULE_NAME)' in environment '$(ENVIRONMENT)'.
+          Update notifyUsers to module owners' emails.
+        notifyUsers: |
+          ashwini.waghmode1@gilead.com
+          
+        onTimeout: 'reject'
+        timeout: '0'
+
+# ---- Stage 2: Deploy the module after approval ----
+- stage: Findings_Deploy
+  displayName: "Deploy – Module: $(MODULE_NAME)"
+  dependsOn: Findings_Approval
+  condition: succeeded()
+  jobs:
+  - job: DeployFindings
+    displayName: "Run deployment for $(MODULE_NAME)"
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - checkout: self
+      persistCredentials: true
+
+    # Optionally ensure python is present
+    - bash: |
+        set -e
+        python3 --version || python --version
+      displayName: "Check Python"
+
+    # If legacy filename is still referenced elsewhere, overwrite it with the fixed one
+    - bash: |
+        set -euo pipefail
+        cd "$(System.DefaultWorkingDirectory)/project_root"
+
+        # Use the hardened script
+        if [ ! -f Deployment_Automation/gvault_25gr2_deployment_all_sheets_approvers_fixed.py ]; then
+          echo "ERROR: fixed script not found"; exit 1
+        fi
+
+        # Overwrite legacy entrypoint so other tooling doesn't need path changes
+        cp -f Deployment_Automation/gvault_25gr2_deployment_all_sheets_approvers_fixed.py \
+              Deployment_Automation/gvault_25gr2_deployment.py
+
+        # Prove unsafe access isn't present
+        if grep -n "row\\['File Type'\\]" Deployment_Automation/gvault_25gr2_deployment.py; then
+          echo "ERROR: unsafe 'row[\"File Type\"]' found"; exit 1
+        fi
+
+        # Optional: short diagnostics
+        ls -l Deployment_Automation | sed -n '1,100p'
+      displayName: "Prepare script (safe overwrite)"
+
+    # Run the script (uses ENVIRONMENT passed from parent)
+    - bash: |
+        set -euo pipefail
+        cd "$(System.DefaultWorkingDirectory)/project_root"
+
+        # For module-wise approval, keep BYPASS_APPROVALS=false so the script
+        # will honor the Approvals sheet (only this module should be set Approved).
+        export BYPASS_APPROVALS=false
+
+        echo "ENVIRONMENT=$(ENVIRONMENT)"
+        python3 Deployment_Automation/gvault_25gr2_deployment.py
+      displayName: "Deploy $(MODULE_NAME)"
